@@ -6,8 +6,9 @@ interface FetchDataResult<T> {
   error: Error | null;
 }
 
-// const baseURL = "http://localhost:8080"; 
-const baseURL = process.env.REACT_APP_API_ENDPOINT;
+// const baseURL = "http://localhost:8080";
+// const baseURL = process.env.REACT_APP_API_BASE_URL;
+const baseURL = import.meta.env.VITE_APP_API_BASE_URL;
 
 const useFetchData = <T>(url: string): FetchDataResult<T> => {
   const [fetchedData, setFetchedData] = useState<T | null>(null);

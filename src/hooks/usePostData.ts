@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const baseURL = process.env.REACT_APP_API_ENDPOINT;
+const baseURL = import.meta.env.VITE_APP_API_BASE_URL;
 
 const usePostData = () => {
   const [error, setError] = useState<Error | null>(null);
