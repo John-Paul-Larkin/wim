@@ -1,10 +1,11 @@
 import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import { Column, useGlobalFilter, useSortBy, useTable } from "react-table";
-import useFetchData from "../hooks/useFetchData";
-import "./CustomerDetails.css";
-import { GlobalFilter } from "./GlobalFilter";
+import useFetchData from "../../hooks/useFetchData";
+import { GlobalFilter } from "./../GlobalFilter";
+import "./Customer.css";
 import { SingleCustomerDetails } from "./SingleCustomerDetails";
+// import { SingleCustomerDetails } from "./SingleCustomerDetails";
 
 export const Customers = () => {
   const [data, setData] = useState<CustomerTableData[]>([]);
@@ -13,20 +14,10 @@ export const Customers = () => {
   // fetch the data
   const { fetchedData, loading, error, refetchData } = useFetchData<CustomerTableData[]>("/customertable");
 
-  console.log(fetchedData);
-
-  // let data: CustomerTableData[] = [];
-
-  // if (fetchedData !== null) {
-  //   data = fetchedData;
-  // }
-
   useEffect(() => {
     // if (fetchedData && data?.length === 0) {
-    if (fetchedData ) {
-
-
-      console.log("where we set data");
+    if (fetchedData) {
+      console.log(fetchedData,'fd');
       setData(fetchedData);
     }
   }, [fetchedData]);
@@ -133,7 +124,7 @@ export const Customers = () => {
             </table>
           </div>
           <GlobalFilter globalFilter={globalFilter} setGlobalFilter={setGlobalFilter} />
-          {detailsSelectedCustomer && <SingleCustomerDetails customerDetails={detailsSelectedCustomer} refetchData={refetchData}/>}
+          {detailsSelectedCustomer && <SingleCustomerDetails customerDetails={detailsSelectedCustomer} refetchData={refetchData} />}
         </>
       )}
     </>

@@ -16,7 +16,7 @@ export const FormButtons = ({ editMode, setEditMode, newCustomerMode, setNewCust
             <button onClick={() => setEditMode(true)}>Edit</button>
           </div>
           <div>
-            <button onClick={() => setNewCustomerMode(true)}>New Customer</button>
+            <button onClick={() => setNewCustomerMode(true)}>New</button>
           </div>
           <div>
             <button>Place order</button>

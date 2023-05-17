@@ -1,14 +1,16 @@
 import { FormEvent, useState } from "react";
-import usePostData from "../hooks/usePostData";
-import { FormButtons } from "./FormButtons";
+import useDeleteData from "../../hooks/useDeleteData";
+import usePostData from "../../hooks/usePostData";
+import { FormButtons } from "../FormButtons";
 
-export const SingleCustomerDetails = ({ customerDetails, refetchData }: { refetchData:()=>void, customerDetails: CustomerTableData }) => {
+export const SingleCustomerDetails = ({ customerDetails, refetchData }: { refetchData: () => void; customerDetails: CustomerTableData }) => {
   const { name, rep, contact_phone, customer_id, address, eircode, email } = customerDetails;
 
   const [editMode, setEditMode] = useState(false);
   const [newCustomerMode, setNewCustomerMode] = useState(false);
 
   const { postData } = usePostData();
+  const { deleteData } = useDeleteData();
 
   const handleClickSaveEdit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -54,24 +56,21 @@ export const SingleCustomerDetails = ({ customerDetails, refetchData }: { refetc
       console.log(responseData);
       setEditMode(false);
       setNewCustomerMode(false);
-      refetchData()
+      refetchData();
     } else {
       console.log(error.name);
       console.log(error.message);
     }
   };
 
-  const handleClickDelete = () => {
-    const baseURL = import.meta.env.VITE_APP_API_BASE_URL;
-    fetch(baseURL + "/deletecustomer", {
-      method: "DELETE",
-      //  credentials: "include"
-      headers: {
-        // "Content-Type": "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({customer_id:customer_id}),
-    });
+  const handleClickDelete = async () => {
+    const { error } = await deleteData({ url: "/deletecustomer", id: customer_id });
+    if (error === null) {
+      refetchData();
+    } else {
+      console.log(error.name);
+      console.log(error.message);
+    }
   };
 
   return (

@@ -34,7 +34,7 @@ const useFetchData = <T>(url: string): FetchDataResult<T> => {
     fetch(baseURL + url, { method: "GET", credentials: "include" })
       .then((response) => response.json())
       .then((responseData) => {
-        // console.log(responseData);
+        console.log(responseData,'rd');
         setFetchedData(responseData as T);
       });
   };

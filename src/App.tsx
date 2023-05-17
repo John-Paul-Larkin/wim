@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./App.css";
-import { SectionViewArea } from "./components/SectionViewArea";
-import { SideMenu } from "./components/SideMenu";
+import { SideMenu } from "./components/mainScreen/SideMenu";
+import { SectionViewArea } from "./components/mainScreen/SectionViewArea";
 
 function App() {
   const [selectedNavComponent, setSelectedNavComponent] = useState("Customers");
