@@ -1,5 +1,5 @@
 export const Salesorders = () => {
   return (
-    <div>Salesorders comp</div>
+    <div>Sales orders comp</div>
   )
 }

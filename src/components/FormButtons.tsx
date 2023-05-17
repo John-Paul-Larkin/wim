@@ -1,18 +1,20 @@
-interface FormButton {
+interface Inputs{
   editMode: boolean;
   setEditMode: React.Dispatch<React.SetStateAction<boolean>>;
   newCustomerMode: boolean;
-
   setNewCustomerMode: React.Dispatch<React.SetStateAction<boolean>>;
   handleClickDelete: () => void;
 }
 
-export const FormButtons = ({ editMode, setEditMode, newCustomerMode, setNewCustomerMode, handleClickDelete }: FormButton) => {
+export const FormButtons = (props: Inputs) => {
+  
+ const { editMode, setEditMode, newCustomerMode, setNewCustomerMode, handleClickDelete } = props;
+ 
   return (
     <div className="btn-container">
       {!editMode && !newCustomerMode && (
         <div>
-          <div>
+          <div> 
             <button onClick={() => setEditMode(true)}>Edit</button>
           </div>
           <div>

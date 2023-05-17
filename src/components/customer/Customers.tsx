@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
+import { FaSort, FaSortDown, FaSortUp } from "react-icons/fa";
 import { Column, useGlobalFilter, useSortBy, useTable } from "react-table";
 import useFetchData from "../../hooks/useFetchData";
 import { GlobalFilter } from "./../GlobalFilter";
@@ -15,14 +16,13 @@ export const Customers = () => {
   const { fetchedData, loading, error, refetchData } = useFetchData<CustomerTableData[]>("/customertable");
 
   useEffect(() => {
-    // if (fetchedData && data?.length === 0) {
     if (fetchedData) {
-      console.log(fetchedData,'fd');
-      setData(fetchedData);
+      // Reverse the array so the last entered item will be at the top of the table
+      setData(fetchedData.reverse());
     }
   }, [fetchedData]);
 
-  // Once the data is fetched, set the default row to the first in the table
+  // Once the data is fetched, set the default row to the recrord at top of the table
   if (customerIdOfCurrentlySelectedRow === null && data.length > 0) {
     setCustomerIdOfCurrentlySelectedRow(data[0].customer_id);
   }
@@ -51,7 +51,7 @@ export const Customers = () => {
         accessor: "eircode",
       },
       {
-        Header: "email",
+        Header: "Email",
         accessor: "email",
       },
       {
@@ -73,13 +73,12 @@ export const Customers = () => {
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow, state, setGlobalFilter } = tableInstance;
   const { globalFilter } = state;
 
+  // Once we have an id of a selected record, find the record within the data array
   let detailsSelectedCustomer = {} as CustomerTableData;
-
   if (customerIdOfCurrentlySelectedRow) {
-    const testData = data?.find((row) => row.customer_id === customerIdOfCurrentlySelectedRow);
-
-    if (testData) {
-      detailsSelectedCustomer = testData;
+    const SingleCustomerData = data?.find((row) => row.customer_id === customerIdOfCurrentlySelectedRow);
+    if (SingleCustomerData) {
+      detailsSelectedCustomer = SingleCustomerData;
     }
   }
 
@@ -89,12 +88,11 @@ export const Customers = () => {
         {" "}
         <span>Customers</span>
       </div>
-      {loading && <div>Loading.....</div>}
-      {error && <div>Error. {error?.message}</div>}
-
-      {!loading && !error && (
-        <>
-          <div className="table-wrapper">
+      <>
+        <div className="table-wrapper">
+          {loading && <div className="error-loading">Loading.....</div>}
+          {error && <div className="error-loading">Error. {error?.message}</div>}
+          {!loading && !error && (
             <table {...getTableProps()}>
               <thead>
                 {headerGroups.map((headerGroup) => (
@@ -102,7 +100,7 @@ export const Customers = () => {
                     {headerGroup.headers.map((column) => (
                       <th {...column.getHeaderProps(column.getSortByToggleProps())}>
                         {column.render("Header")}
-                        <span className="sort-arrows">{column.isSorted ? (column.isSortedDesc ? "↓" : "↑") : "⇅"}</span>
+                        <span className="sort-arrows">{column.isSorted ? column.isSortedDesc ? <FaSortUp /> : <FaSortDown /> : <FaSort />}</span>
                       </th>
                     ))}
                   </tr>
@@ -122,11 +120,18 @@ export const Customers = () => {
                 })}
               </tbody>
             </table>
-          </div>
-          <GlobalFilter globalFilter={globalFilter} setGlobalFilter={setGlobalFilter} />
-          {detailsSelectedCustomer && <SingleCustomerDetails customerDetails={detailsSelectedCustomer} refetchData={refetchData} />}
-        </>
-      )}
+          )}
+        </div>
+        <GlobalFilter globalFilter={globalFilter} setGlobalFilter={setGlobalFilter} />
+        {detailsSelectedCustomer && (
+          <SingleCustomerDetails
+            setCustomerIdOfCurrentlySelectedRow={setCustomerIdOfCurrentlySelectedRow}
+            customerDetails={detailsSelectedCustomer}
+            refetchData={refetchData}
+            loading={loading}
+          />
+        )}
+      </>
     </>
   );
 };

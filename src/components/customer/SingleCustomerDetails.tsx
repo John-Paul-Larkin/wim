@@ -3,15 +3,26 @@ import useDeleteData from "../../hooks/useDeleteData";
 import usePostData from "../../hooks/usePostData";
 import { FormButtons } from "../FormButtons";
 
-export const SingleCustomerDetails = ({ customerDetails, refetchData }: { refetchData: () => void; customerDetails: CustomerTableData }) => {
+interface Inputs {
+  setCustomerIdOfCurrentlySelectedRow: React.Dispatch<React.SetStateAction<number | null>>;
+  refetchData: () => void;
+  customerDetails: CustomerTableData;
+  loading: boolean;
+}
+
+export const SingleCustomerDetails = (props: Inputs) => {
+  // Destructure props and variables
+  const { setCustomerIdOfCurrentlySelectedRow, customerDetails, refetchData, loading } = props;
   const { name, rep, contact_phone, customer_id, address, eircode, email } = customerDetails;
 
+  // These state assert which buttons will display. edit new save cancel etc
   const [editMode, setEditMode] = useState(false);
   const [newCustomerMode, setNewCustomerMode] = useState(false);
 
   const { postData } = usePostData();
   const { deleteData } = useDeleteData();
 
+  // Posts new customer, or edits existing, depending on whether a customer id has been provided
   const handleClickSaveEdit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -49,13 +60,11 @@ export const SingleCustomerDetails = ({ customerDetails, refetchData }: { refetc
       customer_id,
     });
 
-    console.log(editFormInputJson);
-
-    const { error, responseData } = await postData({ url: "/editcustomer", jsonData: editFormInputJson });
+    const { error } = await postData({ url: "/editcustomer", jsonData: editFormInputJson });
     if (error === null) {
-      console.log(responseData);
       setEditMode(false);
       setNewCustomerMode(false);
+      setCustomerIdOfCurrentlySelectedRow(null);
       refetchData();
     } else {
       console.log(error.name);
@@ -66,6 +75,7 @@ export const SingleCustomerDetails = ({ customerDetails, refetchData }: { refetc
   const handleClickDelete = async () => {
     const { error } = await deleteData({ url: "/deletecustomer", id: customer_id });
     if (error === null) {
+      setCustomerIdOfCurrentlySelectedRow(null);
       refetchData();
     } else {
       console.log(error.name);
@@ -76,85 +86,89 @@ export const SingleCustomerDetails = ({ customerDetails, refetchData }: { refetc
   return (
     <>
       <div className="customer-edit-wrapper">
-        <div className="labels">
-          <div>Name : </div>
-          <div>Rep : </div>
-          <div>Contact number : </div>
-          <div>Address : </div>
-          <div>Eircode : </div>
-          <div>Email : </div>
-          <div>Customer id : </div>
-        </div>
-        {!editMode && !newCustomerMode && (
-          <div className="details">
-            <div>{name}</div>
-            <div>{rep}</div>
-            <div>{contact_phone}</div>
-            <div>{address}</div>
-            <div>{eircode}</div>
-            <div>{email}</div>
-
-            <div>{customer_id}</div>
+        <div>
+          <div className="labels">
+            <div>Name : </div>
+            <div>Rep : </div>
+            <div>Contact number : </div>
+            <div>Address : </div>
+            <div>Eircode : </div>
+            <div>Email : </div>
+            <div>Customer id : </div>
           </div>
-        )}
-        {editMode && (
-          <form className="details" id="customer-form" onSubmit={handleClickSaveEdit}>
-            <label>
-              <input type="text" name="name" defaultValue={name}></input>
-            </label>
-            <label>
-              <input type="text" name="rep" defaultValue={rep}></input>
-            </label>
-            <label>
-              <input type="text" name="contact_phone" defaultValue={contact_phone}></input>
-            </label>
-            <label>
-              <input type="text" name="address" defaultValue={address}></input>
-            </label>
-            <label>
-              <input type="text" name="eircode" defaultValue={eircode}></input>
-            </label>
-            <label>
-              <input type="text" name="email" defaultValue={email}></input>
-            </label>
-            <label>
-              <input type="text" name="customer_id" defaultValue={customer_id} readOnly></input>
-            </label>
-          </form>
-        )}
-        {newCustomerMode && (
-          <form className="details" id="customer-form" onSubmit={handleClickSaveEdit}>
-            <label>
-              <input type="text" name="name"></input>
-            </label>
-            <label>
-              <input type="text" name="rep"></input>
-            </label>
-            <label>
-              <input type="text" name="contact_phone"></input>
-            </label>
-            <label>
-              <input type="text" name="address"></input>
-            </label>
-            <label>
-              <input type="text" name="eircode"></input>
-            </label>
-            <label>
-              <input type="text" name="email"></input>
-            </label>
-            <label>
-              <input type="text" name="customer_id" readOnly></input>
-            </label>
-          </form>
-        )}
+          {loading && <div className="error-loading">Loading.....</div>}
+
+          {!loading && !editMode && !newCustomerMode && (
+            <div className="details">
+              <div>{name}</div>
+              <div>{rep}</div>
+              <div>{contact_phone}</div>
+              <div>{address}</div>
+              <div>{eircode}</div>
+              <div>{email}</div>
+
+              <div>{customer_id}</div>
+            </div>
+          )}
+          {!loading && editMode && (
+            <form className="details" id="customer-form" onSubmit={handleClickSaveEdit}>
+              <label>
+                <input type="text" name="name" defaultValue={name}></input>
+              </label>
+              <label>
+                <input type="text" name="rep" defaultValue={rep}></input>
+              </label>
+              <label>
+                <input type="text" name="contact_phone" defaultValue={contact_phone}></input>
+              </label>
+              <label>
+                <input type="text" name="address" defaultValue={address}></input>
+              </label>
+              <label>
+                <input type="text" name="eircode" defaultValue={eircode}></input>
+              </label>
+              <label>
+                <input type="text" name="email" defaultValue={email}></input>
+              </label>
+              <label>
+                <input type="text" name="customer_id" defaultValue={customer_id} readOnly></input>
+              </label>
+            </form>
+          )}
+          {!loading && newCustomerMode && (
+            <form className="details" id="customer-form" onSubmit={handleClickSaveEdit}>
+              <label>
+                <input type="text" name="name"></input>
+              </label>
+              <label>
+                <input type="text" name="rep"></input>
+              </label>
+              <label>
+                <input type="text" name="contact_phone"></input>
+              </label>
+              <label>
+                <input type="text" name="address"></input>
+              </label>
+              <label>
+                <input type="text" name="eircode"></input>
+              </label>
+              <label>
+                <input type="text" name="email"></input>
+              </label>
+              <label>
+                <input type="text" name="customer_id" readOnly></input>
+              </label>
+            </form>
+          )}
+        </div>
+        <FormButtons
+          handleClickDelete={handleClickDelete}
+          editMode={editMode}
+          setEditMode={setEditMode}
+          newCustomerMode={newCustomerMode}
+          setNewCustomerMode={setNewCustomerMode}
+        />
       </div>
-      <FormButtons
-        handleClickDelete={handleClickDelete}
-        editMode={editMode}
-        setEditMode={setEditMode}
-        newCustomerMode={newCustomerMode}
-        setNewCustomerMode={setNewCustomerMode}
-      />
     </>
   );
 };

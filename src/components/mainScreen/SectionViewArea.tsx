@@ -1,6 +1,6 @@
 import { Dashboard } from "../Dashboard";
 import { Employees } from "../Employees";
-import { Products } from "../Products";
+import { Products } from "../products/Products";
 import { PurchaseOrders } from "../PurchaseOrders";
 import { Salesorders } from "../Salesorders";
 import { Suppliers } from "../Suppliers";

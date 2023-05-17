@@ -9,7 +9,7 @@ function App() {
   return (
     <div className="app">
       <div className="main-screen">
-        <SideMenu setSelectedNavComponent={setSelectedNavComponent} />
+        <SideMenu setSelectedNavComponent={setSelectedNavComponent} selectedNavComponent={selectedNavComponent}/>
         <SectionViewArea selectedNavComponent={selectedNavComponent} />
       </div>
     </div>

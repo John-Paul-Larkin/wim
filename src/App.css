@@ -1,5 +1,6 @@
 :root {
   --max-screen-width: 1600px;
+  --clr-1: antiquewhite;
   --clr-4: white;
   --clr-5: blue;
   --clr-6: red;
@@ -7,7 +8,6 @@
   --clr-8: pink;
   --clr-9: brown;
 }
-
 
 .app {
   background-color: var(--clr-7);
@@ -17,8 +17,8 @@
 
 .main-screen {
   max-width: var(--max-screen-width);
-  height:100vh;
-  background-color: var(--clr-4);
+  height: 100vh;
+  background-color: var(--clr-1);
   margin: 0 auto;
   display: flex;
 }
@@ -37,14 +37,14 @@
   border-bottom: 5px solid black;
 }
 
-
-
 /* CSS RESET*************************************************** */
 
 /*
   1. Use a more-intuitive box-sizing model.
 */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 /*
@@ -56,7 +56,8 @@
 /*
   3. Allow percentage-based heights in the application
 */
-html, body {
+html,
+body {
   height: 100%;
 }
 /*
@@ -71,25 +72,39 @@ body {
 /*
   6. Improve media defaults
 */
-img, picture, video, canvas, svg {
+img,
+picture,
+video,
+canvas,
+svg {
   display: block;
   max-width: 100%;
 }
 /*
   7. Remove built-in form typography styles
 */
-input, button, textarea, select {
+input,
+button,
+textarea,
+select {
   font: inherit;
 }
 /*
   8. Avoid text overflows
 */
-p, h1, h2, h3, h4, h5, h6 {
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   overflow-wrap: break-word;
 }
 /*
   9. Create a root stacking context
 */
-#root, #__next {
+#root,
+#__next {
   isolation: isolate;
 }
