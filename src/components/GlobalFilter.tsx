@@ -10,8 +10,8 @@ export const GlobalFilter = ({ globalFilter, setGlobalFilter }: { globalFilter: 
   }, 200);
 
   return (
-    <span>
-      Search:{" "}
+    <span className="global-filter">
+      Table search:{" "}
       <input
         value={value || ""}
         onChange={(e) => {

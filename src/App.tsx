@@ -1,10 +1,10 @@
 import { useState } from "react";
 import "./App.css";
-import { SideMenu } from "./components/SideMenu";
 import { SectionViewArea } from "./components/SectionViewArea";
+import { SideMenu } from "./components/SideMenu";
 
 function App() {
-  const [selectedNavComponent, setSelectedNavComponent] = useState("");
+  const [selectedNavComponent, setSelectedNavComponent] = useState("Customers");
 
   return (
     <div className="app">

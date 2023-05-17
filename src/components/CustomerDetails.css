@@ -12,35 +12,61 @@
   padding-right: 1rem;
 }
 
-.customer-edit-wrapper .labels div{
-    height:2rem;
+.customer-edit-wrapper .labels div {
+  height: 2rem;
 }
 
 .customer-edit-wrapper .details {
-  background-color: var(--clr-6);
+  /* background-color: var(--clr-6); */
   width: 50%;
   padding-left: 1rem;
 }
 
 .customer-edit-wrapper .details div {
-    height: 2rem;
+  height: 2rem;
 }
-
 
 .customer-edit-wrapper input {
-    width:100%;
-    height:2rem;
+  width: 100%;
+  height: 2rem;
 }
 
+.customer-edit-wrapper input:read-only {
+  background-color: silver;
+}
+
+.btn-container {
+  display: flex;
+  height: 3rem;
+  /* padding-top: 1rem; */
+  border: 2px solid black;
+  width: 500px;
+}
+
+.btn-container div {
+  flex-grow: 1;
+  /* border: 1px solid black; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table,
+th,
+td {
+  border: 1px solid;
+}
 
 .table-wrapper {
   height: 300px;
-  background-color: var(--clr-9);
+  /* background-color: var(--clr-9); */
+  border: 2px solid black;
   overflow-y: scroll;
-}
-
-input:read-only {
-    background-color: silver;
 }
 
 tr {
@@ -48,16 +74,28 @@ tr {
   cursor: pointer;
 }
 
-td {
-  height: 40px;
-  min-width: 170px;
-  width: 200%;
-  padding-left: 2rem;
+tr:nth-child(2n) {
+  background-color: #fafafa;
 }
 
-td:nth-of-type(5) {
-  /* height: 40px;
-    width: 400px; */
+td {
+  height: 40px;
+  /* min-width: 170px; */
+  /* width: 200%; */
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+tr:hover {
+  background-color: var(--clr-6);
+}
+
+.table-heading > * {
+  background-color: yellow;
+}
+
+th {
+  height: 70px;
 }
 
 .sort-arrows {
@@ -67,20 +105,15 @@ td:nth-of-type(5) {
   display: inline-block;
 }
 
-tr:nth-child(2n) {
-  background-color: #fafafa;
-}
-
-tr:hover {
-  background-color: var(--clr-6);
-}
-
-tr:nth-of-type(1):hover {
-  background-color: lightblue;
+.global-filter {
+  display: inline-block;
+  padding: 1rem;
 }
 
 th {
-  height: 70px;
-  border-bottom: 3px solid black;
-}
+    /* background: white; */
+    position: sticky;
+    top: 0; /* required for the stickiness */
+    box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
 
+  }

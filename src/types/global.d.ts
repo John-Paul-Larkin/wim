@@ -5,4 +5,5 @@ interface CustomerTableData {
   contact_phone: string;
   address: string;
   eircode: string;
+  email:string;
 }

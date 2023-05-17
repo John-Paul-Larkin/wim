@@ -1,12 +1,13 @@
-import { useEffect, useState } from "react";
 
 const baseURL = import.meta.env.VITE_APP_API_BASE_URL;
 
 const usePostData = () => {
-  const [error, setError] = useState<Error | null>(null);
-  const [responseData, setResponseData] = useState("");
+  //   const [error, setError] = useState<Error | null>(null);
+  //   const [responseData, setResponseData] = useState("");
 
   const postData = async ({ url, jsonData }: { url: string; jsonData: any }) => {
+    let error: Error | null = null;
+    let responseData: any;
     try {
       const response = await fetch(baseURL + url, {
         method: "POST",
@@ -17,10 +18,9 @@ const usePostData = () => {
         },
         body: jsonData,
       });
-      const response1 = await response.json();
-      setResponseData(response1);
-    } catch (error) {
-      setError(error as Error);
+      responseData = await response.json();
+    } catch (err) {
+      error = err as Error;
     }
     return { error, responseData };
   };

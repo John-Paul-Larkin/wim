@@ -1,6 +1,6 @@
 .side-menu {
   background-color: var(--clr-6);
-  width: 270px;
+  min-width: 270px;
   height: 100%;
   display: inline-block;
 }

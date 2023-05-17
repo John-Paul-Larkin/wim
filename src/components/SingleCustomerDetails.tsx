@@ -1,10 +1,12 @@
 import { FormEvent, useState } from "react";
 import usePostData from "../hooks/usePostData";
+import { FormButtons } from "./FormButtons";
 
-export const SingleCustomerDetails = ({ customerDetails }: { customerDetails: CustomerTableData }) => {
-  const { name, rep, contact_phone, customer_id, address } = customerDetails;
+export const SingleCustomerDetails = ({ customerDetails, refetchData }: { refetchData:()=>void, customerDetails: CustomerTableData }) => {
+  const { name, rep, contact_phone, customer_id, address, eircode, email } = customerDetails;
 
   const [editMode, setEditMode] = useState(false);
+  const [newCustomerMode, setNewCustomerMode] = useState(false);
 
   const { postData } = usePostData();
 
@@ -16,6 +18,8 @@ export const SingleCustomerDetails = ({ customerDetails }: { customerDetails: Cu
       rep: { value: string };
       contact_phone: { value: string };
       address: { value: string };
+      eircode: { value: string };
+      email: { value: string };
       customer_id: { value: number };
     };
 
@@ -23,20 +27,51 @@ export const SingleCustomerDetails = ({ customerDetails }: { customerDetails: Cu
     const rep = target.rep.value;
     const contact_phone = target.contact_phone.value;
     const address = target.address.value;
+    const eircode = target.eircode.value;
+    const email = target.email.value;
+
+    // If this is an edit the id will already be set
+    // if new customer there will be no id
+    let customer_id: number | undefined = undefined;
+    if (target.customer_id.value) {
+      customer_id = target.customer_id.value;
+    }
 
     const editFormInputJson = JSON.stringify({
       name,
       rep,
       contact_phone,
       address,
+      eircode,
+      email,
+      customer_id,
     });
 
+    console.log(editFormInputJson);
+
     const { error, responseData } = await postData({ url: "/editcustomer", jsonData: editFormInputJson });
+    if (error === null) {
+      console.log(responseData);
+      setEditMode(false);
+      setNewCustomerMode(false);
+      refetchData()
+    } else {
+      console.log(error.name);
+      console.log(error.message);
+    }
+  };
 
-    console.log(error, "post error message");
-    console.log(responseData);
-
-    setEditMode(false);
+  const handleClickDelete = () => {
+    const baseURL = import.meta.env.VITE_APP_API_BASE_URL;
+    fetch(baseURL + "/deletecustomer", {
+      method: "DELETE",
+      //  credentials: "include"
+      headers: {
+        // "Content-Type": "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({customer_id:customer_id}),
+    });
   };
 
   return (
@@ -47,19 +82,24 @@ export const SingleCustomerDetails = ({ customerDetails }: { customerDetails: Cu
           <div>Rep : </div>
           <div>Contact number : </div>
           <div>Address : </div>
+          <div>Eircode : </div>
+          <div>Email : </div>
           <div>Customer id : </div>
         </div>
-        {!editMode && (
+        {!editMode && !newCustomerMode && (
           <div className="details">
             <div>{name}</div>
             <div>{rep}</div>
             <div>{contact_phone}</div>
             <div>{address}</div>
+            <div>{eircode}</div>
+            <div>{email}</div>
+
             <div>{customer_id}</div>
           </div>
         )}
         {editMode && (
-          <form className="details" id="edit-form" onSubmit={handleClickSaveEdit}>
+          <form className="details" id="customer-form" onSubmit={handleClickSaveEdit}>
             <label>
               <input type="text" name="name" defaultValue={name}></input>
             </label>
@@ -73,23 +113,49 @@ export const SingleCustomerDetails = ({ customerDetails }: { customerDetails: Cu
               <input type="text" name="address" defaultValue={address}></input>
             </label>
             <label>
+              <input type="text" name="eircode" defaultValue={eircode}></input>
+            </label>
+            <label>
+              <input type="text" name="email" defaultValue={email}></input>
+            </label>
+            <label>
               <input type="text" name="customer_id" defaultValue={customer_id} readOnly></input>
             </label>
           </form>
         )}
+        {newCustomerMode && (
+          <form className="details" id="customer-form" onSubmit={handleClickSaveEdit}>
+            <label>
+              <input type="text" name="name"></input>
+            </label>
+            <label>
+              <input type="text" name="rep"></input>
+            </label>
+            <label>
+              <input type="text" name="contact_phone"></input>
+            </label>
+            <label>
+              <input type="text" name="address"></input>
+            </label>
+            <label>
+              <input type="text" name="eircode"></input>
+            </label>
+            <label>
+              <input type="text" name="email"></input>
+            </label>
+            <label>
+              <input type="text" name="customer_id" readOnly></input>
+            </label>
+          </form>
+        )}
       </div>
-      {!editMode && <button onClick={() => setEditMode(true)}>Edit</button>}
-      {editMode && (
-        <button type="submit" form="edit-form">
-          Save
-        </button>
-      )}
-      {!editMode && (
-        <>
-          <button>New customer</button>
-          <button>Place order</button>
-        </>
-      )}
+      <FormButtons
+        handleClickDelete={handleClickDelete}
+        editMode={editMode}
+        setEditMode={setEditMode}
+        newCustomerMode={newCustomerMode}
+        setNewCustomerMode={setNewCustomerMode}
+      />
     </>
   );
 };

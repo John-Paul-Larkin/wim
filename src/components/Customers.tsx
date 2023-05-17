@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Column, useGlobalFilter, useSortBy, useTable } from "react-table";
 import useFetchData from "../hooks/useFetchData";
 import "./CustomerDetails.css";
@@ -11,10 +11,25 @@ export const Customers = () => {
   const [customerIdOfCurrentlySelectedRow, setCustomerIdOfCurrentlySelectedRow] = useState<number | null>(null);
 
   // fetch the data
-  const { fetchedData, loading, error } = useFetchData<CustomerTableData[]>("/customertable");
-  if (fetchedData && data?.length === 0) {
-    setData(fetchedData);
-  }
+  const { fetchedData, loading, error, refetchData } = useFetchData<CustomerTableData[]>("/customertable");
+
+  console.log(fetchedData);
+
+  // let data: CustomerTableData[] = [];
+
+  // if (fetchedData !== null) {
+  //   data = fetchedData;
+  // }
+
+  useEffect(() => {
+    // if (fetchedData && data?.length === 0) {
+    if (fetchedData ) {
+
+
+      console.log("where we set data");
+      setData(fetchedData);
+    }
+  }, [fetchedData]);
 
   // Once the data is fetched, set the default row to the first in the table
   if (customerIdOfCurrentlySelectedRow === null && data.length > 0) {
@@ -45,6 +60,10 @@ export const Customers = () => {
         accessor: "eircode",
       },
       {
+        Header: "email",
+        accessor: "email",
+      },
+      {
         Header: "Cust ID",
         accessor: "customer_id",
       },
@@ -54,7 +73,8 @@ export const Customers = () => {
 
   // eslint-disable-next-line
   const handleClickOnRow = (event: any) => {
-    const id = event.nativeEvent.target.parentNode.childNodes[5].innerText;
+    const id = event.nativeEvent.target.parentNode.childNodes[6].innerText;
+
     setCustomerIdOfCurrentlySelectedRow(Number(id));
   };
 
@@ -87,7 +107,7 @@ export const Customers = () => {
             <table {...getTableProps()}>
               <thead>
                 {headerGroups.map((headerGroup) => (
-                  <tr {...headerGroup.getHeaderGroupProps()}>
+                  <tr className="table-heading" {...headerGroup.getHeaderGroupProps()}>
                     {headerGroup.headers.map((column) => (
                       <th {...column.getHeaderProps(column.getSortByToggleProps())}>
                         {column.render("Header")}
@@ -113,8 +133,7 @@ export const Customers = () => {
             </table>
           </div>
           <GlobalFilter globalFilter={globalFilter} setGlobalFilter={setGlobalFilter} />
-
-          {detailsSelectedCustomer && <SingleCustomerDetails customerDetails={detailsSelectedCustomer} />}
+          {detailsSelectedCustomer && <SingleCustomerDetails customerDetails={detailsSelectedCustomer} refetchData={refetchData}/>}
         </>
       )}
     </>
