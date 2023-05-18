@@ -1,24 +1,24 @@
-interface Inputs{
+interface Inputs {
   editMode: boolean;
   setEditMode: React.Dispatch<React.SetStateAction<boolean>>;
-  newCustomerMode: boolean;
-  setNewCustomerMode: React.Dispatch<React.SetStateAction<boolean>>;
+  newMode: boolean;
+  setNewMode: React.Dispatch<React.SetStateAction<boolean>>;
   handleClickDelete: () => void;
+  tableType: "customer" | "product" | "supplier";
 }
 
 export const FormButtons = (props: Inputs) => {
-  
- const { editMode, setEditMode, newCustomerMode, setNewCustomerMode, handleClickDelete } = props;
- 
+  const { editMode, setEditMode, newMode, setNewMode, handleClickDelete, tableType } = props;
+
   return (
     <div className="btn-container">
-      {!editMode && !newCustomerMode && (
+      {!editMode && !newMode && (
         <div>
-          <div> 
+          <div>
             <button onClick={() => setEditMode(true)}>Edit</button>
           </div>
           <div>
-            <button onClick={() => setNewCustomerMode(true)}>New</button>
+            <button onClick={() => setNewMode(true)}>New</button>
           </div>
           <div>
             <button>Place order</button>
@@ -31,7 +31,7 @@ export const FormButtons = (props: Inputs) => {
       {editMode && (
         <>
           <div>
-            <button type="submit" form="customer-form">
+            <button type="submit" form={`${tableType}-form`}>
               Save
             </button>
           </div>
@@ -40,15 +40,15 @@ export const FormButtons = (props: Inputs) => {
           </div>
         </>
       )}
-      {newCustomerMode && (
+      {newMode && (
         <>
           <div>
-            <button type="submit" form="customer-form">
+            <button type="submit" form={`${tableType}-form`}>
               Save
             </button>
           </div>
           <div>
-            <button onClick={() => setNewCustomerMode(false)}>Cancel</button>
+            <button onClick={() => setNewMode(false)}>Cancel</button>
           </div>
         </>
       )}

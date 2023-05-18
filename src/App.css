@@ -6,7 +6,7 @@
   --clr-6: red;
   --clr-7: orange;
   --clr-8: pink;
-  --clr-9: brown;
+  --clr-9: rgb(170, 78, 78);
 }
 
 .app {

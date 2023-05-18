@@ -15,7 +15,8 @@
     "react-dom": "^18.2.0",
     "react-icons": "^4.8.0",
     "react-table": "^7.8.0",
-    "regenerator-runtime": "^0.13.11"
+    "regenerator-runtime": "^0.13.11",
+    "sweetalert2": "^11.7.5"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",

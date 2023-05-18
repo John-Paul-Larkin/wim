@@ -1,51 +1,51 @@
-.customer-edit-wrapper {
+.edit-wrapper {
   background-color: var(--clr-1);
   /* width: 500px; */
   border: 2px solid black;
   margin: 1rem;
 }
 
-.customer-edit-wrapper > div {
+.edit-wrapper > div {
   display: flex;
 }
 
-.customer-edit-wrapper .labels {
+.edit-wrapper .labels {
   background-color: var(--clr-7);
   /* width: 50%; */
   text-align: end;
   padding: 1rem;
 }
 
-.customer-edit-wrapper .labels div {
+.edit-wrapper .labels div {
   height: 2rem;
 }
 
-.customer-edit-wrapper .details {
+.edit-wrapper .details {
   /* background-color: var(--clr-6); */
   width: 50%;
   padding: 1rem;
 }
 
-.customer-edit-wrapper .details div {
+.edit-wrapper .details div {
   height: 2rem;
 }
 
-.customer-edit-wrapper input {
+.edit-wrapper input {
   width: 100%;
   height: 2rem;
 }
 
-.customer-edit-wrapper input:read-only {
+.edit-wrapper input:read-only {
   background-color: silver;
 }
 
-.customer-edit-wrapper .btn-container {
+.edit-wrapper .btn-container {
   display: flex;
   height: 3rem;
   max-width: fit-content;
 }
 
-.customer-edit-wrapper .btn-container div {
+.edit-wrapper .btn-container div {
   flex-grow: 1;
   display: flex;
   align-items: center;
@@ -97,13 +97,12 @@ tr:hover {
 
 th {
   height: 70px;
+  position: relative;
 }
 
 .sort-arrows {
-  font-weight: 500;
-  padding-left: 10px;
-  width: 2rem;
-  display: inline-block;
+  position: absolute;
+  top: 40%;
 }
 
 .global-filter {

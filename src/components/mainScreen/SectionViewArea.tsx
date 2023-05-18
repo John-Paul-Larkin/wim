@@ -1,10 +1,10 @@
 import { Dashboard } from "../Dashboard";
 import { Employees } from "../Employees";
-import { Products } from "../products/Products";
 import { PurchaseOrders } from "../PurchaseOrders";
 import { Salesorders } from "../Salesorders";
 import { Suppliers } from "../Suppliers";
 import { Customers } from "../customer/Customers";
+import { Products } from "../products/Products";
 import "./SectionViewArea.css";
 
 export const SectionViewArea = ({ selectedNavComponent }: { selectedNavComponent: string }) => {

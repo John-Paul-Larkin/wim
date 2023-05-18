@@ -1,4 +1,5 @@
 import { FormEvent, useState } from "react";
+import Swal from "sweetalert2";
 import useDeleteData from "../../hooks/useDeleteData";
 import usePostData from "../../hooks/usePostData";
 import { FormButtons } from "../FormButtons";
@@ -6,7 +7,7 @@ import { FormButtons } from "../FormButtons";
 interface Inputs {
   setCustomerIdOfCurrentlySelectedRow: React.Dispatch<React.SetStateAction<number | null>>;
   refetchData: () => void;
-  customerDetails: CustomerTableData;
+  customerDetails: CustomerData;
   loading: boolean;
 }
 
@@ -60,7 +61,7 @@ export const SingleCustomerDetails = (props: Inputs) => {
       customer_id,
     });
 
-    const { error } = await postData({ url: "/editcustomer", jsonData: editFormInputJson });
+    const { error } = await postData({ url: "/customer/", jsonData: editFormInputJson });
     if (error === null) {
       setEditMode(false);
       setNewCustomerMode(false);
@@ -72,20 +73,34 @@ export const SingleCustomerDetails = (props: Inputs) => {
     }
   };
 
-  const handleClickDelete = async () => {
-    const { error } = await deleteData({ url: "/deletecustomer", id: customer_id });
-    if (error === null) {
-      setCustomerIdOfCurrentlySelectedRow(null);
-      refetchData();
-    } else {
-      console.log(error.name);
-      console.log(error.message);
-    }
+  const handleClickDelete = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Customer will be deleted permanently",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const { error } = await deleteData({ url: "/customer/", id: customer_id });
+        if (error === null) {
+          Swal.fire("Deleted!", "Customer has been deleted.", "success");
+          setCustomerIdOfCurrentlySelectedRow(null);
+          refetchData();
+        } else {
+          console.log(error.name);
+          console.log(error.message);
+          Swal.fire("Something went wrong - Error message :", error.message);
+        }
+      }
+    });
   };
 
   return (
     <>
-      <div className="customer-edit-wrapper">
+      <div className="edit-wrapper">
         <div>
           <div className="labels">
             <div>Name : </div>
@@ -162,11 +177,12 @@ export const SingleCustomerDetails = (props: Inputs) => {
           )}
         </div>
         <FormButtons
+          tableType={"customer"}
           handleClickDelete={handleClickDelete}
           editMode={editMode}
           setEditMode={setEditMode}
-          newCustomerMode={newCustomerMode}
-          setNewCustomerMode={setNewCustomerMode}
+          newMode={newCustomerMode}
+          setNewMode={setNewCustomerMode}
         />
       </div>
     </>

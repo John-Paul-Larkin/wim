@@ -9,11 +9,11 @@ import { SingleCustomerDetails } from "./SingleCustomerDetails";
 // import { SingleCustomerDetails } from "./SingleCustomerDetails";
 
 export const Customers = () => {
-  const [data, setData] = useState<CustomerTableData[]>([]);
+  const [data, setData] = useState<CustomerData[]>([]);
   const [customerIdOfCurrentlySelectedRow, setCustomerIdOfCurrentlySelectedRow] = useState<number | null>(null);
 
   // fetch the data
-  const { fetchedData, loading, error, refetchData } = useFetchData<CustomerTableData[]>("/customertable");
+  const { fetchedData, loading, error, refetchData } = useFetchData<CustomerData[]>("/customer/");
 
   useEffect(() => {
     if (fetchedData) {
@@ -22,13 +22,13 @@ export const Customers = () => {
     }
   }, [fetchedData]);
 
-  // Once the data is fetched, set the default row to the recrord at top of the table
+  // Once the data is fetched, set the default row to the record at top of the table
   if (customerIdOfCurrentlySelectedRow === null && data.length > 0) {
     setCustomerIdOfCurrentlySelectedRow(data[0].customer_id);
   }
 
   // define column configuration object.
-  const columns: Column<CustomerTableData>[] = React.useMemo(
+  const columns: Column<CustomerData>[] = React.useMemo(
     () => [
       {
         Header: "Business name",
@@ -74,7 +74,7 @@ export const Customers = () => {
   const { globalFilter } = state;
 
   // Once we have an id of a selected record, find the record within the data array
-  let detailsSelectedCustomer = {} as CustomerTableData;
+  let detailsSelectedCustomer = {} as CustomerData;
   if (customerIdOfCurrentlySelectedRow) {
     const SingleCustomerData = data?.find((row) => row.customer_id === customerIdOfCurrentlySelectedRow);
     if (SingleCustomerData) {

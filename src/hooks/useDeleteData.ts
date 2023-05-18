@@ -24,6 +24,7 @@ const useDeleteData = () => {
     } catch (err) {
       error = err as Error;
     }
+    console.log(responseData);
     return { error, responseData };
   };
   return { deleteData };
