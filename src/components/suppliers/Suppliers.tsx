@@ -4,16 +4,14 @@ import { FaSort, FaSortDown, FaSortUp } from "react-icons/fa";
 import { Column, useGlobalFilter, useSortBy, useTable } from "react-table";
 import useFetchData from "../../hooks/useFetchData";
 import { GlobalFilter } from "./../GlobalFilter";
-import "./Customer.css";
-import { SingleCustomerDetails } from "./SingleCustomerDetails";
-// import { SingleCustomerDetails } from "./SingleCustomerDetails";
+import { SingleSupplierDetails } from "./SingleSupplierDetails";
 
-export const Customers = () => {
-  const [data, setData] = useState<CustomerData[]>([]);
-  const [customerIdOfCurrentlySelectedRow, setCustomerIdOfCurrentlySelectedRow] = useState<number | null>(null);
+export const Suppliers = () => {
+  const [data, setData] = useState<SupplierData[]>([]);
+  const [supplierIdOfCurrentlySelectedRow, setSupplierIdOfCurrentlySelectedRow] = useState<number | null>(null);
 
   // fetch the data
-  const { fetchedData, loading, error, refetchData } = useFetchData<CustomerData[]>("/customer/");
+  const { fetchedData, loading, error, refetchData } = useFetchData<SupplierData[]>("/supplier/");
 
   useEffect(() => {
     if (fetchedData) {
@@ -23,19 +21,19 @@ export const Customers = () => {
   }, [fetchedData]);
 
   // Once the data is fetched, set the default row to the record at top of the table
-  if (customerIdOfCurrentlySelectedRow === null && data.length > 0) {
-    setCustomerIdOfCurrentlySelectedRow(data[0].customer_id);
+  if (supplierIdOfCurrentlySelectedRow === null && data.length > 0) {
+    setSupplierIdOfCurrentlySelectedRow(data[0].supplier_id);
   }
 
   // define column configuration object.
-  const columns: Column<CustomerData>[] = React.useMemo(
+  const columns: Column<SupplierData>[] = React.useMemo(
     () => [
       {
         Header: "Name",
         accessor: "name",
       },
       {
-        Header: " Rep",
+        Header: "Rep",
         accessor: "rep",
       },
       {
@@ -55,8 +53,8 @@ export const Customers = () => {
         accessor: "email",
       },
       {
-        Header: "ID",
-        accessor: "customer_id",
+        Header: "Supplier ID",
+        accessor: "supplier_id",
       },
     ],
     []
@@ -66,7 +64,7 @@ export const Customers = () => {
   const handleClickOnRow = (event: any) => {
     const id = event.nativeEvent.target.parentNode.childNodes[6].innerText;
 
-    setCustomerIdOfCurrentlySelectedRow(Number(id));
+    setSupplierIdOfCurrentlySelectedRow(Number(id));
   };
 
   const tableInstance = useTable({ columns, data }, useGlobalFilter, useSortBy);
@@ -74,11 +72,11 @@ export const Customers = () => {
   const { globalFilter } = state;
 
   // Once we have an id of a selected record, find the record within the data array
-  let detailsSelectedCustomer = {} as CustomerData;
-  if (customerIdOfCurrentlySelectedRow) {
-    const SingleCustomerData = data?.find((row) => row.customer_id === customerIdOfCurrentlySelectedRow);
-    if (SingleCustomerData) {
-      detailsSelectedCustomer = SingleCustomerData;
+  let detailsSelectedSupplier = {} as SupplierData;
+  if (supplierIdOfCurrentlySelectedRow) {
+    const SingleSupplierData = data?.find((row) => row.supplier_id === supplierIdOfCurrentlySelectedRow);
+    if (SingleSupplierData) {
+      detailsSelectedSupplier = SingleSupplierData;
     }
   }
 
@@ -86,7 +84,7 @@ export const Customers = () => {
     <>
       <div className="heading">
         {" "}
-        <span>Customers</span>
+        <span>Suppliers</span>
       </div>
       <>
         <div className="table-wrapper">
@@ -100,9 +98,7 @@ export const Customers = () => {
                     {headerGroup.headers.map((column) => (
                       <th {...column.getHeaderProps(column.getSortByToggleProps())}>
                         {column.render("Header")}
-                        {column.Header !== "Contact phone" && column.Header !== "Eircode" &&
-
-                        <span className="sort-arrows">{column.isSorted ? column.isSortedDesc ? <FaSortUp /> : <FaSortDown /> : <FaSort />}</span>}
+                        <span className="sort-arrows">{column.isSorted ? column.isSortedDesc ? <FaSortUp /> : <FaSortDown /> : <FaSort />}</span>
                       </th>
                     ))}
                   </tr>
@@ -125,10 +121,10 @@ export const Customers = () => {
           )}
         </div>
         <GlobalFilter globalFilter={globalFilter} setGlobalFilter={setGlobalFilter} />
-        {detailsSelectedCustomer && (
-          <SingleCustomerDetails
-            setCustomerIdOfCurrentlySelectedRow={setCustomerIdOfCurrentlySelectedRow}
-            customerDetails={detailsSelectedCustomer}
+        {detailsSelectedSupplier && (
+          <SingleSupplierDetails
+            setSupplierIdOfCurrentlySelectedRow={setSupplierIdOfCurrentlySelectedRow}
+            supplierDetails={detailsSelectedSupplier}
             refetchData={refetchData}
             loading={loading}
           />

@@ -5,7 +5,7 @@ import { Column, useGlobalFilter, useSortBy, useTable } from "react-table";
 import useFetchData from "../../hooks/useFetchData";
 import { GlobalFilter } from "./../GlobalFilter";
 import { SingleProductDetails } from "./SingleProductDetails";
-
+import './Products.css'
 export const Products = () => {
   const [data, setData] = useState<ProductData[]>([]);
   const [productIdOfCurrentlySelectedRow, setProductIdOfCurrentlySelectedRow] = useState<number | null>(null);
@@ -35,15 +35,15 @@ export const Products = () => {
         accessor: "name",
       },
       {
-        Header: "Description",
-        accessor: "description",
-      },
-      {
         Header: "Stock",
         accessor: "quantity_in_stock",
       },
       {
-        Header: "sold by",
+        Header: "Restock level",
+        accessor: "restock_level",
+      },
+      {
+        Header: "Sold by",
         accessor: "sold_by",
       },
       {
@@ -55,12 +55,12 @@ export const Products = () => {
         accessor: "rrp",
       },
       {
-        Header: "Restock level",
-        accessor: "restock_level",
+        Header: "ID",
+        accessor: "product_id",
       },
       {
-        Header: "Product ID",
-        accessor: "product_id",
+        Header: "Description",
+        accessor: "description",
       },
     ],
     []
@@ -100,11 +100,13 @@ export const Products = () => {
             <table {...getTableProps()}>
               <thead>
                 {headerGroups.map((headerGroup) => (
-                  <tr className="table-heading" {...headerGroup.getHeaderGroupProps()}>
+                  <tr className="table-heading product-table" {...headerGroup.getHeaderGroupProps()}>
                     {headerGroup.headers.map((column) => (
                       <th {...column.getHeaderProps(column.getSortByToggleProps())}>
                         {column.render("Header")}
-                        <span className="sort-arrows">{column.isSorted ? column.isSortedDesc ? <FaSortUp /> : <FaSortDown /> : <FaSort />}</span>
+                        {column.Header !== "Description" && column.Header !== "Eircode" &&
+
+                        <span className="sort-arrows">{column.isSorted ? column.isSortedDesc ? <FaSortUp /> : <FaSortDown /> : <FaSort />}</span>}
                       </th>
                     ))}
                   </tr>
@@ -135,6 +137,7 @@ export const Products = () => {
             loading={loading}
           />
         )}
+        <div className="test"></div>
       </>
     </>
   );

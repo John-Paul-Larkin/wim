@@ -4,7 +4,7 @@ interface Inputs {
   newMode: boolean;
   setNewMode: React.Dispatch<React.SetStateAction<boolean>>;
   handleClickDelete: () => void;
-  tableType: "customer" | "product" | "supplier";
+  tableType: "customer" | "product" | "supplier"| "employee";
 }
 
 export const FormButtons = (props: Inputs) => {
@@ -21,11 +21,9 @@ export const FormButtons = (props: Inputs) => {
             <button onClick={() => setNewMode(true)}>New</button>
           </div>
           <div>
-            <button>Place order</button>
-          </div>
-          <div>
             <button onClick={handleClickDelete}>Delete</button>
           </div>
+          <div>{tableType === "customer" && <button>Place order</button>}</div>
         </div>
       )}
       {editMode && (

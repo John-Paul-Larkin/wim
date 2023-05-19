@@ -13,7 +13,7 @@ export const SideMenu = (props: Inputs) => {
 
   // Sets the selected nav component based on the event bubbling from clicked li
   const handleNavClick = (event: React.MouseEvent<HTMLUListElement, MouseEvent>) => {
-  const target = event.target as HTMLLIElement;
+    const target = event.target as HTMLLIElement;
 
     // Select the clicked menu item from the DOM, using the data attribute
     if (target.dataset.menu) {
@@ -29,8 +29,8 @@ export const SideMenu = (props: Inputs) => {
 
   return (
     <div className="side-menu">
-      <div className="logo">WIM</div>
       <nav>
+        <div className="logo">WIM</div>
         <ul onClick={handleNavClick}>
           <li data-menu="Dashboard">
             <FaHome />
@@ -42,16 +42,6 @@ export const SideMenu = (props: Inputs) => {
             <span>Products</span>
             {selectedNavComponent === "Products" && <motion.div initial={{ width: 0 }} animate={{ width: "80%" }}></motion.div>}
           </li>
-          <li data-menu="Customers">
-            <FaUsers />
-            <span>Customers</span>
-            {selectedNavComponent === "Customers" && <motion.div initial={{ width: 0 }} animate={{ width: "80%" }}></motion.div>}
-          </li>
-          <li data-menu="Suppliers">
-            <FaTruckLoading />
-            <span>Suppliers</span>
-            {selectedNavComponent === "Suppliers" && <motion.div initial={{ width: 0 }} animate={{ width: "80%" }}></motion.div>}
-          </li>
           <li data-menu="Sales Orders">
             <FaThList />
             <span>Sales Orders</span>
@@ -61,6 +51,16 @@ export const SideMenu = (props: Inputs) => {
             <FaThList />
             <span>Purchase Orders</span>
             {selectedNavComponent === "Purchase Orders" && <motion.div initial={{ width: 0 }} animate={{ width: "80%" }}></motion.div>}
+          </li>
+          <li data-menu="Customers">
+            <FaUsers />
+            <span>Customers</span>
+            {selectedNavComponent === "Customers" && <motion.div initial={{ width: 0 }} animate={{ width: "80%" }}></motion.div>}
+          </li>
+          <li data-menu="Suppliers">
+            <FaTruckLoading />
+            <span>Suppliers</span>
+            {selectedNavComponent === "Suppliers" && <motion.div initial={{ width: 0 }} animate={{ width: "80%" }}></motion.div>}
           </li>
           <li data-menu="Employees">
             <FaUserAlt />

@@ -19,3 +19,21 @@ interface ProductData {
   restock_level: number;
 }
 
+interface SupplierData {
+  supplier_id: number;
+  name: string;
+  rep: string;
+  contact_phone: string;
+  address: string;
+  eircode: string;
+  email: string;
+}
+
+interface EmployeeData {
+  employee_id: number;
+  name: string;
+  email: string;
+  contact_phone: string;
+  address: string;
+  eircode: string;
+}

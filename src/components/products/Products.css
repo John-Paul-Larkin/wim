@@ -1,0 +1,7 @@
+.product-table > *:nth-child(n + 2):nth-child(-n + 7) {
+  background-color: var(--clr-4);
+  width: 10px;
+  border: 1px solid black;
+  font-size: 0.8em;
+}
+

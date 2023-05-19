@@ -6,19 +6,17 @@
   --clr-6: red;
   --clr-7: orange;
   --clr-8: pink;
-  --clr-9: rgb(170, 78, 78);
+  --clr-9: slategrey;
+  background-color: var(--clr-5);
 }
 
 .app {
-  background-color: var(--clr-7);
-  width: 100vw;
-  height: 100vh;
+  /* background-color: var(--clr-5); */
 }
 
 .main-screen {
   max-width: var(--max-screen-width);
-  height: 100vh;
-  background-color: var(--clr-1);
+  /* background-color: var(--clr-1); */
   margin: 0 auto;
   display: flex;
 }
@@ -107,4 +105,11 @@ h6 {
 #root,
 #__next {
   isolation: isolate;
+}
+
+.test {
+  height: 600px;
+  width: 90%;
+  background-color: aqua;
+  margin-bottom: 4rem;
 }
