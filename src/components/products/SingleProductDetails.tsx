@@ -5,7 +5,7 @@ import usePostData from "../../hooks/usePostData";
 import { FormButtons } from "../FormButtons";
 
 interface Inputs {
-  setProductIdOfCurrentlySelectedRow: React.Dispatch<React.SetStateAction<number | null>>;
+  setIdOfCurrentlySelectedRow: React.Dispatch<React.SetStateAction<number | null>>;
   refetchData: () => void;
   productDetails: ProductData;
   loading: boolean;
@@ -13,7 +13,7 @@ interface Inputs {
 
 export const SingleProductDetails = (props: Inputs) => {
   // Destructure props and variables
-  const { setProductIdOfCurrentlySelectedRow, productDetails, refetchData, loading } = props;
+  const { setIdOfCurrentlySelectedRow, productDetails, refetchData, loading } = props;
   const { product_id, name, description, quantity_in_stock, sold_by, case_size, rrp, restock_level } = productDetails;
 
   // These state assert which buttons will display. edit new save cancel etc
@@ -75,7 +75,7 @@ export const SingleProductDetails = (props: Inputs) => {
         icon: "error",
         title: "Oops...",
         // text: errors,
-        html: '<pre>' + errors + '</pre>'
+        html: "<pre>" + errors + "</pre>",
       });
       return false;
     }
@@ -93,7 +93,7 @@ export const SingleProductDetails = (props: Inputs) => {
       if (error === null) {
         setEditMode(false);
         setNewProductMode(false);
-        setProductIdOfCurrentlySelectedRow(null);
+        setIdOfCurrentlySelectedRow(null);
         refetchData();
       } else {
         console.log(error.name);
@@ -103,14 +103,32 @@ export const SingleProductDetails = (props: Inputs) => {
   };
 
   const handleClickDelete = async () => {
-    const { error } = await deleteData({ url: "/product/", id: product_id });
-    if (error === null) {
-      setProductIdOfCurrentlySelectedRow(null);
-      refetchData();
-    } else {
-      console.log(error.name);
-      console.log(error.message);
-    }
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Product will be permanently deleted",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        let error: Error | null = null;
+        if (product_id) {
+          const response = await deleteData({ url: "/product/", id: product_id });
+          error = response.error;
+        }
+        if (error === null) {
+          Swal.fire("Deleted!", "Product has been deleted.", "success");
+          setIdOfCurrentlySelectedRow(null);
+          refetchData();
+        } else {
+          console.log(error.name);
+          console.log(error.message);
+          Swal.fire("Something went wrong - Error message :", error.message);
+        }
+      }
+    });
   };
 
   return (

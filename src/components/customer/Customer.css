@@ -73,22 +73,26 @@ td {
 }
 
 tr {
-  background-color: lightblue;
+  background-color: hsl(195, 53%, 79%);
   cursor: pointer;
 }
 
+
 tr:nth-child(2n) {
-  background-color: #fafafa;
+  background-color: hsl(0, 0%, 83%);
 }
+
+tr:hover {
+  background-color: darkgrey;
+  cursor: pointer;
+}
+
+
 
 td {
   height: 40px;
   padding-left: 1rem;
   padding-right: 1rem;
-}
-
-tr:hover {
-  background-color: var(--clr-6);
 }
 
 .table-heading > * {
@@ -119,6 +123,13 @@ th {
   position: sticky;
   top: 0; /* required for the stickiness */
   box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
+}
+
+.table-wrapper .row-selected {
+  background-color: var(--clr-1);
+  
+  background-color: blue;
+  /* color:white; */
 }
 
 @media (max-width: 1024px) {

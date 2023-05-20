@@ -4,7 +4,7 @@ import { SectionViewArea } from "./components/mainScreen/SectionViewArea";
 import { SideMenu } from "./components/mainScreen/SideMenu";
 
 function App() {
-  const [selectedNavComponent, setSelectedNavComponent] = useState("Customers");
+  const [selectedNavComponent, setSelectedNavComponent] = useState("Sales Orders");
 
   return (
     <div className="main-screen">

@@ -5,7 +5,7 @@ import usePostData from "../../hooks/usePostData";
 import { FormButtons } from "../FormButtons";
 
 interface Inputs {
-  setSupplierIdOfCurrentlySelectedRow: React.Dispatch<React.SetStateAction<number | null>>;
+  setIdOfCurrentlySelectedRow: React.Dispatch<React.SetStateAction<number | null>>;
   refetchData: () => void;
   supplierDetails: SupplierData;
   loading: boolean;
@@ -13,7 +13,7 @@ interface Inputs {
 
 export const SingleSupplierDetails = (props: Inputs) => {
   // Destructure props and variables
-  const { setSupplierIdOfCurrentlySelectedRow, supplierDetails, refetchData, loading } = props;
+  const { setIdOfCurrentlySelectedRow, supplierDetails, refetchData, loading } = props;
   const { name, rep, contact_phone, supplier_id, address, eircode, email } = supplierDetails;
 
   // These state assert which buttons will display. edit new save cancel etc
@@ -65,7 +65,7 @@ export const SingleSupplierDetails = (props: Inputs) => {
     if (error === null) {
       setEditMode(false);
       setNewSupplierMode(false);
-      setSupplierIdOfCurrentlySelectedRow(null);
+      setIdOfCurrentlySelectedRow(null);
       refetchData();
     } else {
       console.log(error.name);
@@ -87,7 +87,7 @@ export const SingleSupplierDetails = (props: Inputs) => {
         const { error } = await deleteData({ url: "/supplier/", id: supplier_id });
         if (error === null) {
           Swal.fire("Deleted!", "Supplier has been deleted.", "success");
-          setSupplierIdOfCurrentlySelectedRow(null);
+          setIdOfCurrentlySelectedRow(null);
           refetchData();
         } else {
           console.log(error.name);

@@ -5,7 +5,7 @@ import usePostData from "../../hooks/usePostData";
 import { FormButtons } from "../FormButtons";
 
 interface Inputs {
-  setCustomerIdOfCurrentlySelectedRow: React.Dispatch<React.SetStateAction<number | null>>;
+  setIdOfCurrentlySelectedRow: React.Dispatch<React.SetStateAction<number | null>>;
   refetchData: () => void;
   customerDetails: CustomerData;
   loading: boolean;
@@ -13,7 +13,7 @@ interface Inputs {
 
 export const SingleCustomerDetails = (props: Inputs) => {
   // Destructure props and variables
-  const { setCustomerIdOfCurrentlySelectedRow, customerDetails, refetchData, loading } = props;
+  const { setIdOfCurrentlySelectedRow, customerDetails, refetchData, loading } = props;
   const { name, rep, contact_phone, customer_id, address, eircode, email } = customerDetails;
 
   // These state assert which buttons will display. edit new save cancel etc
@@ -65,7 +65,7 @@ export const SingleCustomerDetails = (props: Inputs) => {
     if (error === null) {
       setEditMode(false);
       setNewCustomerMode(false);
-      setCustomerIdOfCurrentlySelectedRow(null);
+      setIdOfCurrentlySelectedRow(null);
       refetchData();
     } else {
       console.log(error.name);
@@ -87,7 +87,7 @@ export const SingleCustomerDetails = (props: Inputs) => {
         const { error } = await deleteData({ url: "/customer/", id: customer_id });
         if (error === null) {
           Swal.fire("Deleted!", "Customer has been deleted.", "success");
-          setCustomerIdOfCurrentlySelectedRow(null);
+          setIdOfCurrentlySelectedRow(null);
           refetchData();
         } else {
           console.log(error.name);
@@ -103,13 +103,13 @@ export const SingleCustomerDetails = (props: Inputs) => {
       <div className="edit-wrapper">
         <div>
           <div className="labels">
-            <div>Name : </div>
-            <div>Rep : </div>
-            <div>Contact number : </div>
-            <div>Address : </div>
-            <div>Eircode : </div>
-            <div>Email : </div>
-            <div>Customer id : </div>
+            <div id="cust-name">Name : </div>
+            <div id="cust-rep">Rep : </div>
+            <div id="cust-contact">Contact number : </div>
+            <div id="cust-address">Address : </div>
+            <div id="cust-eircode">Eircode : </div>
+            <div id="cust-email">Email : </div>
+            <div id="cust-id">Customer id : </div>
           </div>
           {loading && <div className="error-loading">Loading.....</div>}
 
@@ -121,58 +121,29 @@ export const SingleCustomerDetails = (props: Inputs) => {
               <div>{address}</div>
               <div>{eircode}</div>
               <div>{email}</div>
-
               <div>{customer_id}</div>
             </div>
           )}
           {!loading && editMode && (
             <form className="details" id="customer-form" onSubmit={handleClickSaveEdit}>
-              <label>
-                <input type="text" name="name" defaultValue={name}></input>
-              </label>
-              <label>
-                <input type="text" name="rep" defaultValue={rep}></input>
-              </label>
-              <label>
-                <input type="text" name="contact_phone" defaultValue={contact_phone}></input>
-              </label>
-              <label>
-                <input type="text" name="address" defaultValue={address}></input>
-              </label>
-              <label>
-                <input type="text" name="eircode" defaultValue={eircode}></input>
-              </label>
-              <label>
-                <input type="text" name="email" defaultValue={email}></input>
-              </label>
-              <label>
-                <input type="text" name="customer_id" defaultValue={customer_id} readOnly></input>
-              </label>
+              <input type="text" name="name" defaultValue={name} aria-labelledby="cust-name"></input>
+              <input type="text" name="rep" defaultValue={rep} aria-labelledby="cust-rep"></input>
+              <input type="text" name="contact_phone" defaultValue={contact_phone} aria-labelledby="cust-contact"></input>
+              <input type="text" name="address" defaultValue={address} aria-labelledby="cust-address"></input>
+              <input type="text" name="eircode" defaultValue={eircode} aria-labelledby="cust-eircode"></input>
+              <input type="text" name="email" defaultValue={email} aria-labelledby="cust-email"></input>
+              <input type="text" name="customer_id" defaultValue={customer_id} aria-labelledby="cust-id" readOnly></input>
             </form>
           )}
           {!loading && newCustomerMode && (
             <form className="details" id="customer-form" onSubmit={handleClickSaveEdit}>
-              <label>
-                <input type="text" name="name"></input>
-              </label>
-              <label>
-                <input type="text" name="rep"></input>
-              </label>
-              <label>
-                <input type="text" name="contact_phone"></input>
-              </label>
-              <label>
-                <input type="text" name="address"></input>
-              </label>
-              <label>
-                <input type="text" name="eircode"></input>
-              </label>
-              <label>
-                <input type="text" name="email"></input>
-              </label>
-              <label>
-                <input type="text" name="customer_id" readOnly></input>
-              </label>
+              <input type="text" name="name" aria-labelledby="cust-name"></input>
+              <input type="text" name="rep" aria-labelledby="cust-rep"></input>
+              <input type="text" name="contact_phone" aria-labelledby="cust-contact"></input>
+              <input type="text" name="address" aria-labelledby="cust-address"></input>
+              <input type="text" name="eircode" aria-labelledby="cust-eircode"></input>
+              <input type="text" name="email" aria-labelledby="cust-email"></input>
+              <input type="text" name="customer_id" readOnly aria-labelledby="cust-id"></input>
             </form>
           )}
         </div>

@@ -8,9 +8,9 @@ import { SingleSupplierDetails } from "./SingleSupplierDetails";
 
 export const Suppliers = () => {
   const [data, setData] = useState<SupplierData[]>([]);
-  const [supplierIdOfCurrentlySelectedRow, setSupplierIdOfCurrentlySelectedRow] = useState<number | null>(null);
+  const [idOfCurrentlySelectedRow, setIdOfCurrentlySelectedRow] = useState<number | null>(null);
 
-  // fetch the data
+  // fetch the initial table data
   const { fetchedData, loading, error, refetchData } = useFetchData<SupplierData[]>("/supplier/");
 
   useEffect(() => {
@@ -21,8 +21,8 @@ export const Suppliers = () => {
   }, [fetchedData]);
 
   // Once the data is fetched, set the default row to the record at top of the table
-  if (supplierIdOfCurrentlySelectedRow === null && data.length > 0) {
-    setSupplierIdOfCurrentlySelectedRow(data[0].supplier_id);
+  if (idOfCurrentlySelectedRow === null && data.length > 0) {
+    setIdOfCurrentlySelectedRow(data[0].supplier_id);
   }
 
   // define column configuration object.
@@ -59,12 +59,14 @@ export const Suppliers = () => {
     ],
     []
   );
-
+  
+  //used below to distinguish the row within the table
+  const columnContainingId = 6;
   // eslint-disable-next-line
   const handleClickOnRow = (event: any) => {
-    const id = event.nativeEvent.target.parentNode.childNodes[6].innerText;
+    const id = event.nativeEvent.target.parentNode.childNodes[columnContainingId].innerText;
 
-    setSupplierIdOfCurrentlySelectedRow(Number(id));
+    setIdOfCurrentlySelectedRow(Number(id));
   };
 
   const tableInstance = useTable({ columns, data }, useGlobalFilter, useSortBy);
@@ -73,8 +75,8 @@ export const Suppliers = () => {
 
   // Once we have an id of a selected record, find the record within the data array
   let detailsSelectedSupplier = {} as SupplierData;
-  if (supplierIdOfCurrentlySelectedRow) {
-    const SingleSupplierData = data?.find((row) => row.supplier_id === supplierIdOfCurrentlySelectedRow);
+  if (idOfCurrentlySelectedRow) {
+    const SingleSupplierData = data?.find((row) => row.supplier_id === idOfCurrentlySelectedRow);
     if (SingleSupplierData) {
       detailsSelectedSupplier = SingleSupplierData;
     }
@@ -109,7 +111,10 @@ export const Suppliers = () => {
                   prepareRow(row);
 
                   return (
-                    <motion.tr {...row.getRowProps()} onClick={handleClickOnRow} initial={{ y: 50 }} animate={{ y: 0 }}>
+                    <motion.tr {...row.getRowProps()} onClick={handleClickOnRow} initial={{ y: 50 }} animate={{ y: 0 }}
+                    className={row.cells[columnContainingId].value === idOfCurrentlySelectedRow ? "row-selected" : ""}
+                    
+                    >
                       {row.cells.map((cell) => {
                         return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
                       })}
@@ -123,7 +128,7 @@ export const Suppliers = () => {
         <GlobalFilter globalFilter={globalFilter} setGlobalFilter={setGlobalFilter} />
         {detailsSelectedSupplier && (
           <SingleSupplierDetails
-            setSupplierIdOfCurrentlySelectedRow={setSupplierIdOfCurrentlySelectedRow}
+            setIdOfCurrentlySelectedRow={setIdOfCurrentlySelectedRow}
             supplierDetails={detailsSelectedSupplier}
             refetchData={refetchData}
             loading={loading}

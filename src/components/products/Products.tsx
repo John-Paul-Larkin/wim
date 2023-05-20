@@ -4,11 +4,11 @@ import { FaSort, FaSortDown, FaSortUp } from "react-icons/fa";
 import { Column, useGlobalFilter, useSortBy, useTable } from "react-table";
 import useFetchData from "../../hooks/useFetchData";
 import { GlobalFilter } from "./../GlobalFilter";
+import "./Products.css";
 import { SingleProductDetails } from "./SingleProductDetails";
-import './Products.css'
 export const Products = () => {
   const [data, setData] = useState<ProductData[]>([]);
-  const [productIdOfCurrentlySelectedRow, setProductIdOfCurrentlySelectedRow] = useState<number | null>(null);
+  const [idOfCurrentlySelectedRow, setIdOfCurrentlySelectedRow] = useState<number | null>(null);
 
   // fetch the data
   const { fetchedData, loading, error, refetchData } = useFetchData<ProductData[]>("/product/");
@@ -19,13 +19,6 @@ export const Products = () => {
       setData(fetchedData.reverse());
     }
   }, [fetchedData]);
-
-  // Once the data is fetched, set the default row to the recrord at top of the table
-  if (productIdOfCurrentlySelectedRow === null && data.length > 0) {
-    if (data[0].product_id) {
-      setProductIdOfCurrentlySelectedRow(data[0].product_id);
-    }
-  }
 
   // define column configuration object.
   const columns: Column<ProductData>[] = React.useMemo(
@@ -66,11 +59,20 @@ export const Products = () => {
     []
   );
 
+  // Once the data is fetched, set the default row to the recrord at top of the table
+  if (idOfCurrentlySelectedRow === null && data.length > 0) {
+    if (data[0].product_id) {
+      setIdOfCurrentlySelectedRow(data[0].product_id);
+    }
+  }
+
+  //used below to distinguish the row within the table
+  const columnContainingId = 6;
   // eslint-disable-next-line
   const handleClickOnRow = (event: any) => {
-    const id = event.nativeEvent.target.parentNode.childNodes[7].innerText;
+    const id = event.nativeEvent.target.parentNode.childNodes[columnContainingId].innerText;
 
-    setProductIdOfCurrentlySelectedRow(Number(id));
+    setIdOfCurrentlySelectedRow(Number(id));
   };
 
   const tableInstance = useTable({ columns, data }, useGlobalFilter, useSortBy);
@@ -79,8 +81,8 @@ export const Products = () => {
 
   // Once we have an id of a selected record, find the record within the data array
   let detailsSelectedProduct = {} as ProductData;
-  if (productIdOfCurrentlySelectedRow) {
-    const SingleProductData = data?.find((row) => row.product_id === productIdOfCurrentlySelectedRow);
+  if (idOfCurrentlySelectedRow) {
+    const SingleProductData = data?.find((row) => row.product_id === idOfCurrentlySelectedRow);
     if (SingleProductData) {
       detailsSelectedProduct = SingleProductData;
     }
@@ -93,20 +95,20 @@ export const Products = () => {
         <span>Products</span>
       </div>
       <>
-        <div className="table-wrapper">
+        <div className="table-wrapper product-table">
           {loading && <div className="error-loading">Loading.....</div>}
           {error && <div className="error-loading">Error. {error?.message}</div>}
           {!loading && !error && (
             <table {...getTableProps()}>
               <thead>
                 {headerGroups.map((headerGroup) => (
-                  <tr className="table-heading product-table" {...headerGroup.getHeaderGroupProps()}>
+                  <tr className="table-heading" {...headerGroup.getHeaderGroupProps()}>
                     {headerGroup.headers.map((column) => (
                       <th {...column.getHeaderProps(column.getSortByToggleProps())}>
                         {column.render("Header")}
-                        {column.Header !== "Description" && column.Header !== "Eircode" &&
-
-                        <span className="sort-arrows">{column.isSorted ? column.isSortedDesc ? <FaSortUp /> : <FaSortDown /> : <FaSort />}</span>}
+                        {column.Header !== "Description" && column.Header !== "Eircode" && (
+                          <span className="sort-arrows">{column.isSorted ? column.isSortedDesc ? <FaSortUp /> : <FaSortDown /> : <FaSort />}</span>
+                        )}
                       </th>
                     ))}
                   </tr>
@@ -117,7 +119,13 @@ export const Products = () => {
                   prepareRow(row);
 
                   return (
-                    <motion.tr {...row.getRowProps()} onClick={handleClickOnRow} initial={{ y: 50 }} animate={{ y: 0 }}>
+                    <motion.tr
+                      {...row.getRowProps()}
+                      onClick={handleClickOnRow}
+                      initial={{ y: 50 }}
+                      animate={{ y: 0 }}
+                      className={row.cells[columnContainingId].value === idOfCurrentlySelectedRow ? "row-selected" : ""}
+                    >
                       {row.cells.map((cell) => {
                         return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
                       })}
@@ -131,7 +139,7 @@ export const Products = () => {
         <GlobalFilter globalFilter={globalFilter} setGlobalFilter={setGlobalFilter} />
         {detailsSelectedProduct && (
           <SingleProductDetails
-            setProductIdOfCurrentlySelectedRow={setProductIdOfCurrentlySelectedRow}
+            setIdOfCurrentlySelectedRow={setIdOfCurrentlySelectedRow}
             productDetails={detailsSelectedProduct}
             refetchData={refetchData}
             loading={loading}

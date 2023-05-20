@@ -8,7 +8,7 @@ import { SingleEmployeeDetails } from "./SingleEmployeeDetails";
 
 export const Employees = () => {
   const [data, setData] = useState<EmployeeData[]>([]);
-  const [employeeIdOfCurrentlySelectedRow, setEmployeeIdOfCurrentlySelectedRow] = useState<number | null>(null);
+  const [idOfCurrentlySelectedRow, setIdOfCurrentlySelectedRow] = useState<number | null>(null);
 
   // fetch the data
   const { fetchedData, loading, error, refetchData } = useFetchData<EmployeeData[]>("/employee/");
@@ -21,8 +21,8 @@ export const Employees = () => {
   }, [fetchedData]);
 
   // Once the data is fetched, set the default row to the record at top of the table
-  if (employeeIdOfCurrentlySelectedRow === null && data.length > 0) {
-    setEmployeeIdOfCurrentlySelectedRow(data[0].employee_id);
+  if (idOfCurrentlySelectedRow === null && data.length > 0) {
+    setIdOfCurrentlySelectedRow(data[0].employee_id);
   }
 
   // define column configuration object.
@@ -55,12 +55,14 @@ export const Employees = () => {
     ],
     []
   );
+  const columnContainingId = 5;
 
   // eslint-disable-next-line
   const handleClickOnRow = (event: any) => {
-    const id = event.nativeEvent.target.parentNode.childNodes[5].innerText;
 
-    setEmployeeIdOfCurrentlySelectedRow(Number(id));
+    const id = event.nativeEvent.target.parentNode.childNodes[columnContainingId].innerText;
+
+    setIdOfCurrentlySelectedRow(Number(id));
   };
 
   const tableInstance = useTable({ columns, data }, useGlobalFilter, useSortBy);
@@ -69,8 +71,8 @@ export const Employees = () => {
 
   // Once we have an id of a selected record, find the record within the data array
   let detailsSelectedEmployee = {} as EmployeeData;
-  if (employeeIdOfCurrentlySelectedRow) {
-    const SingleEmployeeData = data?.find((row) => row.employee_id === employeeIdOfCurrentlySelectedRow);
+  if (idOfCurrentlySelectedRow) {
+    const SingleEmployeeData = data?.find((row) => row.employee_id === idOfCurrentlySelectedRow);
     if (SingleEmployeeData) {
       detailsSelectedEmployee = SingleEmployeeData;
     }
@@ -105,7 +107,10 @@ export const Employees = () => {
                   prepareRow(row);
 
                   return (
-                    <motion.tr {...row.getRowProps()} onClick={handleClickOnRow} initial={{ y: 50 }} animate={{ y: 0 }}>
+                    <motion.tr {...row.getRowProps()} onClick={handleClickOnRow} initial={{ y: 50 }} animate={{ y: 0 }}
+                    className={row.cells[columnContainingId].value === idOfCurrentlySelectedRow ? "row-selected" : ""}
+                    
+                    >
                       {row.cells.map((cell) => {
                         return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
                       })}
@@ -119,7 +124,7 @@ export const Employees = () => {
         <GlobalFilter globalFilter={globalFilter} setGlobalFilter={setGlobalFilter} />
         {detailsSelectedEmployee && (
           <SingleEmployeeDetails
-            setEmployeeIdOfCurrentlySelectedRow={setEmployeeIdOfCurrentlySelectedRow}
+            setIdOfCurrentlySelectedRow={setIdOfCurrentlySelectedRow}
             employeeDetails={detailsSelectedEmployee}
             refetchData={refetchData}
             loading={loading}

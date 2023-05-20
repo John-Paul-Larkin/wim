@@ -5,7 +5,7 @@ import usePostData from "../../hooks/usePostData";
 import { FormButtons } from "../FormButtons";
 
 interface Inputs {
-  setEmployeeIdOfCurrentlySelectedRow: React.Dispatch<React.SetStateAction<number | null>>;
+  setIdOfCurrentlySelectedRow: React.Dispatch<React.SetStateAction<number | null>>;
   refetchData: () => void;
   employeeDetails: EmployeeData;
   loading: boolean;
@@ -13,7 +13,7 @@ interface Inputs {
 
 export const SingleEmployeeDetails = (props: Inputs) => {
   // Destructure props and variables
-  const { setEmployeeIdOfCurrentlySelectedRow, employeeDetails, refetchData, loading } = props;
+  const { setIdOfCurrentlySelectedRow, employeeDetails, refetchData, loading } = props;
   const { name, contact_phone, employee_id, address, eircode, email } = employeeDetails;
 
   // These state assert which buttons will display. edit new save cancel etc
@@ -62,7 +62,7 @@ export const SingleEmployeeDetails = (props: Inputs) => {
     if (error === null) {
       setEditMode(false);
       setNewEmployeeMode(false);
-      setEmployeeIdOfCurrentlySelectedRow(null);
+      setIdOfCurrentlySelectedRow(null);
       refetchData();
     } else {
       console.log(error.name);
@@ -84,7 +84,7 @@ export const SingleEmployeeDetails = (props: Inputs) => {
         const { error } = await deleteData({ url: "/employee/", id: employee_id });
         if (error === null) {
           Swal.fire("Deleted!", "Employee has been deleted.", "success");
-          setEmployeeIdOfCurrentlySelectedRow(null);
+          setIdOfCurrentlySelectedRow(null);
           refetchData();
         } else {
           console.log(error.name);
