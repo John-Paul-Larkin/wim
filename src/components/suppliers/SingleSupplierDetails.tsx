@@ -103,13 +103,13 @@ export const SingleSupplierDetails = (props: Inputs) => {
       <div className="edit-wrapper">
         <div>
           <div className="labels">
-            <div>Name : </div>
-            <div>Rep : </div>
-            <div>Contact number : </div>
-            <div>Address : </div>
-            <div>Eircode : </div>
-            <div>Email : </div>
-            <div>Supplier id : </div>
+            <div id="supplier-name">Name : </div>
+            <div id="supplier-rep">Rep : </div>
+            <div id="supplier-contact">Contact number : </div>
+            <div id="supplier-address">Address : </div>
+            <div id="supplier-eircode">Eircode : </div>
+            <div id="supplier-email">Email : </div>
+            <div id="supplier-id">Supplier id : </div>
           </div>
           {loading && <div className="error-loading">Loading.....</div>}
 
@@ -121,58 +121,29 @@ export const SingleSupplierDetails = (props: Inputs) => {
               <div>{address}</div>
               <div>{eircode}</div>
               <div>{email}</div>
-
               <div>{supplier_id}</div>
             </div>
           )}
           {!loading && editMode && (
             <form className="details" id="supplier-form" onSubmit={handleClickSaveEdit}>
-              <label>
-                <input type="text" name="name" defaultValue={name}></input>
-              </label>
-              <label>
-                <input type="text" name="rep" defaultValue={rep}></input>
-              </label>
-              <label>
-                <input type="text" name="contact_phone" defaultValue={contact_phone}></input>
-              </label>
-              <label>
-                <input type="text" name="address" defaultValue={address}></input>
-              </label>
-              <label>
-                <input type="text" name="eircode" defaultValue={eircode}></input>
-              </label>
-              <label>
-                <input type="text" name="email" defaultValue={email}></input>
-              </label>
-              <label>
-                <input type="text" name="supplier_id" defaultValue={supplier_id} readOnly></input>
-              </label>
+              <input type="text" name="name" aria-labelledby="supplier-name" defaultValue={name}></input>
+              <input type="text" name="rep" defaultValue={rep} aria-labelledby="supplier-rep"></input>
+              <input type="text" name="contact_phone" defaultValue={contact_phone} aria-labelledby="supplier-contact"></input>
+              <input type="text" name="address" defaultValue={address} aria-labelledby="supplier-address"></input>
+              <input type="text" name="eircode" defaultValue={eircode} aria-labelledby="supplier-eircode"></input>
+              <input type="text" name="email" defaultValue={email} aria-labelledby="supplier-email"></input>
+              <input type="text" name="supplier_id" defaultValue={supplier_id} readOnly aria-labelledby="supplier-id"></input>
             </form>
           )}
           {!loading && newSupplierMode && (
             <form className="details" id="supplier-form" onSubmit={handleClickSaveEdit}>
-              <label>
-                <input type="text" name="name"></input>
-              </label>
-              <label>
-                <input type="text" name="rep"></input>
-              </label>
-              <label>
-                <input type="text" name="contact_phone"></input>
-              </label>
-              <label>
-                <input type="text" name="address"></input>
-              </label>
-              <label>
-                <input type="text" name="eircode"></input>
-              </label>
-              <label>
-                <input type="text" name="email"></input>
-              </label>
-              <label>
-                <input type="text" name="supplier_id" readOnly></input>
-              </label>
+              <input type="text" name="name" aria-labelledby="supplier-name"></input>
+              <input type="text" name="rep" aria-labelledby="supplier-rep"></input>
+              <input type="text" name="contact_phone" aria-labelledby="supplier-contact"></input>
+              <input type="text" name="address" aria-labelledby="supplier-address"></input>
+              <input type="text" name="eircode" aria-labelledby="supplier-eircode"></input>
+              <input type="text" name="email" aria-labelledby="supplier-email"></input>
+              <input type="text" name="supplier_id" aria-labelledby="supplier-id" readOnly></input>
             </form>
           )}
         </div>

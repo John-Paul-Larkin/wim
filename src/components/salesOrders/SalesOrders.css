@@ -1,10 +1,13 @@
-.sales-orders div {
-    height:200px;
-    margin:1rem;
-    border:2px solid black;
-
+.received,
+.picked,
+.returned,
+.sent {
+  height: 200px;
+  margin: 1rem;
+  border: 2px solid black;
 }
 
-div.order-form {
-    height:1000px;
+.place-order {
+  height: 1000px;
+  background-color: antiquewhite;
 }

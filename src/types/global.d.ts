@@ -37,3 +37,7 @@ interface EmployeeData {
   address: string;
   eircode: string;
 }
+
+interface ProductDataQuantity extends ProductData {
+  quantity:number;
+}

@@ -136,14 +136,14 @@ export const SingleProductDetails = (props: Inputs) => {
       <div className="edit-wrapper">
         <div>
           <div className="labels">
-            <div>Name : </div>
-            <div>Description : </div>
-            <div>Quantity in stock : </div>
-            <div>Sold by : </div>
-            <div>Case size : </div>
-            <div>RRP : </div>
-            <div>Restock level : </div>
-            <div>Product id : </div>
+            <div id="product-name">Name : </div>
+            <div id="product-description">Description : </div>
+            <div id="product-quantity">Quantity in stock : </div>
+            <div id="product-sold">Sold by : </div>
+            <div id="product-case">Case size : </div>
+            <div id="product-rrp">RRP : </div>
+            <div id="product-restock">Restock level : </div>
+            <div id="product-id">Product id : </div>
           </div>
           {loading && <div className="error-loading">Loading.....</div>}
 
@@ -161,68 +161,30 @@ export const SingleProductDetails = (props: Inputs) => {
           )}
           {!loading && editMode && (
             <form className="details" id="product-form" onSubmit={handleClickSaveEdit}>
-              <label>
-                <input type="text" name="name" defaultValue={name}></input>
-              </label>
-              <label>
-                <input type="text" name="description" defaultValue={description}></input>
-              </label>
-              <label>
-                <input type="text" name="quantity_in_stock" defaultValue={quantity_in_stock}></input>
-              </label>
-              <label>
-                <input type="text" name="sold_by" defaultValue={sold_by}></input>
-              </label>
-              <label>
-                <input type="text" name="case_size" defaultValue={case_size}></input>
-              </label>
-              <label>
-                <label>
-                  <input type="text" name="rrp" defaultValue={rrp}></input>
-                </label>
-
-                <label>
-                  <input type="text" name="restock_level" defaultValue={restock_level}></input>
-                </label>
-
-                <input type="text" name="product_id" defaultValue={product_id} readOnly></input>
-              </label>
+              <input type="text" name="name" defaultValue={name} aria-labelledby="product-name"></input>
+              <input type="text" name="description" defaultValue={description} aria-labelledby="product-description"></input>
+              <input type="text" name="quantity_in_stock" defaultValue={quantity_in_stock} aria-labelledby="product-quantity"></input>
+              <input type="text" name="sold_by" defaultValue={sold_by} aria-labelledby="product-sold"></input>
+              <input type="text" name="case_size" defaultValue={case_size} aria-labelledby="product-case"></input>
+              <input type="text" name="rrp" defaultValue={rrp} aria-labelledby="product-rrp"></input>
+              <input type="text" name="restock_level" defaultValue={restock_level} aria-labelledby="product-restock"></input>
+              <input type="text" name="product_id" defaultValue={product_id} readOnly aria-labelledby="product-id"></input>
             </form>
           )}
           {!loading && newProductMode && (
             <form className="details" id="product-form" onSubmit={handleClickSaveEdit}>
-              <label>
-                <input type="text" name="name"></input>
-              </label>
-              <label>
-                <input type="text" name="description"></input>
-              </label>
-              <label>
-                <input type="text" name="quantity_in_stock"></input>
-              </label>
-              <label>
-                {/* <input type="text" name="sold_by"></input> */}
-                <select name="sold_by">
-                  <option value="case" selected>
-                    case
-                  </option>
-                  <option value="unit">unit</option>
-                  <option value="kg">kg</option>
-                </select>
-              </label>
-              <label>
-                <input type="text" name="case_size"></input>
-              </label>
-              <label>
-                <input type="text" name="rrp"></input>
-              </label>
-              <label>
-                <input type="text" name="restock_level"></input>
-              </label>
-
-              <label>
-                <input type="text" name="product_id" readOnly></input>
-              </label>
+              <input type="text" name="name" aria-labelledby="product-name"></input>
+              <input type="text" name="description" aria-labelledby="product-description"></input>
+              <input type="text" name="quantity_in_stock" aria-labelledby="product-quantity"></input>
+              <select name="sold_by" aria-labelledby="product-sold">
+                <option value="case">case</option>
+                <option value="unit">unit</option>
+                <option value="kg">kg</option>
+              </select>
+              <input type="text" name="case_size" aria-labelledby="product-case"></input>
+              <input type="text" name="rrp" aria-labelledby="product-rrp"></input>
+              <input type="text" name="restock_level" aria-labelledby="product-restock"></input>
+              <input type="text" name="product_id" readOnly aria-labelledby="product-id"></input>
             </form>
           )}
         </div>

@@ -100,12 +100,12 @@ export const SingleEmployeeDetails = (props: Inputs) => {
       <div className="edit-wrapper">
         <div>
           <div className="labels">
-            <div>Name : </div>
-            <div>Contact number : </div>
-            <div>Address : </div>
-            <div>Eircode : </div>
-            <div>Email : </div>
-            <div>Employee id : </div>
+            <div id="employee-name">Name : </div>
+            <div id="employee-contact">Contact number : </div>
+            <div id="employee-address">Address : </div>
+            <div id="employee-eircode">Eircode : </div>
+            <div id="employee-email">Email : </div>
+            <div id="employee-id">Employee id : </div>
           </div>
           {loading && <div className="error-loading">Loading.....</div>}
 
@@ -116,52 +116,27 @@ export const SingleEmployeeDetails = (props: Inputs) => {
               <div>{address}</div>
               <div>{eircode}</div>
               <div>{email}</div>
-
               <div>{employee_id}</div>
             </div>
           )}
           {!loading && editMode && (
             <form className="details" id="employee-form" onSubmit={handleClickSaveEdit}>
-              <label>
-                <input type="text" name="name" defaultValue={name}></input>
-              </label>
-              <label>
-                <input type="text" name="contact_phone" defaultValue={contact_phone}></input>
-              </label>
-              <label>
-                <input type="text" name="address" defaultValue={address}></input>
-              </label>
-              <label>
-                <input type="text" name="eircode" defaultValue={eircode}></input>
-              </label>
-              <label>
-                <input type="text" name="email" defaultValue={email}></input>
-              </label>
-              <label>
-                <input type="text" name="employee_id" defaultValue={employee_id} readOnly></input>
-              </label>
+              <input type="text" name="name" defaultValue={name} aria-labelledby="employee-name"></input>
+              <input type="text" name="contact_phone" defaultValue={contact_phone} aria-labelledby="employee-contact"></input>
+              <input type="text" name="address" defaultValue={address} aria-labelledby="employee-address"></input>
+              <input type="text" name="eircode" defaultValue={eircode} aria-labelledby="employee-eircode"></input>
+              <input type="text" name="email" defaultValue={email} aria-labelledby="employee-email"></input>
+              <input type="text" name="employee_id" defaultValue={employee_id} readOnly aria-labelledby="employee-id"></input>
             </form>
           )}
           {!loading && newEmployeeMode && (
             <form className="details" id="employee-form" onSubmit={handleClickSaveEdit}>
-              <label>
-                <input type="text" name="name"></input>
-              </label>
-              <label>
-                <input type="text" name="contact_phone"></input>
-              </label>
-              <label>
-                <input type="text" name="address"></input>
-              </label>
-              <label>
-                <input type="text" name="eircode"></input>
-              </label>
-              <label>
-                <input type="text" name="email"></input>
-              </label>
-              <label>
-                <input type="text" name="employee_id" readOnly></input>
-              </label>
+              <input type="text" name="name" aria-labelledby="employee-name"></input>
+              <input type="text" name="contact_phone" aria-labelledby="employee-contact"></input>
+              <input type="text" name="address" aria-labelledby="employee-address"></input>
+              <input type="text" name="eircode" aria-labelledby="employee-eircode"></input>
+              <input type="text" name="email" aria-labelledby="employee-email"></input>
+              <input type="text" name="employee_id" readOnly aria-labelledby="employee-id"></input>
             </form>
           )}
         </div>
