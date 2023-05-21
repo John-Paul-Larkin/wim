@@ -44,12 +44,24 @@ export const Products = () => {
         accessor: "case_size",
       },
       {
-        Header: "RRP",
-        accessor: "rrp",
+        Header: "Unit RRP",
+        accessor: "unit_rrp",
       },
       {
         Header: "ID",
         accessor: "product_id",
+      },
+      {
+        Header: "Purchase Price",
+        accessor: "purchase_price",
+      },
+      {
+        Header: "Sale price",
+        accessor: "sale_price",
+      },
+      {
+        Header: "SKU",
+        accessor: "sku",
       },
       {
         Header: "Description",
@@ -96,8 +108,8 @@ export const Products = () => {
       </div>
       <>
         <div className="table-wrapper product-table">
-          {loading && <div className="error-loading">Loading.....</div>}
-          {error && <div className="error-loading">Error. {error?.message}</div>}
+          {loading && <div className="error-loading"><span>Loading.....</span></div>}
+          {error && <div className="error-loading"><span>Error. {error?.message}</span></div>}
           {!loading && !error && (
             <table {...getTableProps()}>
               <thead>

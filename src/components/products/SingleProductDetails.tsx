@@ -14,7 +14,8 @@ interface Inputs {
 export const SingleProductDetails = (props: Inputs) => {
   // Destructure props and variables
   const { setIdOfCurrentlySelectedRow, productDetails, refetchData, loading } = props;
-  const { product_id, name, description, quantity_in_stock, sold_by, case_size, rrp, restock_level } = productDetails;
+  const { product_id, name, description, quantity_in_stock, sold_by, case_size, unit_rrp, restock_level, sku, purchase_price, sale_price } =
+    productDetails;
 
   // These state assert which buttons will display. edit new save cancel etc
   const [editMode, setEditMode] = useState(false);
@@ -31,8 +32,11 @@ export const SingleProductDetails = (props: Inputs) => {
       quantity_in_stock: { value: number };
       sold_by: { value: "case" | "unit" | "kg" };
       case_size: { value: number };
-      rrp: { value: number };
+      unit_rrp: { value: number };
       restock_level: { value: number };
+      purchase_price: { value: number };
+      sku: { value: string };
+      sale_price: { value: number };
     };
 
     // If this is an edit the id will already be set
@@ -48,9 +52,12 @@ export const SingleProductDetails = (props: Inputs) => {
       quantity_in_stock: Number(target.quantity_in_stock.value),
       sold_by: target.sold_by.value,
       case_size: Number(target.case_size.value),
-      rrp: target.rrp.value,
+      unit_rrp: target.unit_rrp.value,
       restock_level: Number(target.restock_level.value),
       product_id: product_id,
+      purchase_price: target.purchase_price.value,
+      sku: target.sku.value,
+      sale_price: target.sale_price.value,
     };
 
     return userInputs;
@@ -143,9 +150,14 @@ export const SingleProductDetails = (props: Inputs) => {
             <div id="product-case">Case size : </div>
             <div id="product-rrp">RRP : </div>
             <div id="product-restock">Restock level : </div>
+
+            <div id="product-sku">sku :</div>
+            <div id="product-purchase_price">Purchase price</div>
+            <div id="product-sale-price">Sale price</div>
+
             <div id="product-id">Product id : </div>
           </div>
-          {loading && <div className="error-loading">Loading.....</div>}
+          {loading && <div className="error-loading"><span>Loading.....</span></div>}
 
           {!loading && !editMode && !newProductMode && (
             <div className="details">
@@ -154,8 +166,11 @@ export const SingleProductDetails = (props: Inputs) => {
               <div>{quantity_in_stock}</div>
               <div>{sold_by}</div>
               <div>{case_size}</div>
-              <div>{rrp}</div>
+              <div>{unit_rrp}</div>
               <div>{restock_level}</div>
+              <div>{sku}</div>
+              <div>{purchase_price}</div>
+              <div>{sale_price}</div>
               <div>{product_id}</div>
             </div>
           )}
@@ -164,10 +179,17 @@ export const SingleProductDetails = (props: Inputs) => {
               <input type="text" name="name" defaultValue={name} aria-labelledby="product-name"></input>
               <input type="text" name="description" defaultValue={description} aria-labelledby="product-description"></input>
               <input type="text" name="quantity_in_stock" defaultValue={quantity_in_stock} aria-labelledby="product-quantity"></input>
-              <input type="text" name="sold_by" defaultValue={sold_by} aria-labelledby="product-sold"></input>
+              <select name="sold_by" aria-labelledby="product-sold">
+                <option value="case">case</option>
+                <option value="unit">unit</option>
+                <option value="kg">kg</option>
+              </select>
               <input type="text" name="case_size" defaultValue={case_size} aria-labelledby="product-case"></input>
-              <input type="text" name="rrp" defaultValue={rrp} aria-labelledby="product-rrp"></input>
+              <input type="text" name="unit_rrp" defaultValue={unit_rrp} aria-labelledby="product-rrp"></input>
               <input type="text" name="restock_level" defaultValue={restock_level} aria-labelledby="product-restock"></input>
+              <input type="text" name="sku" defaultValue={sku} aria-labelledby="product-sku"></input>
+              <input type="text" name="purchase_price" defaultValue={purchase_price} aria-labelledby="product-purchase_price"></input>
+              <input type="text" name="sale_price" defaultValue={sale_price} aria-labelledby="product-sale_price"></input>
               <input type="text" name="product_id" defaultValue={product_id} readOnly aria-labelledby="product-id"></input>
             </form>
           )}
@@ -182,8 +204,11 @@ export const SingleProductDetails = (props: Inputs) => {
                 <option value="kg">kg</option>
               </select>
               <input type="text" name="case_size" aria-labelledby="product-case"></input>
-              <input type="text" name="rrp" aria-labelledby="product-rrp"></input>
+              <input type="text" name="unit_rrp" aria-labelledby="product-rrp"></input>
               <input type="text" name="restock_level" aria-labelledby="product-restock"></input>
+              <input type="text" name="sku" aria-labelledby="product-sku"></input>
+              <input type="text" name="purchase_price" aria-labelledby="product-purchase_price"></input>
+              <input type="text" name="sale_price" aria-labelledby="product-sale_price"></input>
               <input type="text" name="product_id" readOnly aria-labelledby="product-id"></input>
             </form>
           )}

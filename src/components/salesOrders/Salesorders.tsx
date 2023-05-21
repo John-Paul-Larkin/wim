@@ -59,24 +59,47 @@ export const Salesorders = () => {
 
     const selectedProduct = productData.find((product) => product.product_id === selectedOption?.value);
     if (selectedProduct) {
-      setSelectedProducts([...selectedProducts, {...selectedProduct,quantity:0}]);
+      if (!selectedProducts.find((product) => product.product_id === selectedProduct.product_id)) {
+        // IF the item has not preveiously been added to the array/cart
+        setSelectedProducts([...selectedProducts, { ...selectedProduct, order_quantity: 0 }]);
+      }
     }
   };
 
   return (
-    <div className="sales-orders">
+    <div className="sales-order">
+      <div className="heading">
+        {" "}
+        <span>Sales orders</span>
+      </div>
+
       <div className="place-order">
-        <Select options={customerOptions} onChange={(selectedOption: CustomerSelect | null) => setSelectedCustomer(selectedOption)}></Select>
-        <div>
-          <span>Customer:</span>
-          <span>{customerDetails?.name}</span>
-        </div>
-        <div>
-          <span>Rep:</span>
-          <span>{customerDetails?.rep}</span>
-        </div>
-        <Select options={productOptions} onChange={handleClickProdcutSelect}></Select>
-        <SelectedProducts selectedProducts={selectedProducts}/>
+        <div>Choose a customer to place an order</div>
+        <Select 
+        placeholder="Select a customer"
+        options={customerOptions} onChange={(selectedOption: CustomerSelect | null) => setSelectedCustomer(selectedOption)}></Select>
+        {selectedCustomer && (
+          <>
+            {" "}
+            <div>
+              <span>Customer:</span>
+              <span>{customerDetails?.name}</span>
+            </div>
+            <div>
+              <span>Rep:</span>
+              <span>{customerDetails?.rep}</span>
+            </div>
+            <SelectedProducts selectedProducts={selectedProducts} />
+            <Select
+              options={productOptions}
+              onChange={handleClickProdcutSelect}
+              placeholder="Choose a product"
+              closeMenuOnSelect={true}
+              //  menuIsOpen={true}
+              openMenuOnFocus={true}
+            ></Select>
+          </>
+        )}
       </div>
       <div className="received">received</div>
       <div className="picked">picked</div>

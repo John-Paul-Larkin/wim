@@ -7,9 +7,11 @@ export const SelectedProducts = ({ selectedProducts }: Inputs) => {
     <>
       {selectedProducts.map((product) => {
         return (
-          <div key={product.product_id}>
+          <div key={product.product_id} className="product-unit-details">
             <div>{product.name}</div>
-            <div>{product.quantity}</div>
+            <span>sold by <span>{product.sold_by}</span> </span>
+            <span>in stock <span>{product.quantity_in_stock}</span></span>
+            <div>{product.order_quantity}</div>
             <div></div>
           </div>
         );

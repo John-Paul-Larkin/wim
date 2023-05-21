@@ -86,8 +86,8 @@ export const Employees = () => {
       </div>
       <>
         <div className="table-wrapper">
-          {loading && <div className="error-loading">Loading.....</div>}
-          {error && <div className="error-loading">Error. {error?.message}</div>}
+          {loading && <div className="error-loading"><span>Loading.....</span></div>}
+          {error && <div className="error-loading"><span>Error. {error?.message}</span></div>}
           {!loading && !error && (
             <table {...getTableProps()}>
               <thead>

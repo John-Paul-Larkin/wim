@@ -111,7 +111,7 @@ export const SingleCustomerDetails = (props: Inputs) => {
             <div id="cust-email">Email : </div>
             <div id="cust-id">Customer id : </div>
           </div>
-          {loading && <div className="error-loading">Loading.....</div>}
+          {loading && <div className="error-loading"><span>Loading.....</span></div>}
 
           {!loading && !editMode && !newCustomerMode && (
             <div className="details">

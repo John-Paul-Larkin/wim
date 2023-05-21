@@ -107,7 +107,7 @@ export const SingleEmployeeDetails = (props: Inputs) => {
             <div id="employee-email">Email : </div>
             <div id="employee-id">Employee id : </div>
           </div>
-          {loading && <div className="error-loading">Loading.....</div>}
+          {loading && <div className="error-loading"><span>Loading.....</span></div>}
 
           {!loading && !editMode && !newEmployeeMode && (
             <div className="details">

@@ -90,8 +90,8 @@ export const Suppliers = () => {
       </div>
       <>
         <div className="table-wrapper">
-          {loading && <div className="error-loading">Loading.....</div>}
-          {error && <div className="error-loading">Error. {error?.message}</div>}
+          {loading && <div className="error-loading"><span>Loading.....</span></div>}
+          {error && <div className="error-loading"><span>Error. {error?.message}</span></div>}
           {!loading && !error && (
             <table {...getTableProps()}>
               <thead>
@@ -109,11 +109,9 @@ export const Suppliers = () => {
               <tbody {...getTableBodyProps()}>
                 {rows.map((row) => {
                   prepareRow(row);
-
                   return (
                     <motion.tr {...row.getRowProps()} onClick={handleClickOnRow} initial={{ y: 50 }} animate={{ y: 0 }}
-                    className={row.cells[columnContainingId].value === idOfCurrentlySelectedRow ? "row-selected" : ""}
-                    
+                    className={row.cells[columnContainingId].value === idOfCurrentlySelectedRow ? "row-selected" : ""}          
                     >
                       {row.cells.map((cell) => {
                         return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;

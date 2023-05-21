@@ -111,7 +111,7 @@ export const SingleSupplierDetails = (props: Inputs) => {
             <div id="supplier-email">Email : </div>
             <div id="supplier-id">Supplier id : </div>
           </div>
-          {loading && <div className="error-loading">Loading.....</div>}
+          {loading && <div className="error-loading"><span>Loading.....</span></div>}
 
           {!loading && !editMode && !newSupplierMode && (
             <div className="details">

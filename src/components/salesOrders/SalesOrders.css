@@ -7,7 +7,23 @@
   border: 2px solid black;
 }
 
+.sales-order {
+
+}
+
 .place-order {
-  height: 1000px;
-  background-color: antiquewhite;
+    background-color: antiquewhite;
+    /* height: 1000px; */
+    margin: 1rem;
+    padding: 1rem;
+}
+
+.place-order > *:nth-child(2){
+    width:400px;
+}
+
+.product-unit-details {
+    border: 1px solid black;
+    margin: 1rem 1rem 1rem 3rem;
+
 }

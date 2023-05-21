@@ -15,8 +15,11 @@ interface ProductData {
   quantity_in_stock: number;
   sold_by: "case" | "unit" | "kg";
   case_size: number;
-  rrp: number;
+  unit_rrp: number;
   restock_level: number;
+  purchase_price:number;
+  sale_price:number;
+  sku: string;
 }
 
 interface SupplierData {
@@ -39,5 +42,5 @@ interface EmployeeData {
 }
 
 interface ProductDataQuantity extends ProductData {
-  quantity:number;
+  order_quantity:number;
 }

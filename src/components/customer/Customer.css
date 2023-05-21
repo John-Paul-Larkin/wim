@@ -77,7 +77,6 @@ tr {
   cursor: pointer;
 }
 
-
 tr:nth-child(2n) {
   background-color: hsl(0, 0%, 83%);
 }
@@ -86,8 +85,6 @@ tr:hover {
   background-color: darkgrey;
   cursor: pointer;
 }
-
-
 
 td {
   height: 40px;
@@ -116,6 +113,11 @@ th {
 
 .error-loading {
   font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
 }
 
 th {
@@ -127,7 +129,7 @@ th {
 
 .table-wrapper .row-selected {
   background-color: var(--clr-1);
-  
+
   background-color: blue;
   /* color:white; */
 }
