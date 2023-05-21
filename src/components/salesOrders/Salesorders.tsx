@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import Select from "react-select";
 import useFetchData from "../../hooks/useFetchData";
+import { CustomerDetails } from "./CustomerDetails";
 import "./SalesOrders.css";
 import { SelectedProducts } from "./SelectedProducts";
 
@@ -23,6 +25,26 @@ export const Salesorders = () => {
 
   const [selectedCustomer, setSelectedCustomer] = useState<CustomerSelect | null>(null);
   const [selectedProducts, setSelectedProducts] = useState<ProductDataQuantity[]>([]);
+
+  console.log(selectedCustomer, " selected customer");
+
+  useEffect(() => {
+    const localStorageSelectedProducts = localStorage.getItem("selectedProducts");
+    const localStorageSelectedCustomer = localStorage.getItem("selectedCustomer");
+
+    console.log(localStorageSelectedProducts, "local products");
+    console.log(localStorageSelectedProducts?.length, "local products length");
+
+    if (localStorageSelectedProducts && JSON.parse(localStorageSelectedProducts).length > 0) {
+      setSelectedProducts([...JSON.parse(localStorageSelectedProducts)]);
+
+      if (localStorageSelectedCustomer) {
+        // console.log(JSON.parse(localStorageSelectedCustomer));
+        console.log("here");
+        setSelectedCustomer(JSON.parse(localStorageSelectedCustomer));
+      }
+    }
+  }, []);
 
   let customerDetails: CustomerData | null | undefined = null;
 
@@ -54,7 +76,7 @@ export const Salesorders = () => {
     }
   }
 
-  const handleClickProdcutSelect = (selectedOption: ProductSelect | null) => {
+  const handleClickProductSelect = (selectedOption: ProductSelect | null) => {
     const productData = fetchedProductData as ProductData[];
 
     const selectedProduct = productData.find((product) => product.product_id === selectedOption?.value);
@@ -62,8 +84,14 @@ export const Salesorders = () => {
       if (!selectedProducts.find((product) => product.product_id === selectedProduct.product_id)) {
         // IF the item has not preveiously been added to the array/cart
         setSelectedProducts([...selectedProducts, { ...selectedProduct, order_quantity: 0 }]);
+        localStorage.setItem("selectedProducts", JSON.stringify([...selectedProducts, { ...selectedProduct, order_quantity: 0 }]));
       }
     }
+  };
+
+  const handleChangeCustomerSelect = (selectedOption: CustomerSelect | null) => {
+    setSelectedCustomer(selectedOption);
+    localStorage.setItem("selectedCustomer", JSON.stringify(selectedOption));
   };
 
   return (
@@ -74,32 +102,31 @@ export const Salesorders = () => {
       </div>
 
       <div className="place-order">
-        <div>Choose a customer to place an order</div>
-        <Select 
-        placeholder="Select a customer"
-        options={customerOptions} onChange={(selectedOption: CustomerSelect | null) => setSelectedCustomer(selectedOption)}></Select>
-        {selectedCustomer && (
-          <>
-            {" "}
-            <div>
-              <span>Customer:</span>
-              <span>{customerDetails?.name}</span>
-            </div>
-            <div>
-              <span>Rep:</span>
-              <span>{customerDetails?.rep}</span>
-            </div>
-            <SelectedProducts selectedProducts={selectedProducts} />
-            <Select
-              options={productOptions}
-              onChange={handleClickProdcutSelect}
-              placeholder="Choose a product"
-              closeMenuOnSelect={true}
-              //  menuIsOpen={true}
-              openMenuOnFocus={true}
-            ></Select>
-          </>
-        )}
+        {!selectedCustomer && <div>Choose a customer to place an order</div>}
+        <Select
+          className="customer-select"
+          placeholder={selectedCustomer ? "Change customer" : "Select a customer"}
+          options={customerOptions}
+          onChange={handleChangeCustomerSelect}
+        ></Select>
+        <AnimatePresence>
+          {selectedCustomer && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              transition={{ duration: 0.25 }}
+              exit={{ opacity: 0 }}
+            >
+              <CustomerDetails customerDetails={customerDetails} />
+              <SelectedProducts
+                productOptions={productOptions}
+                handleClickProductSelect={handleClickProductSelect}
+                selectedProducts={selectedProducts}
+                setSelectedProducts={setSelectedProducts}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
       <div className="received">received</div>
       <div className="picked">picked</div>
