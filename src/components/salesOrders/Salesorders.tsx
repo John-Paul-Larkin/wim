@@ -2,16 +2,13 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import Select from "react-select";
 import useFetchData from "../../hooks/useFetchData";
+import useFetchIndividualData from "../../hooks/useFetchIndividualData";
 import { CustomerDetails } from "./CustomerDetails";
+import { OrdersReceived } from "./OrdersReceived";
 import "./SalesOrders.css";
 import { SelectedProducts } from "./SelectedProducts";
 
 export const Salesorders = () => {
-  interface CustomerSelect {
-    value: number;
-    label: string;
-  }
-
   interface ProductSelect {
     value: number;
     label: string;
@@ -26,21 +23,15 @@ export const Salesorders = () => {
   const [selectedCustomer, setSelectedCustomer] = useState<CustomerSelect | null>(null);
   const [selectedProducts, setSelectedProducts] = useState<ProductDataQuantity[]>([]);
 
-  console.log(selectedCustomer, " selected customer");
-
   useEffect(() => {
     const localStorageSelectedProducts = localStorage.getItem("selectedProducts");
     const localStorageSelectedCustomer = localStorage.getItem("selectedCustomer");
-
-    console.log(localStorageSelectedProducts, "local products");
-    console.log(localStorageSelectedProducts?.length, "local products length");
 
     if (localStorageSelectedProducts && JSON.parse(localStorageSelectedProducts).length > 0) {
       setSelectedProducts([...JSON.parse(localStorageSelectedProducts)]);
 
       if (localStorageSelectedCustomer) {
         // console.log(JSON.parse(localStorageSelectedCustomer));
-        console.log("here");
         setSelectedCustomer(JSON.parse(localStorageSelectedCustomer));
       }
     }
@@ -108,6 +99,7 @@ export const Salesorders = () => {
           placeholder={selectedCustomer ? "Change customer" : "Select a customer"}
           options={customerOptions}
           onChange={handleChangeCustomerSelect}
+          value={null}
         ></Select>
         <AnimatePresence>
           {selectedCustomer && (
@@ -123,12 +115,14 @@ export const Salesorders = () => {
                 handleClickProductSelect={handleClickProductSelect}
                 selectedProducts={selectedProducts}
                 setSelectedProducts={setSelectedProducts}
+                selectedCustomer={selectedCustomer}
+                setSelectedCustomer={setSelectedCustomer}
               />
             </motion.div>
           )}
         </AnimatePresence>
       </div>
-      <div className="received">received</div>
+      <OrdersReceived />
       <div className="picked">picked</div>
       <div className="returned">returned</div>
       <div className="sent">sent</div>

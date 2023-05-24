@@ -44,3 +44,8 @@ interface EmployeeData {
 interface ProductDataQuantity extends ProductData {
   order_quantity:number;
 }
+
+interface CustomerSelect {
+  value: number;
+  label: string;
+}

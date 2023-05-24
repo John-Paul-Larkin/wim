@@ -108,8 +108,16 @@ export const Products = () => {
       </div>
       <>
         <div className="table-wrapper product-table">
-          {loading && <div className="error-loading"><span>Loading.....</span></div>}
-          {error && <div className="error-loading"><span>Error. {error?.message}</span></div>}
+          {loading && (
+            <div className="error-loading">
+              <span>Loading.....</span>
+            </div>
+          )}
+          {error && (
+            <div className="error-loading">
+              <span>Error. {error?.message}</span>
+            </div>
+          )}
           {!loading && !error && (
             <table {...getTableProps()}>
               <thead>
@@ -162,3 +170,8 @@ export const Products = () => {
     </>
   );
 };
+
+
+// calculate sales price
+//  <div>{(((2.49 / 123) * 100) / 3) * 12}</div> 
+

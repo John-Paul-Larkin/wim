@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 interface FetchDataResult<T> {
   fetchedData: T | null;
@@ -7,17 +7,21 @@ interface FetchDataResult<T> {
   refetchData: () => void;
 }
 
+// const baseURL = new URL(import.meta.env.VITE_APP_API_BASE_URL);
 const baseURL = import.meta.env.VITE_APP_API_BASE_URL;
 
-const useFetchData = <T>(url: string): FetchDataResult<T> => {
+const useFetchData = <T>(inputUrl: string): FetchDataResult<T> => {
   const [fetchedData, setFetchedData] = useState<T | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<Error | null>(null);
 
+
+  const url = useMemo(()=> new URL(baseURL + inputUrl),[inputUrl])
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(baseURL + url, { method: "GET", credentials: "include" });
+        const response = await fetch(url, { method: "GET", credentials: "include" });
         const responseData = await response.json();
         setFetchedData(responseData);
       } catch (error) {
@@ -31,7 +35,7 @@ const useFetchData = <T>(url: string): FetchDataResult<T> => {
   }, [url]);
 
   const refetchData = () => {
-    fetch(baseURL + url, { method: "GET", credentials: "include" })
+    fetch(url, { method: "GET", credentials: "include" })
       .then((response) => response.json())
       .then((responseData) => {
         setFetchedData(responseData as T);
