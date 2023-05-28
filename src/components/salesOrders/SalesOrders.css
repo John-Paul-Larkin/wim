@@ -1,10 +1,8 @@
-.received,
-.picked,
-.returned,
-.sent {
+.order-container {
   height: 200px;
   margin: 1rem;
   border: 2px solid black;
+  overflow-y: scroll;
 }
 
 .sales-order {
@@ -126,4 +124,10 @@
 
 .order-submit span > * {
   margin:1rem;
+}
+
+.individual-order {
+  /* height:3rem; */
+  border: 1px solid black;
+  margin:2px;
 }

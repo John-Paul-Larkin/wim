@@ -6,9 +6,10 @@ interface Inputs {
   selectedCustomer: CustomerSelect | null;
   setSelectedCustomer: React.Dispatch<React.SetStateAction<CustomerSelect | null>>;
   setSelectedProducts: React.Dispatch<React.SetStateAction<ProductDataQuantity[]>>;
+  refetchReceivedIds: () => void;
 }
 
-export const OrderSubmit = ({ selectedCustomer, selectedProducts, setSelectedCustomer, setSelectedProducts }: Inputs) => {
+export const OrderSubmit = ({ selectedCustomer, selectedProducts, setSelectedCustomer, setSelectedProducts, refetchReceivedIds }: Inputs) => {
   const handleClearOrder = () => {
     setSelectedCustomer(null);
     localStorage.setItem("selectedCustomer", JSON.stringify(null));
@@ -32,8 +33,8 @@ export const OrderSubmit = ({ selectedCustomer, selectedProducts, setSelectedCus
     // add
     // error
     // handling
-
     handleClearOrder();
+    refetchReceivedIds();
     Swal.fire("Order has been placed");
   };
 

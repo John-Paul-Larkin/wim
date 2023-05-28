@@ -2,9 +2,9 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import Select from "react-select";
 import useFetchData from "../../hooks/useFetchData";
-import useFetchIndividualData from "../../hooks/useFetchIndividualData";
 import { CustomerDetails } from "./CustomerDetails";
-import { OrdersReceived } from "./OrdersReceived";
+import { OrdersCategories } from "./OrdersCategories";
+
 import "./SalesOrders.css";
 import { SelectedProducts } from "./SelectedProducts";
 
@@ -85,6 +85,10 @@ export const Salesorders = () => {
     localStorage.setItem("selectedCustomer", JSON.stringify(selectedOption));
   };
 
+  const pickedFetchedData = useFetchData<number[]>("/saleOrder/getOrderPickedIds");
+
+  const receivedFectchedData = useFetchData<number[]>("/saleOrder/getOrderReceivedIds");
+
   return (
     <div className="sales-order">
       <div className="heading">
@@ -117,15 +121,22 @@ export const Salesorders = () => {
                 setSelectedProducts={setSelectedProducts}
                 selectedCustomer={selectedCustomer}
                 setSelectedCustomer={setSelectedCustomer}
+                refetchReceivedIds={receivedFectchedData.refetchData}
               />
             </motion.div>
           )}
         </AnimatePresence>
       </div>
-      <OrdersReceived />
-      <div className="picked">picked</div>
-      <div className="returned">returned</div>
-      <div className="sent">sent</div>
+      <OrdersCategories
+        fetchedPickedIds={fetchedPickedIds}
+        pickedIdError={pickedIdError}
+        pickedIdLoading={pickedIdLoading}
+        refetchPickedIds={refetchPickedIds}
+        fetchedReceivedIds={fetchedReceivedIds}
+        receivedIdError={receivedIdError}
+        receivedIdLoading={receivedIdLoading}
+        refetchReceivedIds={refetchReceivedIds}
+      />
     </div>
   );
 };

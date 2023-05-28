@@ -15,6 +15,7 @@ interface Inputs {
   selectedProducts: ProductDataQuantity[];
   selectedCustomer: CustomerSelect | null;
   setSelectedCustomer: React.Dispatch<React.SetStateAction<CustomerSelect | null>>;
+  refetchReceivedIds: () => void;
 }
 
 export const SelectedProducts = ({
@@ -24,6 +25,7 @@ export const SelectedProducts = ({
   setSelectedProducts,
   productOptions,
   handleClickProductSelect,
+  refetchReceivedIds,
 }: Inputs) => {
   const handleClickRemoveProduct = (id: number | undefined) => {
     const productsWithClickedRemoved = selectedProducts.filter((product) => product.product_id !== id);
@@ -114,6 +116,7 @@ export const SelectedProducts = ({
         selectedProducts={selectedProducts}
         selectedCustomer={selectedCustomer}
         setSelectedCustomer={setSelectedCustomer}
+        refetchReceivedIds={refetchReceivedIds}
       />
     </>
   );

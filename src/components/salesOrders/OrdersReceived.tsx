@@ -1,24 +1,42 @@
-import useFetchData from "../../hooks/useFetchData";
-import { IndividualOrder } from "./IndividualOrder";
+import { IndividualReceivedOrder } from "./IndividualReceivedOrder";
 
-export const OrdersReceived = () => {
-  const { fetchedData: fetchedOrderIds, error: IdError, loading: IdLoading } = useFetchData<number[]>("/saleOrder/getOrderIds");
 
+interface Inputs {
+  fetchedReceivedIds: number[] | null;
+  receivedIdError: Error | null;
+  receivedIdLoading: boolean;
+  refetchReceivedIds: () => void;
+  refetchPickedIds: () => void;
+}
+
+export const OrdersReceived = ( { fetchedReceivedIds,
+  receivedIdError,
+  receivedIdLoading,
+  refetchReceivedIds,
+  refetchPickedIds
+}:Inputs) => {
   return (
     <>
-      <div className="received">
+      <div className="order-container">
         <div></div>
-        {IdLoading && (
+        {receivedIdLoading && (
           <div className="error-loading">
             <span>Loading.....</span>
           </div>
         )}
-        {IdError && (
+        {receivedIdError && (
           <div className="error-loading">
-            <span>Error. {IdError?.message}</span>
+            <span>Error. {receivedIdError?.message}</span>
           </div>
         )}
-        {!IdError && !IdLoading && fetchedOrderIds && fetchedOrderIds.map((id) => <IndividualOrder key={id} id={id} />)}
+        {!receivedIdError &&
+          !receivedIdLoading &&
+          fetchedReceivedIds &&
+          [...fetchedReceivedIds].reverse().map((id) => <IndividualReceivedOrder key={id} id={id}
+           refetchReceivedIds={refetchReceivedIds}
+           refetchPickedIds={ refetchPickedIds}
+           
+           />)}
       </div>
     </>
   );

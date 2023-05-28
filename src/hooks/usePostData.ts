@@ -5,7 +5,7 @@ const usePostData = () => {
   //   const [error, setError] = useState<Error | null>(null);
   //   const [responseData, setResponseData] = useState("");
 
-  const postData = async ({ url, jsonData }: { url: string; jsonData: any }) => {
+  const postData = async ({ url, jsonData }: { url: string; jsonData?: any }) => {
     let error: Error | null = null;
     let responseData: any;
     try {

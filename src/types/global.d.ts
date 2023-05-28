@@ -17,8 +17,8 @@ interface ProductData {
   case_size: number;
   unit_rrp: number;
   restock_level: number;
-  purchase_price:number;
-  sale_price:number;
+  purchase_price: number;
+  sale_price: number;
   sku: string;
 }
 
@@ -42,10 +42,17 @@ interface EmployeeData {
 }
 
 interface ProductDataQuantity extends ProductData {
-  order_quantity:number;
+  order_quantity: number;
 }
 
 interface CustomerSelect {
   value: number;
   label: string;
+}
+
+interface FetchData {
+  fetchedData: number[] | null;
+  error: Error | null;
+  loading: boolean;
+  refetchData: () => void;
 }
