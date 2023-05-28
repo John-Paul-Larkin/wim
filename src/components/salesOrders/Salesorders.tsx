@@ -86,8 +86,8 @@ export const Salesorders = () => {
   };
 
   const pickedFetchedData = useFetchData<number[]>("/saleOrder/getOrderPickedIds");
-
-  const receivedFectchedData = useFetchData<number[]>("/saleOrder/getOrderReceivedIds");
+  const receivedFetchedData = useFetchData<number[]>("/saleOrder/getOrderReceivedIds");
+  const sentFetchedData = useFetchData<number[]>("/saleOrder/getOrderSentIds");
 
   return (
     <div className="sales-order">
@@ -95,7 +95,6 @@ export const Salesorders = () => {
         {" "}
         <span>Sales orders</span>
       </div>
-
       <div className="place-order">
         {!selectedCustomer && <div>Choose a customer to place an order</div>}
         <Select
@@ -121,22 +120,13 @@ export const Salesorders = () => {
                 setSelectedProducts={setSelectedProducts}
                 selectedCustomer={selectedCustomer}
                 setSelectedCustomer={setSelectedCustomer}
-                refetchReceivedIds={receivedFectchedData.refetchData}
+                refetchReceivedIds={receivedFetchedData.refetchData}
               />
             </motion.div>
           )}
         </AnimatePresence>
       </div>
-      <OrdersCategories
-        fetchedPickedIds={fetchedPickedIds}
-        pickedIdError={pickedIdError}
-        pickedIdLoading={pickedIdLoading}
-        refetchPickedIds={refetchPickedIds}
-        fetchedReceivedIds={fetchedReceivedIds}
-        receivedIdError={receivedIdError}
-        receivedIdLoading={receivedIdLoading}
-        refetchReceivedIds={refetchReceivedIds}
-      />
+      <OrdersCategories pickedFetchedData={pickedFetchedData} receivedFetchedData={receivedFetchedData} sentFetchedData={sentFetchedData} />
     </div>
   );
 };

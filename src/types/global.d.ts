@@ -50,7 +50,7 @@ interface CustomerSelect {
   label: string;
 }
 
-interface FetchData {
+interface FetchedData {
   fetchedData: number[] | null;
   error: Error | null;
   loading: boolean;

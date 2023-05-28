@@ -1,42 +1,33 @@
 import { IndividualReceivedOrder } from "./IndividualReceivedOrder";
 
-
 interface Inputs {
-  fetchedReceivedIds: number[] | null;
-  receivedIdError: Error | null;
-  receivedIdLoading: boolean;
-  refetchReceivedIds: () => void;
+  receivedFetchedData: FetchedData;
   refetchPickedIds: () => void;
 }
 
-export const OrdersReceived = ( { fetchedReceivedIds,
-  receivedIdError,
-  receivedIdLoading,
-  refetchReceivedIds,
-  refetchPickedIds
-}:Inputs) => {
+export const OrdersReceived = ({ receivedFetchedData, refetchPickedIds }: Inputs) => {
   return (
     <>
       <div className="order-container">
         <div></div>
-        {receivedIdLoading && (
+        {receivedFetchedData.loading && (
           <div className="error-loading">
             <span>Loading.....</span>
           </div>
         )}
-        {receivedIdError && (
+        {receivedFetchedData.error && (
           <div className="error-loading">
-            <span>Error. {receivedIdError?.message}</span>
+            <span>Error. {receivedFetchedData.error?.message}</span>
           </div>
         )}
-        {!receivedIdError &&
-          !receivedIdLoading &&
-          fetchedReceivedIds &&
-          [...fetchedReceivedIds].reverse().map((id) => <IndividualReceivedOrder key={id} id={id}
-           refetchReceivedIds={refetchReceivedIds}
-           refetchPickedIds={ refetchPickedIds}
-           
-           />)}
+        {!receivedFetchedData.error &&
+          !receivedFetchedData.loading &&
+          receivedFetchedData.fetchedData &&
+          [...receivedFetchedData.fetchedData]
+            .reverse()
+            .map((id) => (
+              <IndividualReceivedOrder key={id} id={id} refetchReceivedIds={receivedFetchedData.refetchData} refetchPickedIds={refetchPickedIds} />
+            ))}
       </div>
     </>
   );

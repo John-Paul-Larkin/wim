@@ -71,7 +71,7 @@ export const Products = () => {
     []
   );
 
-  // Once the data is fetched, set the default row to the recrord at top of the table
+  // Once the data is fetched, set the default row to the record at top of the table
   if (idOfCurrentlySelectedRow === null && data.length > 0) {
     if (data[0].product_id) {
       setIdOfCurrentlySelectedRow(data[0].product_id);

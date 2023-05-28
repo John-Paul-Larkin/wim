@@ -1,39 +1,31 @@
 import { IndividualPickedOrder } from "./IndividualPickedOrder";
 
-interface InputsPicked {
-  fetchedPickedIds: number[] | null;
-  pickedIdError: Error | null;
-  pickedIdLoading: boolean;
-  refetchPickedIds: () => void;
+interface Inputs {
+  pickedFetchedData: FetchedData;
+  refetchSentIds: () => void;
 }
 
-export const OrdersPicked = ({ fetchedPickedIds, pickedIdError, pickedIdLoading, refetchPickedIds }: InputsPicked) => {
+export const OrdersPicked = ({ pickedFetchedData, refetchSentIds }: Inputs) => {
   return (
     <>
       <div className="order-container">
         <div></div>
-        {pickedIdLoading && (
+        {pickedFetchedData.loading && (
           <div className="error-loading">
             <span>Loading.....</span>
           </div>
         )}
-        {pickedIdError && (
+        {pickedFetchedData.error && (
           <div className="error-loading">
-            <span>Error. {pickedIdError?.message}</span>
+            <span>Error. {pickedFetchedData.error?.message}</span>
           </div>
         )}
-        {!pickedIdError &&
-          !pickedIdLoading &&
-          fetchedPickedIds &&
-          [...fetchedPickedIds]
+        {!pickedFetchedData.error &&
+          !pickedFetchedData.loading &&
+          pickedFetchedData.fetchedData &&
+          [...pickedFetchedData.fetchedData]
             .reverse()
-            .map((id) => (
-              <IndividualPickedOrder
-                key={id}
-                id={id}
-                refetchPickedIds={refetchPickedIds}
-              />
-            ))}
+            .map((id) => <IndividualPickedOrder key={id} id={id} refetchPickedIds={pickedFetchedData.refetchData} refetchSentIds={refetchSentIds} />)}
       </div>
     </>
   );

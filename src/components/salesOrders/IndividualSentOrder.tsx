@@ -12,13 +12,12 @@ interface OrderDetails {
   productId: number;
 }
 
-interface InputsPicked {
-  refetchPickedIds: () => void;
+interface Inputs {
   refetchSentIds: () => void;
   id: number;
 }
 
-export const IndividualPickedOrder = ({ id, refetchPickedIds, refetchSentIds }: InputsPicked) => {
+export const IndividualSentOrder = ({ id, refetchSentIds }: Inputs) => {
   const url = "/saleOrder/" + id.toString();
   const { fetchedData: orderDetails, error, loading } = useFetchData<OrderDetails[]>(url);
   const { postData } = usePostData();
@@ -27,16 +26,15 @@ export const IndividualPickedOrder = ({ id, refetchPickedIds, refetchSentIds }: 
     return date.substring(0, 10);
   };
 
-  const handleClickSent = async () => {
-    const url = "/saleOrder/setSent/" + id.toString();
-    console.log(url);
-    const editFormInputJson = JSON.stringify({ id: id });
+//   const handleClickSent = async () => {
+//     const url = "/saleOrder/setSent/" + id.toString();
+//     console.log(url);
+//     const editFormInputJson = JSON.stringify({ id: id });
 
-    const { error } = await postData({ url: url, jsonData: editFormInputJson });
-    refetchPickedIds();
-    refetchSentIds();
-    console.log(error);
-  };
+//     const { error } = await postData({ url: url, jsonData: editFormInputJson });
+//     refetchSentIds();
+//     console.log(error);
+//   };
 
   return (
     <div className="individual-order">
@@ -66,7 +64,7 @@ export const IndividualPickedOrder = ({ id, refetchPickedIds, refetchSentIds }: 
               </div>
             );
           })}
-          <button onClick={handleClickSent}>sent</button>
+          {/* <button onClick={handleClickSent}>sent</button> */}
         </>
       )}
     </div>
