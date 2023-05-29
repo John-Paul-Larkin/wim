@@ -32,41 +32,41 @@ export const Products = () => {
         accessor: "quantity_in_stock",
       },
       {
+        Header: "On hold",
+        accessor: "quantity_on_hold",
+      },
+      {
         Header: "Restock level",
         accessor: "restock_level",
-      },
-      {
-        Header: "Sold by",
-        accessor: "sold_by",
-      },
-      {
-        Header: "Case size",
-        accessor: "case_size",
-      },
-      {
-        Header: "Unit RRP",
-        accessor: "unit_rrp",
       },
       {
         Header: "ID",
         accessor: "product_id",
       },
-      {
-        Header: "Purchase Price",
-        accessor: "purchase_price",
-      },
-      {
-        Header: "Sale price",
-        accessor: "sale_price",
-      },
-      {
-        Header: "SKU",
-        accessor: "sku",
-      },
-      {
-        Header: "Description",
-        accessor: "description",
-      },
+      // {
+      //   Header: "Case size",
+      //   accessor: "case_size",
+      // },
+      // {
+      //   Header: "Unit RRP",
+      //   accessor: "unit_rrp",
+      // },
+      // {
+      //   Header: "Purchase Price",
+      //   accessor: "purchase_price",
+      // },
+      // {
+      //   Header: "Sale price",
+      //   accessor: "sale_price",
+      // },
+      // {
+      //   Header: "SKU",
+      //   accessor: "sku",
+      // },
+      // {
+      //   Header: "Description",
+      //   accessor: "description",
+      // },
     ],
     []
   );
@@ -79,7 +79,7 @@ export const Products = () => {
   }
 
   //used below to distinguish the row within the table
-  const columnContainingId = 6;
+  const columnContainingId = 4;
   // eslint-disable-next-line
   const handleClickOnRow = (event: any) => {
     const id = event.nativeEvent.target.parentNode.childNodes[columnContainingId].innerText;
@@ -171,7 +171,5 @@ export const Products = () => {
   );
 };
 
-
 // calculate sales price
-//  <div>{(((2.49 / 123) * 100) / 3) * 12}</div> 
-
+//  <div>{(((2.49 / 123) * 100) / 3) * 12}</div>

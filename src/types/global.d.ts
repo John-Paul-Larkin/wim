@@ -20,6 +20,7 @@ interface ProductData {
   purchase_price: number;
   sale_price: number;
   sku: string;
+  quantity_on_hold?: number;
 }
 
 interface SupplierData {

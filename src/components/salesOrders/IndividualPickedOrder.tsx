@@ -22,20 +22,27 @@ export const IndividualPickedOrder = ({ id, refetchPickedIds, refetchSentIds }: 
   const url = "/saleOrder/" + id.toString();
   const { fetchedData: orderDetails, error, loading } = useFetchData<OrderDetails[]>(url);
   const { postData } = usePostData();
+ 
 
   const parseDate = (date: string) => {
     return date.substring(0, 10);
   };
 
   const handleClickSent = async () => {
-    const url = "/saleOrder/setSent/" + id.toString();
+    let url = "/saleOrder/setSent/";
     console.log(url);
-    const editFormInputJson = JSON.stringify({ id: id });
+    let editFormInputJson = JSON.stringify({ id: id });
 
     const { error } = await postData({ url: url, jsonData: editFormInputJson });
+
+    url = "/saleOrder/updateQuantityOnSent/";
+    editFormInputJson = JSON.stringify({ orderDetails });
+    const { error: updateQuantityError } = await postData({ url: url, jsonData: editFormInputJson });
+
     refetchPickedIds();
     refetchSentIds();
     console.log(error);
+    console.log(updateQuantityError);
   };
 
   return (

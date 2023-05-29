@@ -82,7 +82,7 @@ export const SelectedProducts = ({
                 className="quantity-input"
                 strict={true}
                 min={0}
-                max={product.quantity_in_stock}
+                max={product.quantity_in_stock - (product.quantity_on_hold ?? 0)}
                 value={product.order_quantity}
                 onChange={(valueAsNumber) => {
                   const id = product.product_id;

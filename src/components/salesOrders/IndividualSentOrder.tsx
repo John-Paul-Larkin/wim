@@ -1,5 +1,5 @@
 import useFetchData from "../../hooks/useFetchData";
-import usePostData from "../../hooks/usePostData";
+// import usePostData from "../../hooks/usePostData";
 
 interface OrderDetails {
   placedDate: string;
@@ -17,24 +17,24 @@ interface Inputs {
   id: number;
 }
 
-export const IndividualSentOrder = ({ id, refetchSentIds }: Inputs) => {
+export const IndividualSentOrder = ({ id }: Inputs) => {
   const url = "/saleOrder/" + id.toString();
   const { fetchedData: orderDetails, error, loading } = useFetchData<OrderDetails[]>(url);
-  const { postData } = usePostData();
+  // const { postData } = usePostData();
 
   const parseDate = (date: string) => {
     return date.substring(0, 10);
   };
 
-//   const handleClickSent = async () => {
-//     const url = "/saleOrder/setSent/" + id.toString();
-//     console.log(url);
-//     const editFormInputJson = JSON.stringify({ id: id });
+  //   const handleClickSent = async () => {
+  //     const url = "/saleOrder/setSent/" + id.toString();
+  //     console.log(url);
+  //     const editFormInputJson = JSON.stringify({ id: id });
 
-//     const { error } = await postData({ url: url, jsonData: editFormInputJson });
-//     refetchSentIds();
-//     console.log(error);
-//   };
+  //     const { error } = await postData({ url: url, jsonData: editFormInputJson });
+  //     refetchSentIds();
+  //     console.log(error);
+  //   };
 
   return (
     <div className="individual-order">
