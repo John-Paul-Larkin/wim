@@ -157,7 +157,11 @@ export const SingleProductDetails = (props: Inputs) => {
 
             <div id="product-id">Product id : </div>
           </div>
-          {loading && <div className="error-loading"><span>Loading.....</span></div>}
+          {loading && (
+            <div className="error-loading">
+              <span>Loading.....</span>
+            </div>
+          )}
 
           {!loading && !editMode && !newProductMode && (
             <div className="details">
