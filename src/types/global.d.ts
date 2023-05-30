@@ -57,3 +57,15 @@ interface FetchedData {
   loading: boolean;
   refetchData: () => void;
 }
+
+interface OrderDetails {
+  placedDate: string;
+  businessName: string;
+  employeeName: string;
+  productName: string;
+  quantity: number;
+  caseSize: number;
+  soldBy: string;
+  productId: number;
+  pickedDate: string;
+}

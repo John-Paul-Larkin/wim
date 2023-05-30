@@ -6,10 +6,11 @@ import { FaHome, FaProductHunt, FaThList, FaTruckLoading, FaUserAlt, FaUsers } f
 interface Inputs {
   setSelectedNavComponent: React.Dispatch<React.SetStateAction<string>>;
   selectedNavComponent: string;
+  setSideMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const SideMenu = (props: Inputs) => {
-  const { setSelectedNavComponent, selectedNavComponent } = props;
+  const { setSelectedNavComponent, selectedNavComponent, setSideMenuOpen } = props;
 
   // Sets the selected nav component based on the event bubbling from clicked li
   const handleNavClick = (event: React.MouseEvent<HTMLUListElement, MouseEvent>) => {
@@ -17,13 +18,16 @@ export const SideMenu = (props: Inputs) => {
 
     // Select the clicked menu item from the DOM, using the data attribute
     if (target.dataset.menu) {
-      // lcicks within the li
+      // clicks within the li
       setSelectedNavComponent(target.dataset.menu);
+      setSideMenuOpen(false);
     } else if (target.parentElement?.dataset.menu) {
       setSelectedNavComponent(target.parentElement?.dataset.menu);
+      setSideMenuOpen(false);
     } else if (target.parentElement?.parentElement?.dataset.menu) {
       // clicks the icon
       setSelectedNavComponent(target.parentElement?.parentElement?.dataset.menu);
+      setSideMenuOpen(false);
     }
   };
 

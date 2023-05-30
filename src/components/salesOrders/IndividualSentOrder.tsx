@@ -26,15 +26,6 @@ export const IndividualSentOrder = ({ id }: Inputs) => {
     return date.substring(0, 10);
   };
 
-  //   const handleClickSent = async () => {
-  //     const url = "/saleOrder/setSent/" + id.toString();
-  //     console.log(url);
-  //     const editFormInputJson = JSON.stringify({ id: id });
-
-  //     const { error } = await postData({ url: url, jsonData: editFormInputJson });
-  //     refetchSentIds();
-  //     console.log(error);
-  //   };
 
   return (
     <div className="individual-order">

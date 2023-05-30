@@ -59,7 +59,6 @@ export const SingleProductDetails = (props: Inputs) => {
       sku: target.sku.value,
       sale_price: target.sale_price.value,
     };
-
     return userInputs;
   };
 

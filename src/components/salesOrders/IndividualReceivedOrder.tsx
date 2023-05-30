@@ -1,16 +1,6 @@
 import useFetchData from "../../hooks/useFetchData";
 import usePostData from "../../hooks/usePostData";
-
-interface OrderDetails {
-  placedDate: string;
-  businessName: string;
-  employeeName: string;
-  productName: string;
-  quantity: number;
-  caseSize: number;
-  soldBy: string;
-  productId: number;
-}
+import { IndividualOrderDetails } from "./IndividualOrderDetails";
 
 interface Inputs {
   refetchReceivedIds: () => void;
@@ -23,12 +13,14 @@ export const IndividualReceivedOrder = ({ id, refetchReceivedIds, refetchPickedI
   const { fetchedData: orderDetails, error, loading } = useFetchData<OrderDetails[]>(url);
   const { postData } = usePostData();
 
+  // console.log(orderDetails);/
+
   const parseDate = (date: string) => {
     return date.substring(0, 10);
   };
 
   const handleClickPicked = async () => {
-    const url = "/saleOrder/setReceived/" + id.toString();
+    const url = "/saleOrder/setPicked/" + id.toString();
     console.log(url);
     const editFormInputJson = JSON.stringify({ id: id });
 
@@ -39,8 +31,9 @@ export const IndividualReceivedOrder = ({ id, refetchReceivedIds, refetchPickedI
     console.log(error);
   };
 
+
   return (
-    <div className="individual-order">
+    <div className="individual-order-container">
       {loading && (
         <div className="error-loading">
           <span>Loading.....</span>
@@ -53,21 +46,22 @@ export const IndividualReceivedOrder = ({ id, refetchReceivedIds, refetchPickedI
       )}
       {!loading && !error && orderDetails && (
         <>
-          <span>{orderDetails[0].businessName}</span>
-          <span>Rep: {orderDetails[0].employeeName}</span>
-          <span>{parseDate(orderDetails[0].placedDate)}</span>
+          <div className="individual-order-heading">
+            <div>{orderDetails[0].businessName}</div>
+            <div>Rep : {orderDetails[0].employeeName}</div>
+            <div>Placed on :{parseDate(orderDetails[0].placedDate)}</div>
+          </div>
 
-          {orderDetails.map((order) => {
-            return (
-              <div key={order.productId}>
-                {order.productName}
-                {order.quantity}
-                {order.soldBy}
-                {order.caseSize}
-              </div>
-            );
-          })}
-          <button onClick={handleClickPicked}>picked</button>
+          <div>
+            <div className="order-details-wrapper">
+              {orderDetails.map((order) => {
+                return <IndividualOrderDetails key={order.productId} order={order} />;
+              })}
+            </div>
+            <span className="btn-wrapper">
+              <button onClick={handleClickPicked}>picked</button>
+            </span>
+          </div>
         </>
       )}
     </div>
