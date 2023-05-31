@@ -8,7 +8,9 @@ interface Inputs {
   sentFetchedData: FetchedData;
 }
 
-export const OrdersCategories = ({ receivedFetchedData, pickedFetchedData, sentFetchedData }: Inputs) => {
+export const OrdersCategories = (props: Inputs) => {
+
+  const { receivedFetchedData, pickedFetchedData, sentFetchedData } = props;
   const countReceivedOrders = receivedFetchedData.fetchedData?.length;
   const countPickedOrders = pickedFetchedData.fetchedData?.length;
   const countSentOrders = sentFetchedData.fetchedData?.length;

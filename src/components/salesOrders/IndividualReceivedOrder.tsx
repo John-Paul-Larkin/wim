@@ -9,7 +9,8 @@ interface Inputs {
   id: number;
 }
 
-export const IndividualReceivedOrder = ({ id, refetchReceivedIds, refetchPickedIds }: Inputs) => {
+export const IndividualReceivedOrder = (props: Inputs) => {
+  const { id, refetchReceivedIds, refetchPickedIds } = props;
   const url = "/saleOrder/" + id.toString();
   const { fetchedData: orderDetails, error, loading } = useFetchData<OrderDetails[]>(url);
   const { postData } = usePostData();

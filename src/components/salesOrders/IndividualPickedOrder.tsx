@@ -3,13 +3,15 @@ import useFetchData from "../../hooks/useFetchData";
 import usePostData from "../../hooks/usePostData";
 import { IndividualOrderDetails } from "./IndividualOrderDetails";
 
-interface InputsPicked {
+interface Inputs {
   refetchPickedIds: () => void;
   refetchSentIds: () => void;
   id: number;
 }
 
-export const IndividualPickedOrder = ({ id, refetchPickedIds, refetchSentIds }: InputsPicked) => {
+export const IndividualPickedOrder = (props: Inputs) => {
+  const { id, refetchPickedIds, refetchSentIds } = props;
+
   const url = "/saleOrder/" + id.toString();
   const { fetchedData: orderDetails, error, loading } = useFetchData<OrderDetails[]>(url);
   const { postData } = usePostData();

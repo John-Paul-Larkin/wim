@@ -5,7 +5,9 @@ interface Inputs {
   refetchPickedIds: () => void;
 }
 
-export const OrdersReceived = ({ receivedFetchedData, refetchPickedIds }: Inputs) => {
+export const OrdersReceived = (props: Inputs) => {
+  const { receivedFetchedData, refetchPickedIds } = props;
+
   return (
     <>
       <div className="order-container">

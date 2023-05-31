@@ -9,7 +9,10 @@ interface Inputs {
   refetchReceivedIds: () => void;
 }
 
-export const OrderSubmit = ({ selectedCustomer, selectedProducts, setSelectedCustomer, setSelectedProducts, refetchReceivedIds }: Inputs) => {
+export const OrderSubmit = (props: Inputs) => {
+  const { selectedCustomer, selectedProducts, setSelectedCustomer, setSelectedProducts, refetchReceivedIds } = props;
+
+  // remove details from local storage and empty state
   const handleClearOrder = () => {
     setSelectedCustomer(null);
     localStorage.setItem("selectedCustomer", JSON.stringify(null));
@@ -27,15 +30,17 @@ export const OrderSubmit = ({ selectedCustomer, selectedProducts, setSelectedCus
     });
 
     const { error } = await postData({ url: "/saleOrder/", jsonData: orderDetails });
-    console.log(error);
-    // Need
-    // to
-    // add
-    // error
-    // handling
-    handleClearOrder();
-    refetchReceivedIds();
-    Swal.fire("Order has been placed");
+    if (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Something went wrong!",
+        text: error?.message,
+      });
+    } else {
+      handleClearOrder();
+      refetchReceivedIds();
+      Swal.fire("Order has been placed");
+    }
   };
 
   return (

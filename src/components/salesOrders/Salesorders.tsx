@@ -9,10 +9,7 @@ import "./SalesOrders.css";
 import { SelectedProducts } from "./SelectedProducts";
 
 export const Salesorders = () => {
-  interface ProductSelect {
-    value: number;
-    label: string;
-  }
+
 
   const { fetchedData: fetchedCustomerData } = useFetchData("/customer/");
   const { fetchedData: fetchedProductData } = useFetchData("/product/");
@@ -29,9 +26,7 @@ export const Salesorders = () => {
 
     if (localStorageSelectedProducts && JSON.parse(localStorageSelectedProducts).length > 0) {
       setSelectedProducts([...JSON.parse(localStorageSelectedProducts)]);
-
       if (localStorageSelectedCustomer) {
-        // console.log(JSON.parse(localStorageSelectedCustomer));
         setSelectedCustomer(JSON.parse(localStorageSelectedCustomer));
       }
     }
@@ -63,7 +58,7 @@ export const Salesorders = () => {
 
     // Once a cutomer has been selected
     if (selectedCustomer) {
-      customerDetails = customerData.find((customer) => customer.customer_id == selectedCustomer.value);
+      customerDetails = customerData.find((customer) => customer.customer_id === selectedCustomer.value);
     }
   }
 

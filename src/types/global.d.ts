@@ -8,21 +8,6 @@ interface CustomerData {
   email: string;
 }
 
-interface ProductData {
-  product_id: number | undefined;
-  name: string;
-  description: string;
-  quantity_in_stock: number;
-  sold_by: "case" | "unit" | "kg";
-  case_size: number;
-  unit_rrp: number;
-  restock_level: number;
-  purchase_price: number;
-  sale_price: number;
-  sku: string;
-  quantity_on_hold?: number;
-}
-
 interface SupplierData {
   supplier_id: number;
   name: string;
@@ -41,12 +26,30 @@ interface EmployeeData {
   address: string;
   eircode: string;
 }
-
+interface ProductData {
+  product_id: number | undefined;
+  name: string;
+  description: string;
+  quantity_in_stock: number;
+  sold_by: "case" | "unit" | "kg";
+  case_size: number;
+  unit_rrp: number;
+  restock_level: number;
+  purchase_price: number;
+  sale_price: number;
+  sku: string;
+  quantity_on_hold?: number;
+}
 interface ProductDataQuantity extends ProductData {
   order_quantity: number;
 }
 
 interface CustomerSelect {
+  value: number;
+  label: string;
+}
+
+interface ProductSelect {
   value: number;
   label: string;
 }

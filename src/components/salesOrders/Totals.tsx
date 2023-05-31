@@ -1,13 +1,11 @@
 export const Totals = ({ selectedProducts }: { selectedProducts: ProductDataQuantity[] }) => {
- 
   let subTotal = selectedProducts.reduce((total, product) => {
     return total + product.order_quantity * product.sale_price;
   }, 0);
 
-  subTotal = Math.round(subTotal*100)/100
+  subTotal = Math.round(subTotal * 100) / 100;
 
   const tax = Math.round((subTotal / 100) * 23 * 100) / 100;
-
   const total = Math.round((subTotal + tax) * 100) / 100;
 
   return (

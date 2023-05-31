@@ -4,10 +4,7 @@ import NumericInput from "react-numeric-input";
 import Select from "react-select";
 import { OrderSubmit } from "./OrderSubmit";
 import { Totals } from "./Totals";
-interface ProductSelect {
-  value: number;
-  label: string;
-}
+
 interface Inputs {
   setSelectedProducts: React.Dispatch<React.SetStateAction<ProductDataQuantity[]>>;
   productOptions: ProductSelect[];
@@ -18,15 +15,17 @@ interface Inputs {
   refetchReceivedIds: () => void;
 }
 
-export const SelectedProducts = ({
-  setSelectedCustomer,
-  selectedProducts,
-  selectedCustomer,
-  setSelectedProducts,
-  productOptions,
-  handleClickProductSelect,
-  refetchReceivedIds,
-}: Inputs) => {
+export const SelectedProducts = (props: Inputs) => {
+  const {
+    setSelectedCustomer,
+    selectedProducts,
+    selectedCustomer,
+    setSelectedProducts,
+    productOptions,
+    handleClickProductSelect,
+    refetchReceivedIds,
+  } = props;
+
   const handleClickRemoveProduct = (id: number | undefined) => {
     const productsWithClickedRemoved = selectedProducts.filter((product) => product.product_id !== id);
     setSelectedProducts(productsWithClickedRemoved);
@@ -46,6 +45,7 @@ export const SelectedProducts = ({
       localStorage.setItem("selectedProducts", JSON.stringify(selectedProductsUpdatedWithNewQuantity));
     }
   };
+
   return (
     <>
       {selectedProducts.map((product) => {
@@ -89,12 +89,9 @@ export const SelectedProducts = ({
                   handleChangeQuantity({ id, valueAsNumber });
                 }}
               />
-              {/* {product.order_quantity} */}
             </div>
             <div>
               Total : <div>{Math.round(product.sale_price * product.order_quantity * 100) / 100}</div>
-              {/* Total : <div>{product.sale_price }</div>   */}
-              {/* Total : <div>{ product.order_quantity}</div>   */}
             </div>
             <div className="delete-icon" onClick={() => handleClickRemoveProduct(product.product_id)}>
               <FaRegTrashAlt />
