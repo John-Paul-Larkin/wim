@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./App.css";
-import { SectionViewArea } from "./components/mainScreen/SectionViewArea";
+import { MainViewArea } from "./components/mainScreen/MainViewArea";
 import { SideMenu } from "./components/mainScreen/SideMenu";
 
 function App() {
@@ -27,7 +27,7 @@ function App() {
         <SideMenu setSideMenuOpen={setSideMenuOpen} setSelectedNavComponent={setSelectedNavComponent} selectedNavComponent={selectedNavComponent} />
       </div>
       <div className="spacer"></div>
-      <SectionViewArea selectedNavComponent={selectedNavComponent} />
+      <MainViewArea selectedNavComponent={selectedNavComponent} />
     </div>
   );
 }

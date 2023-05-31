@@ -22,6 +22,7 @@ export const SideMenu = (props: Inputs) => {
       setSelectedNavComponent(target.dataset.menu);
       setSideMenuOpen(false);
     } else if (target.parentElement?.dataset.menu) {
+      //clicks the span/label
       setSelectedNavComponent(target.parentElement?.dataset.menu);
       setSideMenuOpen(false);
     } else if (target.parentElement?.parentElement?.dataset.menu) {

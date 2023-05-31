@@ -44,7 +44,7 @@ export const SingleCustomerDetails = (props: Inputs) => {
     const eircode = target.eircode.value;
     const email = target.email.value;
 
-    // If this is an edit the id will already be set
+    // If the user clicked edit the id will already be set
     // if new customer there will be no id
     let customer_id: number | undefined = undefined;
     if (target.customer_id.value) {

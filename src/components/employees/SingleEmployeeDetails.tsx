@@ -42,7 +42,7 @@ export const SingleEmployeeDetails = (props: Inputs) => {
     const eircode = target.eircode.value;
     const email = target.email.value;
 
-    // If this is an edit the id will already be set
+    // If the user clicked edit the id will already be set
     // if new employee there will be no id
     let employee_id: number | undefined = undefined;
     if (target.employee_id.value) {

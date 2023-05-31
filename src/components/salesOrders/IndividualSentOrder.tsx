@@ -1,17 +1,6 @@
 import useFetchData from "../../hooks/useFetchData";
 // import usePostData from "../../hooks/usePostData";
 
-interface OrderDetails {
-  placedDate: string;
-  businessName: string;
-  employeeName: string;
-  productName: string;
-  quantity: number;
-  caseSize: number;
-  soldBy: string;
-  productId: number;
-}
-
 interface Inputs {
   refetchSentIds: () => void;
   id: number;

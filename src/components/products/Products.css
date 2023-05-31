@@ -1,17 +1,5 @@
-/* .product-table table thead tr > *:nth-child(n + 2):nth-child(-n + 9) {
-  background-color: var(--clr-4);
-  width: 10px;
-  border: 1px solid black;
-  font-size: 0.8em;
-}
-
-.product-table table tbody tr > *:nth-child(n + 2):nth-child(-n + 9) {
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-} */
 
 .product-table td {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
-  /* text-align: center; */
 }

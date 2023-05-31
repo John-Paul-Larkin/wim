@@ -80,6 +80,7 @@ export const Products = () => {
 
   //used below to distinguish the row within the table
   const columnContainingId = 4;
+
   // eslint-disable-next-line
   const handleClickOnRow = (event: any) => {
     const id = event.nativeEvent.target.parentNode.childNodes[columnContainingId].innerText;
@@ -147,7 +148,7 @@ export const Products = () => {
                       className={row.cells[columnContainingId].value === idOfCurrentlySelectedRow ? "row-selected" : ""}
                     >
                       {row.cells.map((cell, index, cellArray) => {
-                        //If stock level is below restock level - columns 1 and 3 respectively
+                        //Hightlight if stock level is below restock level - columns 1 and 3 respectively
                         if (index === 1 && cellArray[2].value < cellArray[1].value) {
                           return (
                             <td {...cell.getCellProps()} style={{ backgroundColor: "red" }}>

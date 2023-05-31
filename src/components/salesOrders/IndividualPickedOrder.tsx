@@ -1,3 +1,4 @@
+import Swal from "sweetalert2";
 import useFetchData from "../../hooks/useFetchData";
 import usePostData from "../../hooks/usePostData";
 import { IndividualOrderDetails } from "./IndividualOrderDetails";
@@ -13,25 +14,38 @@ export const IndividualPickedOrder = ({ id, refetchPickedIds, refetchSentIds }: 
   const { fetchedData: orderDetails, error, loading } = useFetchData<OrderDetails[]>(url);
   const { postData } = usePostData();
 
+  // Seperates time and date from the UTC datetime
   const parseDate = (date: string) => {
     return date.substring(11, 16) + " on " + date.substring(0, 10);
   };
 
   const handleClickSent = async () => {
+    //First mark the order as sent
     let url = "/saleOrder/setSent/";
-    console.log(url);
     let editFormInputJson = JSON.stringify({ id: id });
-
     const { error } = await postData({ url: url, jsonData: editFormInputJson });
 
-    url = "/saleOrder/updateQuantityOnSent/";
-    editFormInputJson = JSON.stringify({ orderDetails });
-    const { error: updateQuantityError } = await postData({ url: url, jsonData: editFormInputJson });
-
-    refetchPickedIds();
-    refetchSentIds();
-    console.log(error);
-    console.log(updateQuantityError);
+    if (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Something went wrong!",
+        text: error.message,
+      });
+    } else {
+      // then subtract the order quantities from both 'stock level' and 'on hold'
+      url = "/saleOrder/updateQuantityOnSent/";
+      editFormInputJson = JSON.stringify({ orderDetails });
+      const { error } = await postData({ url: url, jsonData: editFormInputJson });
+      if (error) {
+        Swal.fire({
+          icon: "error",
+          title: "Something went wrong!",
+          text: error.message,
+        });
+      }
+      refetchPickedIds();
+      refetchSentIds();
+    }
   };
 
   return (

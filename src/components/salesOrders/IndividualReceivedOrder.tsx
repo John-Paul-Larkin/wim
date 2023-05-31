@@ -1,3 +1,4 @@
+import Swal from "sweetalert2";
 import useFetchData from "../../hooks/useFetchData";
 import usePostData from "../../hooks/usePostData";
 import { IndividualOrderDetails } from "./IndividualOrderDetails";
@@ -13,22 +14,24 @@ export const IndividualReceivedOrder = ({ id, refetchReceivedIds, refetchPickedI
   const { fetchedData: orderDetails, error, loading } = useFetchData<OrderDetails[]>(url);
   const { postData } = usePostData();
 
-  // console.log(orderDetails);/
-
   const parseDate = (date: string) => {
     return date.substring(0, 10);
   };
 
   const handleClickPicked = async () => {
     const url = "/saleOrder/setPicked/" + id.toString();
-    console.log(url);
     const editFormInputJson = JSON.stringify({ id: id });
 
     const { error } = await postData({ url: url, jsonData: editFormInputJson });
+    if (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Something went wrong!",
+        text: error?.message,
+      });
+    }
     refetchReceivedIds();
     refetchPickedIds();
-
-    console.log(error);
   };
 
   return (
