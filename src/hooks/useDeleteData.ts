@@ -8,7 +8,7 @@ interface DeleteDataInputs {
 const useDeleteData = () => {
   const deleteData = async ({ url, id }: DeleteDataInputs) => {
     let error: Error | null = null;
-    let responseData: any;
+    let responseData: unknown;
 
     try {
       const response = await fetch(baseURL + url, {

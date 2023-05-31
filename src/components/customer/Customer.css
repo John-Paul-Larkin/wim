@@ -53,9 +53,12 @@
   padding: 1rem;
 }
 
+
+
+/* css for styling table */
+
 .table-wrapper {
   height: 500px;
-  /* background-color: var(--clr-9); */
   border: 2px solid black;
   overflow-y: scroll;
   margin: 1rem;
@@ -69,7 +72,7 @@ table {
 table,
 th,
 td {
-  border: 1px solid;
+  border-bottom: 1px solid;
 }
 
 tr {
@@ -92,13 +95,12 @@ td {
   padding-right: 1rem;
 }
 
-.table-heading > * {
-  background-color: yellow;
+td:not(:first-of-type) {
+  text-align: center;
 }
 
-th {
-  height: 70px;
-  position: relative;
+.table-heading > * {
+  background-color: yellow;
 }
 
 .sort-arrows {
@@ -107,21 +109,11 @@ th {
 }
 
 .global-filter {
-  display: inline-block;
-  /* padding: 1rem; */
-}
-
-.error-loading {
-  font-size: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
+  padding-left: 1rem;
 }
 
 th {
-  /* background: white; */
+  height: 70px;
   position: sticky;
   top: 0; /* required for the stickiness */
   box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
@@ -129,9 +121,7 @@ th {
 
 .table-wrapper .row-selected {
   background-color: var(--clr-1);
-
   background-color: blue;
-  /* color:white; */
 }
 
 @media (max-width: 1024px) {

@@ -9,10 +9,11 @@ import { SingleEmployeeDetails } from "./SingleEmployeeDetails";
 export const Employees = () => {
   const [data, setData] = useState<EmployeeData[]>([]);
   const [idOfCurrentlySelectedRow, setIdOfCurrentlySelectedRow] = useState<number | null>(null);
+  //used below to distinguish the column within the table
+  const columnContainingId = 5;
 
   // fetch the data
   const { fetchedData, loading, error, refetchData } = useFetchData<EmployeeData[]>("/employee/");
-
   useEffect(() => {
     if (fetchedData) {
       // Reverse the array so the last entered item will be at the top of the table
@@ -36,18 +37,21 @@ export const Employees = () => {
         Header: "Phone no.",
         accessor: "contact_phone",
       },
-      {
-        Header: "Address",
-        accessor: "address",
-      },
-      {
-        Header: "Eircode",
-        accessor: "eircode",
-      },
+
       {
         Header: "Email",
         accessor: "email",
       },
+      {
+        Header: "Address",
+        accessor: "address",
+      },
+
+      {
+        Header: "Eircode",
+        accessor: "eircode",
+      },
+
       {
         Header: "ID",
         accessor: "employee_id",
@@ -55,13 +59,11 @@ export const Employees = () => {
     ],
     []
   );
-  const columnContainingId = 5;
 
   // eslint-disable-next-line
   const handleClickOnRow = (event: any) => {
-
+    // Had trouble typing the synthetic event
     const id = event.nativeEvent.target.parentNode.childNodes[columnContainingId].innerText;
-
     setIdOfCurrentlySelectedRow(Number(id));
   };
 
@@ -86,8 +88,16 @@ export const Employees = () => {
       </div>
       <>
         <div className="table-wrapper">
-          {loading && <div className="error-loading"><span>Loading.....</span></div>}
-          {error && <div className="error-loading"><span>Error. {error?.message}</span></div>}
+          {loading && (
+            <div className="error-loading">
+              <span>Loading.....</span>
+            </div>
+          )}
+          {error && (
+            <div className="error-loading">
+              <span>Error. {error?.message}</span>
+            </div>
+          )}
           {!loading && !error && (
             <table {...getTableProps()}>
               <thead>
@@ -96,7 +106,10 @@ export const Employees = () => {
                     {headerGroup.headers.map((column) => (
                       <th {...column.getHeaderProps(column.getSortByToggleProps())}>
                         {column.render("Header")}
-                        <span className="sort-arrows">{column.isSorted ? column.isSortedDesc ? <FaSortUp /> : <FaSortDown /> : <FaSort />}</span>
+                        {/* exclude 'phone', 'eircode' and 'ID' from sort */}
+                        {column.Header !== "Phone no." && column.Header !== "Eircode" && column.Header !== "ID" && (
+                          <span className="sort-arrows">{column.isSorted ? column.isSortedDesc ? <FaSortUp /> : <FaSortDown /> : <FaSort />}</span>
+                        )}
                       </th>
                     ))}
                   </tr>
@@ -107,9 +120,12 @@ export const Employees = () => {
                   prepareRow(row);
 
                   return (
-                    <motion.tr {...row.getRowProps()} onClick={handleClickOnRow} initial={{ y: 50 }} animate={{ y: 0 }}
-                    className={row.cells[columnContainingId].value === idOfCurrentlySelectedRow ? "row-selected" : ""}
-                    
+                    <motion.tr
+                      {...row.getRowProps()}
+                      onClick={handleClickOnRow}
+                      initial={{ y: 50 }}
+                      animate={{ y: 0 }}
+                      className={row.cells[columnContainingId].value === idOfCurrentlySelectedRow ? "row-selected" : ""}
                     >
                       {row.cells.map((cell) => {
                         return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;

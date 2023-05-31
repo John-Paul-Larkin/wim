@@ -32,12 +32,12 @@ export const Products = () => {
         accessor: "quantity_in_stock",
       },
       {
-        Header: "On hold",
-        accessor: "quantity_on_hold",
-      },
-      {
         Header: "Restock level",
         accessor: "restock_level",
+      },
+      {
+        Header: "On hold",
+        accessor: "quantity_on_hold",
       },
       {
         Header: "ID",
@@ -126,7 +126,7 @@ export const Products = () => {
                     {headerGroup.headers.map((column) => (
                       <th {...column.getHeaderProps(column.getSortByToggleProps())}>
                         {column.render("Header")}
-                        {column.Header !== "Description" && column.Header !== "Eircode" && (
+                        {column.Header !== "ID" && (
                           <span className="sort-arrows">{column.isSorted ? column.isSortedDesc ? <FaSortUp /> : <FaSortDown /> : <FaSort />}</span>
                         )}
                       </th>
@@ -146,8 +146,17 @@ export const Products = () => {
                       animate={{ y: 0 }}
                       className={row.cells[columnContainingId].value === idOfCurrentlySelectedRow ? "row-selected" : ""}
                     >
-                      {row.cells.map((cell) => {
-                        return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
+                      {row.cells.map((cell, index, cellArray) => {
+                        //If stock level is below restock level - columns 1 and 3 respectively
+                        if (index === 1 && cellArray[2].value < cellArray[1].value) {
+                          return (
+                            <td {...cell.getCellProps()} style={{ backgroundColor: "red" }}>
+                              {cell.render("Cell")}
+                            </td>
+                          );
+                        } else {
+                          return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
+                        }
                       })}
                     </motion.tr>
                   );

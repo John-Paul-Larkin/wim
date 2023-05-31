@@ -12,7 +12,7 @@ interface Inputs {
 }
 
 export const SingleEmployeeDetails = (props: Inputs) => {
-  // Destructure props and variables
+  // Destructure props and employee details
   const { setIdOfCurrentlySelectedRow, employeeDetails, refetchData, loading } = props;
   const { name, contact_phone, employee_id, address, eircode, email } = employeeDetails;
 

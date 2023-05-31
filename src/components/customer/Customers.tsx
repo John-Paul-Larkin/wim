@@ -6,24 +6,20 @@ import useFetchData from "../../hooks/useFetchData";
 import { GlobalFilter } from "./../GlobalFilter";
 import "./Customer.css";
 import { SingleCustomerDetails } from "./SingleCustomerDetails";
-// import { SingleCustomerDetails } from "./SingleCustomerDetails";
 
 export const Customers = () => {
   const [data, setData] = useState<CustomerData[]>([]);
   const [idOfCurrentlySelectedRow, setIdOfCurrentlySelectedRow] = useState<number | null>(null);
+  //used below to distinguish the column within the table
+  const columnContainingId = 6;
 
-  
-
-  // fetch the data
   const { fetchedData, loading, error, refetchData } = useFetchData<CustomerData[]>("/customer/");
-
   useEffect(() => {
     if (fetchedData) {
       // Reverse the array so the last entered item will be at the top of the table
       setData(fetchedData.reverse());
     }
   }, [fetchedData]);
-
   // Once the data is fetched, set the default row to the record at top of the table
   if (idOfCurrentlySelectedRow === null && data.length > 0) {
     setIdOfCurrentlySelectedRow(data[0].customer_id);
@@ -64,12 +60,9 @@ export const Customers = () => {
     []
   );
 
-  //used below to distinguish the row within the table
-  const columnContainingId = 6;
-
   // eslint-disable-next-line
   const handleClickOnRow = (event: any) => {
-    const id = event.nativeEvent.target.parentNode.childNodes[columnContainingId].innerText;
+    const id = event.nativeEvent.target?.parentNode.childNodes[columnContainingId].innerText;
 
     setIdOfCurrentlySelectedRow(Number(id));
   };
@@ -95,8 +88,16 @@ export const Customers = () => {
       </div>
       <>
         <div className="table-wrapper">
-          {loading && <div className="error-loading"><span>Loading.....</span></div>}
-          {error && <div className="error-loading"><span>Error. {error?.message}</span></div>}
+          {loading && (
+            <div className="error-loading">
+              <span>Loading.....</span>
+            </div>
+          )}
+          {error && (
+            <div className="error-loading">
+              <span>Error. {error?.message}</span>
+            </div>
+          )}
           {!loading && !error && (
             <table {...getTableProps()}>
               <thead>
@@ -105,6 +106,7 @@ export const Customers = () => {
                     {headerGroup.headers.map((column) => (
                       <th {...column.getHeaderProps(column.getSortByToggleProps())}>
                         {column.render("Header")}
+                        {/* exclude 'contact phone'  and 'Eircode' from sort*/}
                         {column.Header !== "Contact phone" && column.Header !== "Eircode" && (
                           <span className="sort-arrows">{column.isSorted ? column.isSortedDesc ? <FaSortUp /> : <FaSortDown /> : <FaSort />}</span>
                         )}
@@ -116,7 +118,6 @@ export const Customers = () => {
               <tbody {...getTableBodyProps()}>
                 {rows.map((row) => {
                   prepareRow(row);
-
                   return (
                     <motion.tr
                       {...row.getRowProps()}

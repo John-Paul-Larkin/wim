@@ -4,12 +4,12 @@ import { useAsyncDebounce } from "react-table";
 export const GlobalFilter = ({ globalFilter, setGlobalFilter }: { globalFilter: string; setGlobalFilter: (filterValue: string) => void }) => {
   const [value, setValue] = React.useState(globalFilter);
 
-  const onChange = useAsyncDebounce((value: any) => {
+  const onChange = useAsyncDebounce((value) => {
     setGlobalFilter(value || undefined);
   }, 200);
 
   return (
-    <span className="global-filter">
+    <div className="global-filter">
       Table search:{" "}
       <input
         value={value || ""}
@@ -19,6 +19,6 @@ export const GlobalFilter = ({ globalFilter, setGlobalFilter }: { globalFilter: 
         }}
         placeholder={`records...`}
       />
-    </span>
+    </div>
   );
 };

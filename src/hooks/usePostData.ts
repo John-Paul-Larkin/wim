@@ -1,4 +1,3 @@
-
 const baseURL = import.meta.env.VITE_APP_API_BASE_URL;
 
 const usePostData = () => {
@@ -29,3 +28,43 @@ const usePostData = () => {
 };
 
 export default usePostData;
+
+// import { useCallback, useState } from "react";
+
+// const usePostData = <BodyData, ResponseData>(
+//   query: string,
+//   headers?: HeadersInit
+// ): {
+//   post: (data: BodyData) => Promise<void>;
+//   loading: boolean;
+//   error: Error | null;
+//   responseData: ResponseData | null;
+// } => {
+//   const [responseData, setResponseData] = useState<ResponseData | null>(null);
+//   const [loading, setLoading] = useState<boolean>(true);
+//   const [error, setError] = useState<Error | null>(null);
+
+//   const post = useCallback(
+//     async (data: BodyData) => {
+//       try {
+//         setLoading(true);
+//         const response = await fetch(query, {
+//           method: "POST",
+//           body: JSON.stringify(data),
+//           headers,
+//         });
+//         const json = await response.json();
+
+//         setResponseData(json);
+//         setLoading(false);
+//       } catch (error) {
+//         setError(error as Error);
+//         setLoading(false);
+//       }
+//     },
+//     [headers, query]
+//   );
+
+//   return { responseData, loading, error, postData };
+// };
+// export default usePostData;

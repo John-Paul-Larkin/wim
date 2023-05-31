@@ -31,7 +31,6 @@ export const IndividualReceivedOrder = ({ id, refetchReceivedIds, refetchPickedI
     console.log(error);
   };
 
-
   return (
     <div className="individual-order-container">
       {loading && (
@@ -52,15 +51,17 @@ export const IndividualReceivedOrder = ({ id, refetchReceivedIds, refetchPickedI
             <div>Placed on :{parseDate(orderDetails[0].placedDate)}</div>
           </div>
 
-          <div>
-            <div className="order-details-wrapper">
+          <div className="order-details-wrapper">
+            <div>
               {orderDetails.map((order) => {
                 return <IndividualOrderDetails key={order.productId} order={order} />;
               })}
             </div>
-            <span className="btn-wrapper">
-              <button onClick={handleClickPicked}>picked</button>
-            </span>
+            <div className="btn-wrapper">
+              <div>
+                <button onClick={handleClickPicked}>picked</button>
+              </div>
+            </div>
           </div>
         </>
       )}

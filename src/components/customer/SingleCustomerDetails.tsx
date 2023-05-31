@@ -12,7 +12,7 @@ interface Inputs {
 }
 
 export const SingleCustomerDetails = (props: Inputs) => {
-  // Destructure props and variables
+  // Destructure props and customer details
   const { setIdOfCurrentlySelectedRow, customerDetails, refetchData, loading } = props;
   const { name, rep, contact_phone, customer_id, address, eircode, email } = customerDetails;
 

@@ -2,7 +2,6 @@ import useFetchData from "../../hooks/useFetchData";
 import usePostData from "../../hooks/usePostData";
 import { IndividualOrderDetails } from "./IndividualOrderDetails";
 
-
 interface InputsPicked {
   refetchPickedIds: () => void;
   refetchSentIds: () => void;
@@ -13,11 +12,9 @@ export const IndividualPickedOrder = ({ id, refetchPickedIds, refetchSentIds }: 
   const url = "/saleOrder/" + id.toString();
   const { fetchedData: orderDetails, error, loading } = useFetchData<OrderDetails[]>(url);
   const { postData } = usePostData();
- 
 
   const parseDate = (date: string) => {
-
-    return date.substring(11, 16) + ' on ' + date.substring(0, 10);
+    return date.substring(11, 16) + " on " + date.substring(0, 10);
   };
 
   const handleClickSent = async () => {
@@ -36,7 +33,6 @@ export const IndividualPickedOrder = ({ id, refetchPickedIds, refetchSentIds }: 
     console.log(error);
     console.log(updateQuantityError);
   };
-
 
   return (
     <div className="individual-order-container">
@@ -58,19 +54,22 @@ export const IndividualPickedOrder = ({ id, refetchPickedIds, refetchSentIds }: 
             <div>Picked at : {parseDate(orderDetails[0].pickedDate)}</div>
           </div>
 
-          <div>
-            <div className="order-details-wrapper">
+          <div className="order-details-wrapper">
+            <div>
               {orderDetails.map((order) => {
                 return <IndividualOrderDetails key={order.productId} order={order} />;
               })}
             </div>
-            <span className="btn-wrapper">
-              <button onClick={handleClickSent}>Sent</button>
-            </span>
+            <div className="btn-wrapper">
+              <div>
+                <button onClick={handleClickSent}>Sent</button>
+              </div>
+            </div>
           </div>
         </>
       )}
     </div>
-  );}
+  );
+};
 
-
+// style={{backgroundColor:'brown'}}

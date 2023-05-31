@@ -4,9 +4,9 @@
   margin: 1rem;
   border: 2px solid black;
   overflow-y: scroll;
-  background-color: steelblue;
-}
+  background-color: hsl(207, 44%, 40%);
 
+}
 
 .place-order {
   background-color: antiquewhite;
@@ -37,20 +37,6 @@
   .product-unit-details {
     margin: 1rem;
   }
-}
-
-/* .product-unit-details span:nth-child(3) {
-  width: 6rem;
-}
-.product-unit-details span:nth-child(4) {
-    width: 5.1rem;
-  } */
-
-.product-unit-details > * {
-  /* border: 1px solid black; */
-  /* margin: 5px; */
-  /* width:100px; */
-  /* padding: 0 0.5rem 0 0.5rem; */
 }
 
 .product-unit-details > div {
@@ -127,8 +113,13 @@
 
 .individual-order-container {
   /* height:3rem; */
-  border: 1px solid black;
+  border: 1px solid white;
   margin: 2px;
+  padding-bottom:5px;
+  margin-bottom:5px;
+  background-color: steelblue;
+
+
   /* background-color: aquamarine; */
   /* display: flex; */
   /* flex-direction: column; */
@@ -144,24 +135,33 @@
 }
 
 .order-details-wrapper {
-  width: 80%;
-  display: inline-block;
+  /* width: 85%; */
+  display: flex;
 }
 
+.order-details-wrapper > div:first-child {
+  display: inline-block;
+  /* background-color: aqua; */
+  width: 100%;
+  flex-grow: 1;
+}
 
 
 .order-details {
   display: flex;
   padding-left: 3rem;
+}
 
-  /* flex-direction: column; */
-  /* background-color: antiquewhite; */
-  /* width: 300px; */
+@media (max-width: 550px) {
+  .order-details {
+    padding-left: 0rem;
+  }
 }
 
 .order-details div {
   padding: 0 1rem 0 1rem;
   /* width: 60px; */
+  border-bottom: 1px solid blue;
 }
 
 .order-details div:nth-child(1) {
@@ -170,7 +170,6 @@
 .order-details div:nth-child(2) {
   min-width: 50px;
   max-width: 50px;
-  
 }
 .order-details div:nth-child(3) {
   min-width: 10px;
@@ -178,28 +177,21 @@
 }
 
 .order-details div:nth-child(4) {
-  min-width: 100px;
+  /* min-width: 100px; */
   /* background-color: tomato; */
   /* background-color: burlywood; */
 }
 
-/* 
 .btn-wrapper {
-    display: inline-block;
-    width:100%;
-    height:100%;
-    width:200px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
- */
-
-.individual-order-container div:first-child {
-  /* display: flex; */
-  /* background-color: aqua; */
+  display: inline-block;
+  /* background-color: brown; */
+  /* width: 15%; */
+  /* min-width:50px; */
+  width: max(30px, 20%);
 }
 
-.individual-order {
-  /* display: flex; */
+.btn-wrapper div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
