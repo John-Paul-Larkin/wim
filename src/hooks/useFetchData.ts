@@ -7,16 +7,15 @@ interface FetchDataResult<T> {
   refetchData: () => void;
 }
 
-// const baseURL = new URL(import.meta.env.VITE_APP_API_BASE_URL);
-const baseURL = import.meta.env.VITE_APP_API_BASE_URL;
+// const baseURL = new URL(import.meta.env.DB_BASE_URL);
+const baseURL = import.meta.env.DB_BASE_URL;
 
 const useFetchData = <T>(inputUrl: string): FetchDataResult<T> => {
   const [fetchedData, setFetchedData] = useState<T | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<Error | null>(null);
 
-
-  const url = useMemo(()=> new URL(baseURL + inputUrl),[inputUrl])
+  const url = useMemo(() => new URL(baseURL + inputUrl), [inputUrl]);
 
   useEffect(() => {
     const fetchData = async () => {

@@ -1,4 +1,4 @@
-const baseURL = import.meta.env.VITE_APP_API_BASE_URL;
+const baseURL = import.meta.env.DB_BASE_URL;
 
 const usePostData = () => {
   //   const [error, setError] = useState<Error | null>(null);
