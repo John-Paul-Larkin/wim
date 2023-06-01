@@ -1,4 +1,4 @@
-const baseURL = import.meta.env.DB_BASE_URL;
+const baseURL = import.meta.env.BACK_END_BASE_URL;
 
 interface DeleteDataInputs {
   url: string;

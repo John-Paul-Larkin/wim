@@ -7,8 +7,8 @@ interface FetchDataResult<T> {
   refetchData: () => void;
 }
 
-// const baseURL = new URL(import.meta.env.DB_BASE_URL);
-const baseURL = import.meta.env.DB_BASE_URL;
+// const baseURL = new URL(import.meta.env.BACK_END_BASE_URL);
+const baseURL = import.meta.env.BACK_END_BASE_URL;
 
 const useFetchData = <T>(inputUrl: string): FetchDataResult<T> => {
   const [fetchedData, setFetchedData] = useState<T | null>(null);
