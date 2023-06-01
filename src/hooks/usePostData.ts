@@ -3,9 +3,10 @@ const baseURL = import.meta.env.DB_BASE_URL;
 const usePostData = () => {
   //   const [error, setError] = useState<Error | null>(null);
   //   const [responseData, setResponseData] = useState("");
-
+  // eslint-disable-next-line
   const postData = async ({ url, jsonData }: { url: string; jsonData?: any }) => {
     let error: Error | null = null;
+    // eslint-disable-next-line
     let responseData: any;
     try {
       const response = await fetch(baseURL + url, {
