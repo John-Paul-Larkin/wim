@@ -7,7 +7,6 @@ interface FetchDataResult<T> {
   refetchData: () => void;
 }
 
-// const baseURL = new URL(import.meta.env.BACK_END_BASE_URL);
 const baseURL = import.meta.env.BACK_END_BASE_URL;
 
 const useFetchData = <T>(inputUrl: string): FetchDataResult<T> => {
@@ -15,7 +14,11 @@ const useFetchData = <T>(inputUrl: string): FetchDataResult<T> => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<Error | null>(null);
 
+  console.log(baseURL);
+  console.log(inputUrl);
+
   const url = useMemo(() => new URL(baseURL + inputUrl), [inputUrl]);
+  console.log(url);
 
   useEffect(() => {
     const fetchData = async () => {
