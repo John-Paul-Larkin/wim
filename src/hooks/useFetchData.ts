@@ -14,13 +14,13 @@ const useFetchData = <T>(inputUrl: string): FetchDataResult<T> => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<Error | null>(null);
 
-  console.log(baseURL);
-  console.log(inputUrl);
+  console.log(baseURL,'base');
+  console.log(inputUrl,'input');
 
   // const url = useMemo(() => new URL(baseURL + inputUrl), [inputUrl]);
   const url = baseURL + inputUrl;
 
-  console.log(url);
+  console.log(url,'tog');
 
   useEffect(() => {
     const fetchData = async () => {
