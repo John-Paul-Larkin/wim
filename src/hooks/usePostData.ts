@@ -1,4 +1,4 @@
-const baseURL = import.meta.env.BACK_END_BASE_URL;
+const baseURL = import.meta.env.VITE_BACK_END_BASE_URL;
 
 const usePostData = () => {
   //   const [error, setError] = useState<Error | null>(null);
