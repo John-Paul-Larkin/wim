@@ -107,7 +107,7 @@ li div {
     height: 4px;
     width: 100%;
     border-radius: 10px;
-    background: #0e2431;
+    background: var(--clr-1);
   }
 
   .hamburger-lines .line1 {
@@ -134,6 +134,8 @@ li div {
 
   input[type="checkbox"]:checked ~ .hamburger-lines .line1 {
     transform: rotate(45deg);
+    background: black;
+
   }
 
   input[type="checkbox"]:checked ~ .hamburger-lines .line2 {
@@ -142,5 +144,7 @@ li div {
 
   input[type="checkbox"]:checked ~ .hamburger-lines .line3 {
     transform: rotate(-45deg);
+    background: black;
+
   }
 }

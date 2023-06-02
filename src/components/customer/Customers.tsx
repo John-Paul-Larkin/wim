@@ -4,7 +4,7 @@ import { FaSort, FaSortDown, FaSortUp } from "react-icons/fa";
 import { Column, useGlobalFilter, useSortBy, useTable } from "react-table";
 import useFetchData from "../../hooks/useFetchData";
 import { GlobalFilter } from "./../GlobalFilter";
-import "./Customer.css";
+import "./Tables.css";
 import { SingleCustomerDetails } from "./SingleCustomerDetails";
 
 export const Customers = () => {
@@ -82,10 +82,10 @@ export const Customers = () => {
 
   return (
     <>
-      <div className="heading">
+      <h1>
         {" "}
         <span>Customers</span>
-      </div>
+      </h1>
       <>
         <div className="table-wrapper">
           {loading && (

@@ -86,10 +86,10 @@ export const Salesorders = () => {
 
   return (
     <div className="sales-order">
-      <div className="heading">
+      <h1>
         {" "}
         <span>Sales orders</span>
-      </div>
+      </h1>
       <div className="place-order">
         {!selectedCustomer && <div>Choose a customer to place an order</div>}
         <Select

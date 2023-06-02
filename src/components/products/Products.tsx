@@ -103,10 +103,10 @@ export const Products = () => {
 
   return (
     <>
-      <div className="heading">
+      <h1>
         {" "}
         <span>Products</span>
-      </div>
+      </h1>
       <>
         <div className="table-wrapper product-table">
           {loading && (
@@ -175,7 +175,6 @@ export const Products = () => {
             loading={loading}
           />
         )}
-        <div className="test"></div>
       </>
     </>
   );

@@ -82,10 +82,10 @@ export const Employees = () => {
 
   return (
     <>
-      <div className="heading">
+      <h1>
         {" "}
         <span>Employees</span>
-      </div>
+      </h1>
       <>
         <div className="table-wrapper">
           {loading && (

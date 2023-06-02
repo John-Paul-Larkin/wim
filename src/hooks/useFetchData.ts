@@ -9,18 +9,12 @@ interface FetchDataResult<T> {
 
 const baseURL = import.meta.env.VITE_BACK_END_BASE_URL;
 
-const useFetchData = <T>(inputUrl: string): FetchDataResult<T> => {
+const useFetchData = <T>(inputURL: string): FetchDataResult<T> => {
   const [fetchedData, setFetchedData] = useState<T | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<Error | null>(null);
 
-  console.log(baseURL, "base");
-  console.log(inputUrl, "input");
-
-  const url = useMemo(() => new URL(baseURL + inputUrl), [inputUrl]);
-  // const url = baseURL + inputUrl;
-
-  console.log(url, "tog");
+  const url = useMemo(() => new URL(baseURL + inputURL), [inputURL]);
 
   useEffect(() => {
     const fetchData = async () => {

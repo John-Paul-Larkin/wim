@@ -84,10 +84,10 @@ export const Suppliers = () => {
 
   return (
     <>
-      <div className="heading">
+      <h1>
         {" "}
         <span>Suppliers</span>
-      </div>
+      </h1>
       <>
         <div className="table-wrapper">
           {loading && <div className="error-loading"><span>Loading.....</span></div>}

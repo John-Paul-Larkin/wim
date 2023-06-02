@@ -2,11 +2,12 @@
   --max-screen-width: 1600px;
   --clr-1: antiquewhite;
   --clr-4: white;
-  --clr-5: blue;
-  --clr-6: red;
+  --clr-5: rgb(24, 24, 24);
+  --clr-6: rgb(33, 31, 65);
   --clr-7: orange;
-  --clr-8: pink;
-  --clr-9: slategrey;
+  --clr-8: rgb(77, 71, 110);
+  --clr-9: rgb(31, 31, 31);
+  --clr-11: rgb(14, 22, 44);
   background-color: var(--clr-5);
 }
 
@@ -16,22 +17,22 @@
   display: flex;
 }
 
-.heading {
+h1 {
   font-size: 5rem;
   width: 100%;
   display: flex;
   justify-content: center;
   padding-bottom: 1rem;
+  color: var(--clr-1);
 }
 
-.heading span {
-  border-bottom: 5px solid black;
+h1 span {
+  border-bottom: 5px solid var(--clr-1);
 }
 
 button {
   cursor: pointer;
 }
-
 
 .error-loading {
   font-size: 2rem;
@@ -44,6 +45,8 @@ button {
 
 h2 {
   text-align: center;
+  color: var(--clr-1);
+
 }
 /* CSS RESET*************************************************** */
 
@@ -115,11 +118,4 @@ h6 {
 #root,
 #__next {
   isolation: isolate;
-}
-
-.test {
-  height: 600px;
-  width: 90%;
-  background-color: aqua;
-  margin-bottom: 4rem;
 }
