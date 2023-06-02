@@ -78,9 +78,6 @@ tr {
   cursor: pointer;
 }
 
-tr:nth-child(2n) {
-  /* background-color: hsl(0, 0%, 83%); */
-}
 
 tr:hover {
   background-color: var(--clr-6);
