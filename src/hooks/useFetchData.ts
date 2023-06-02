@@ -1,4 +1,4 @@
-import { useEffect,  useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 interface FetchDataResult<T> {
   fetchedData: T | null;
@@ -7,20 +7,20 @@ interface FetchDataResult<T> {
   refetchData: () => void;
 }
 
-const baseURL = import.meta.env.BACK_END_BASE_URL;
+const baseURL = import.meta.env.VITE_BACK_END_BASE_URL;
 
 const useFetchData = <T>(inputUrl: string): FetchDataResult<T> => {
   const [fetchedData, setFetchedData] = useState<T | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<Error | null>(null);
 
-  console.log(baseURL,'base');
-  console.log(inputUrl,'input');
+  console.log(baseURL, "base");
+  console.log(inputUrl, "input");
 
-  // const url = useMemo(() => new URL(baseURL + inputUrl), [inputUrl]);
-  const url = baseURL + inputUrl;
+  const url = useMemo(() => new URL(baseURL + inputUrl), [inputUrl]);
+  // const url = baseURL + inputUrl;
 
-  console.log(url,'tog');
+  console.log(url, "tog");
 
   useEffect(() => {
     const fetchData = async () => {
