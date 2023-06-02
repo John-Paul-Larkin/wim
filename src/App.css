@@ -6,9 +6,9 @@
   --clr-6: rgb(33, 31, 65);
   --clr-7: orange;
   --clr-8: rgb(77, 71, 110);
-  --clr-9: rgb(31, 31, 31);
+  --clr-9: hsl(254, 70%, 42%);
   --clr-11: rgb(14, 22, 44);
-  background-color: var(--clr-5);
+  background-color:rgb(120, 120, 202);
 }
 
 .main-screen {

@@ -76,7 +76,7 @@ export const SingleCustomerDetails = (props: Inputs) => {
   const handleClickDelete = () => {
     Swal.fire({
       title: "Are you sure?",
-      text: "Customer will be deleted permanently",
+      text: "Customer" + name + "will be deleted permanently",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
