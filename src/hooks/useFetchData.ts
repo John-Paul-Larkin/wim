@@ -17,23 +17,23 @@ const useFetchData = <T>(inputUrl: string): FetchDataResult<T> => {
   console.log(baseURL);
   console.log(inputUrl);
 
-  const url = useMemo(() => new URL(baseURL + inputUrl), [inputUrl]);
+  // const url = useMemo(() => new URL(baseURL + inputUrl), [inputUrl]);
   console.log(url);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(url, { method: "GET", credentials: "include" });
-        const responseData = await response.json();
-        setFetchedData(responseData);
-      } catch (error) {
-        setError(error as Error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await fetch(url, { method: "GET", credentials: "include" });
+  //       const responseData = await response.json();
+  //       setFetchedData(responseData);
+  //     } catch (error) {
+  //       setError(error as Error);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
 
-    fetchData();
+  //   fetchData();
   }, [url]);
 
   const refetchData = () => {
