@@ -5,6 +5,10 @@ interface Inputs {
 }
 
 export const OrdersSent = ({ sentFetchedData }: Inputs) => {
+
+
+
+  
   return (
     <>
       <div className="order-container">

@@ -8,29 +8,40 @@ interface Inputs {
 export const OrdersReceived = (props: Inputs) => {
   const { receivedFetchedData, refetchPickedIds } = props;
 
+  const error = receivedFetchedData.error;
+  const loading = receivedFetchedData.loading;
+  const data = receivedFetchedData.fetchedData;
+
   return (
     <>
       <div className="order-container">
         <div></div>
-        {receivedFetchedData.loading && (
+        {loading && (
           <div className="error-loading">
             <span>Loading.....</span>
           </div>
         )}
-        {receivedFetchedData.error && (
+        {error && (
           <div className="error-loading">
-            <span>Error. {receivedFetchedData.error?.message}</span>
+            <span>Error. {error?.message}</span>
           </div>
         )}
-        {!receivedFetchedData.error &&
-          !receivedFetchedData.loading &&
-          receivedFetchedData.fetchedData &&
-          [...receivedFetchedData.fetchedData]
+        {!error &&
+          !loading &&
+          data &&
+          data?.length > 0 &&
+          [...data]
             .reverse()
             .map((id) => (
               <IndividualReceivedOrder key={id} id={id} refetchReceivedIds={receivedFetchedData.refetchData} refetchPickedIds={refetchPickedIds} />
             ))}
+        {!error && !loading && data && data?.length === 0 && (
+          <div className="error-loading">
+            <span>No current received orders</span>
+          </div>
+        )}
       </div>
     </>
   );
 };
+

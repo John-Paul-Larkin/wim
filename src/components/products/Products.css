@@ -1,5 +1,20 @@
-
 .product-table td {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
+}
+
+.below-restock {
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
+}
+
+.below-restock > div {
+  background-color: red;
+  display: inline-block;
+  /* width: fit-content; */
+  padding: 0.3rem;
+  width:2rem;
+  border-radius: 9px;
+  border: 1px solid white;
 }

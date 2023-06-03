@@ -4,19 +4,17 @@ import { FaSort, FaSortDown, FaSortUp } from "react-icons/fa";
 import { Column, useGlobalFilter, useSortBy, useTable } from "react-table";
 import useFetchData from "../../hooks/useFetchData";
 import { GlobalFilter } from "./../GlobalFilter";
-import "./Products.css";
-import { SingleProductDetails } from "./SingleProductDetails";
-export const Products = () => {
-  const [data, setData] = useState<ProductData[]>([]);
-  const [idOfCurrentlySelectedRow, setIdOfCurrentlySelectedRow] = useState<number | null>(null);
 
-  // fetch the data
+export const PurchaseOrders = () => {
+  const [productData, setProductData] = useState<ProductData[]>([]);
+
+  // fetch the productData
   const { fetchedData, loading, error, refetchData } = useFetchData<ProductData[]>("/product/");
 
   useEffect(() => {
     if (fetchedData) {
       // Reverse the array so the last entered item will be at the top of the table
-      setData(fetchedData.reverse());
+      setProductData(fetchedData.reverse());
     }
   }, [fetchedData]);
 
@@ -26,6 +24,10 @@ export const Products = () => {
       {
         Header: "Product name",
         accessor: "name",
+      },
+      {
+        Header: "",
+        accessor: "product_id",
       },
       {
         Header: "Stock",
@@ -39,73 +41,27 @@ export const Products = () => {
         Header: "On hold",
         accessor: "quantity_on_hold",
       },
-      {
-        Header: "ID",
-        accessor: "product_id",
-      },
-      // {
-      //   Header: "Case size",
-      //   accessor: "case_size",
-      // },
-      // {
-      //   Header: "Unit RRP",
-      //   accessor: "unit_rrp",
-      // },
-      // {
-      //   Header: "Purchase Price",
-      //   accessor: "purchase_price",
-      // },
-      // {
-      //   Header: "Sale price",
-      //   accessor: "sale_price",
-      // },
-      // {
-      //   Header: "SKU",
-      //   accessor: "sku",
-      // },
-      // {
-      //   Header: "Description",
-      //   accessor: "description",
-      // },
     ],
     []
   );
 
-  // Once the data is fetched, set the default row to the record at top of the table
-  if (idOfCurrentlySelectedRow === null && data.length > 0) {
-    if (data[0].product_id) {
-      setIdOfCurrentlySelectedRow(data[0].product_id);
-    }
-  }
-
-  //used below to distinguish the row within the table
-  const columnContainingId = 4;
-
-  // eslint-disable-next-line
-  const handleClickOnRow = (event: any) => {
-    const id = event.nativeEvent.target.parentNode.childNodes[columnContainingId].innerText;
-
-    setIdOfCurrentlySelectedRow(Number(id));
-  };
-
-  const tableInstance = useTable({ columns, data }, useGlobalFilter, useSortBy);
+  const tableInstance = useTable({ columns, data: productData }, useGlobalFilter, useSortBy);
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow, state, setGlobalFilter } = tableInstance;
   const { globalFilter } = state;
 
-  // Once we have an id of a selected record, find the record within the data array
-  let detailsSelectedProduct = {} as ProductData;
-  if (idOfCurrentlySelectedRow) {
-    const SingleProductData = data?.find((row) => row.product_id === idOfCurrentlySelectedRow);
-    if (SingleProductData) {
-      detailsSelectedProduct = SingleProductData;
-    }
-  }
+  const [selectedProducts, setSelectedProducts] = useState<number[] | null>(null);
+
+  const handleAddToOrder = (id: number) => {
+    console.log(id, "add to order");
+    if (selectedProducts) setSelectedProducts([...selectedProducts, id]);
+    else setSelectedProducts([id]);
+  };
 
   return (
     <>
       <h1>
         {" "}
-        <span>Products</span>
+        <span>Purchase orders</span>
       </h1>
       <>
         <div className="table-wrapper product-table">
@@ -127,7 +83,7 @@ export const Products = () => {
                     {headerGroup.headers.map((column) => (
                       <th {...column.getHeaderProps(column.getSortByToggleProps())}>
                         {column.render("Header")}
-                        {column.Header !== "ID" && (
+                        {column.Header !== "" && (
                           <span className="sort-arrows">{column.isSorted ? column.isSortedDesc ? <FaSortUp /> : <FaSortDown /> : <FaSort />}</span>
                         )}
                       </th>
@@ -140,19 +96,24 @@ export const Products = () => {
                   prepareRow(row);
 
                   return (
-                    <motion.tr
-                      {...row.getRowProps()}
-                      onClick={handleClickOnRow}
-                      initial={{ y: 50 }}
-                      animate={{ y: 0 }}
-                      className={row.cells[columnContainingId].value === idOfCurrentlySelectedRow ? "row-selected" : ""}
-                    >
+                    <motion.tr {...row.getRowProps()} initial={{ y: 50 }} animate={{ y: 0 }}>
                       {row.cells.map((cell, index, cellArray) => {
-                        //Hightlight if stock level is below restock level - columns 1 and 3 respectively
-                        if (index === 1 && cellArray[2].value > cellArray[1].value) {
+                        // Hightlight if stock level is below restock level
+                        // index represents the column
+                        if (index === 2 && cellArray[3].value > cellArray[2].value) {
                           return (
                             <td {...cell.getCellProps()} className="below-restock">
                               <div>{cell.render("Cell")}</div>
+                            </td>
+                          );
+                        } else if (index === 1) {
+                          //adds an order button to each row
+                          const isAlreadySelected = selectedProducts?.find((id) => id === cell.value);
+                          return (
+                            <td>
+                              <button disabled={isAlreadySelected ? true : false} onClick={() => handleAddToOrder(cell.value)}>
+                                Order
+                              </button>
                             </td>
                           );
                         } else {
@@ -167,18 +128,7 @@ export const Products = () => {
           )}
         </div>
         <GlobalFilter globalFilter={globalFilter} setGlobalFilter={setGlobalFilter} />
-        {detailsSelectedProduct && (
-          <SingleProductDetails
-            setIdOfCurrentlySelectedRow={setIdOfCurrentlySelectedRow}
-            productDetails={detailsSelectedProduct}
-            refetchData={refetchData}
-            loading={loading}
-          />
-        )}
       </>
     </>
   );
 };
-
-// calculate sales price
-//  <div>{(((2.49 / 123) * 100) / 3) * 12}</div>

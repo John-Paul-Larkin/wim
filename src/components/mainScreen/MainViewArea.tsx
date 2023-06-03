@@ -1,14 +1,13 @@
 import { Dashboard } from "../Dashboard";
-import { PurchaseOrders } from "../PurchaseOrders";
 import { Customers } from "../customer/Customers";
 import { Employees } from "../employees/Employees";
 import { Products } from "../products/Products";
+import { PurchaseOrders } from "../purchaseOrders/PurchaseOrders";
 import { Salesorders } from "../salesOrders/Salesorders";
 import { Suppliers } from "../suppliers/Suppliers";
 import "./MainViewArea.css";
 
 export const MainViewArea = ({ selectedNavComponent }: { selectedNavComponent: string }) => {
-  
   //returns the selected component
   return (
     <div className="section-view-area">

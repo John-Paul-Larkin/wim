@@ -1,11 +1,10 @@
 .order-container {
   max-height: 400px;
-  min-height: 200px;
+  min-height: 100px;
   margin: 1rem;
   border: 2px solid black;
   overflow-y: scroll;
-  background-color: hsl(207, 44%, 40%);
-
+  background-color: var(--clr-12);
 }
 
 .place-order {
@@ -108,8 +107,8 @@
 .individual-order-container {
   border: 1px solid white;
   margin: 2px;
-  padding-bottom:5px;
-  margin-bottom:5px;
+  padding-bottom: 5px;
+  margin-bottom: 5px;
   background-color: steelblue;
 }
 
@@ -130,7 +129,6 @@
   width: 100%;
   flex-grow: 1;
 }
-
 
 .order-details {
   display: flex;

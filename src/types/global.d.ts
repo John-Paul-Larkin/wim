@@ -72,3 +72,8 @@ interface OrderDetails {
   productId: number;
   pickedDate: string;
 }
+
+// interface  ProductOrderDetails {
+  
+
+// }

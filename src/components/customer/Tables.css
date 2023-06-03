@@ -74,13 +74,12 @@ td {
 }
 
 tr {
-  background-color: var(--clr-11);
+  background-color: var(--clr-12);
   cursor: pointer;
 }
 
-
 tr:hover {
-  background-color: var(--clr-6);
+  background-color: var(--clr-12-light);
   cursor: pointer;
 }
 
@@ -116,7 +115,6 @@ th {
 
 .table-wrapper .row-selected {
   background-color: var(--clr-5);
-
 }
 
 @media (max-width: 1024px) {
