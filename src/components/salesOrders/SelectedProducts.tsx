@@ -13,6 +13,7 @@ interface Inputs {
   selectedCustomer: CustomerSelect | null;
   setSelectedCustomer: React.Dispatch<React.SetStateAction<CustomerSelect | null>>;
   refetchReceivedIds: () => void;
+  refetchProductData: () => void;
 }
 
 export const SelectedProducts = (props: Inputs) => {
@@ -24,6 +25,7 @@ export const SelectedProducts = (props: Inputs) => {
     productOptions,
     handleClickProductSelect,
     refetchReceivedIds,
+    refetchProductData,
   } = props;
 
   const handleClickRemoveProduct = (id: number | undefined) => {
@@ -70,10 +72,10 @@ export const SelectedProducts = (props: Inputs) => {
               </div>
             )}
             <div>
-              stock <div>{product.quantity_in_stock}</div>
+              price<div>€ {product.sale_price}</div>{" "}
             </div>
             <div>
-              price<div>€ {product.sale_price}</div>{" "}
+              available <div>{product.quantity_in_stock - (product.quantity_on_hold ?? 0)}</div>
             </div>
 
             <div>
@@ -114,6 +116,7 @@ export const SelectedProducts = (props: Inputs) => {
         selectedCustomer={selectedCustomer}
         setSelectedCustomer={setSelectedCustomer}
         refetchReceivedIds={refetchReceivedIds}
+        refetchProductData={refetchProductData}
       />
     </>
   );

@@ -9,10 +9,8 @@ import "./SalesOrders.css";
 import { SelectedProducts } from "./SelectedProducts";
 
 export const Salesorders = () => {
-
-
-  const { fetchedData: fetchedCustomerData } = useFetchData("/customer/");
-  const { fetchedData: fetchedProductData } = useFetchData("/product/");
+  const { fetchedData: fetchedCustomerData } = useFetchData<CustomerData[]>("/customer/");
+  const { fetchedData: fetchedProductData, refetchData: refetchProductData } = useFetchData<ProductData[]>("/product/");
 
   const customerOptions: CustomerSelect[] = [];
   const productOptions: ProductSelect[] = [];
@@ -36,16 +34,14 @@ export const Salesorders = () => {
 
   if (fetchedCustomerData && fetchedProductData) {
     // Once the data has been fetched create an array with options for both selects
-    const customerData = fetchedCustomerData as CustomerData[];
-    const productData = fetchedProductData as ProductData[];
 
-    customerData.forEach((customer) => {
+    fetchedCustomerData.forEach((customer) => {
       customerOptions.push({
         value: customer.customer_id,
         label: customer.name,
       });
     });
-    productData.forEach((product) => {
+    fetchedProductData.forEach((product) => {
       let id = 0; //product id may possibly be undefined
       if (product.product_id) {
         id = product.product_id;
@@ -58,19 +54,20 @@ export const Salesorders = () => {
 
     // Once a cutomer has been selected
     if (selectedCustomer) {
-      customerDetails = customerData.find((customer) => customer.customer_id === selectedCustomer.value);
+      customerDetails = fetchedCustomerData.find((customer) => customer.customer_id === selectedCustomer.value);
     }
   }
 
   const handleClickProductSelect = (selectedOption: ProductSelect | null) => {
-    const productData = fetchedProductData as ProductData[];
-
-    const selectedProduct = productData.find((product) => product.product_id === selectedOption?.value);
-    if (selectedProduct) {
-      if (!selectedProducts.find((product) => product.product_id === selectedProduct.product_id)) {
-        // IF the item has not preveiously been added to the array/cart
-        setSelectedProducts([...selectedProducts, { ...selectedProduct, order_quantity: 0 }]);
-        localStorage.setItem("selectedProducts", JSON.stringify([...selectedProducts, { ...selectedProduct, order_quantity: 0 }]));
+    // const productData = fetchedProductData as ProductData[];
+    if (fetchedProductData) {
+      const selectedProduct = fetchedProductData.find((product) => product.product_id === selectedOption?.value);
+      if (selectedProduct) {
+        if (!selectedProducts.find((product) => product.product_id === selectedProduct.product_id)) {
+          // IF the item has not preveiously been added to the array/cart
+          setSelectedProducts([...selectedProducts, { ...selectedProduct, order_quantity: 0 }]);
+          localStorage.setItem("selectedProducts", JSON.stringify([...selectedProducts, { ...selectedProduct, order_quantity: 0 }]));
+        }
       }
     }
   };
@@ -116,6 +113,7 @@ export const Salesorders = () => {
                 selectedCustomer={selectedCustomer}
                 setSelectedCustomer={setSelectedCustomer}
                 refetchReceivedIds={receivedFetchedData.refetchData}
+                refetchProductData={refetchProductData}
               />
             </motion.div>
           )}

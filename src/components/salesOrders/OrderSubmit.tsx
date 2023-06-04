@@ -1,5 +1,6 @@
 import Swal from "sweetalert2";
 import usePostData from "../../hooks/usePostData";
+import { Products } from "../products/Products";
 
 interface Inputs {
   selectedProducts: ProductDataQuantity[];
@@ -7,10 +8,11 @@ interface Inputs {
   setSelectedCustomer: React.Dispatch<React.SetStateAction<CustomerSelect | null>>;
   setSelectedProducts: React.Dispatch<React.SetStateAction<ProductDataQuantity[]>>;
   refetchReceivedIds: () => void;
+  refetchProductData: () => void;
 }
 
 export const OrderSubmit = (props: Inputs) => {
-  const { selectedCustomer, selectedProducts, setSelectedCustomer, setSelectedProducts, refetchReceivedIds } = props;
+  const { selectedCustomer, selectedProducts, setSelectedCustomer, setSelectedProducts, refetchReceivedIds, refetchProductData } = props;
 
   // remove details from local storage and empty state
   const handleClearOrder = () => {
@@ -23,23 +25,42 @@ export const OrderSubmit = (props: Inputs) => {
   const { postData } = usePostData();
 
   const handlePlaceOrder = async () => {
-    const orderDetails = JSON.stringify({
-      customerID: selectedCustomer?.value,
-      products: selectedProducts,
-      employeeID: 2,
+    // before putting through the order, check if
+    // there are any products with no quantity selected
+    const productsWithZeroQuantity: string[] = [];
+    selectedProducts.forEach((product) => {
+      if (product.order_quantity === 0) {
+        productsWithZeroQuantity.push(product.name);
+      }
     });
 
-    const { error } = await postData({ url: "/saleOrder/", jsonData: orderDetails });
-    if (error) {
+    if (productsWithZeroQuantity.length > 0) {
+      const message = productsWithZeroQuantity.join(" - ");
       Swal.fire({
         icon: "error",
-        title: "Something went wrong!",
-        text: error?.message,
+        title: "No quantity added",
+        text: message,
       });
     } else {
-      handleClearOrder();
-      refetchReceivedIds();
-      Swal.fire("Order has been placed");
+      const orderDetails = JSON.stringify({
+        customerID: selectedCustomer?.value,
+        products: selectedProducts,
+        employeeID: 2,
+      });
+
+      const { error } = await postData({ url: "/saleOrder/", jsonData: orderDetails });
+      if (error) {
+        Swal.fire({
+          icon: "error",
+          title: "Something went wrong!",
+          text: error?.message,
+        });
+      } else {
+        handleClearOrder();
+        refetchReceivedIds();
+        refetchProductData();
+        Swal.fire("Order has been placed");
+      }
     }
   };
 

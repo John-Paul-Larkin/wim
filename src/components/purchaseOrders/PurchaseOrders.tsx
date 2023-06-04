@@ -4,6 +4,8 @@ import { FaSort, FaSortDown, FaSortUp } from "react-icons/fa";
 import { Column, useGlobalFilter, useSortBy, useTable } from "react-table";
 import useFetchData from "../../hooks/useFetchData";
 import { GlobalFilter } from "./../GlobalFilter";
+import OrderItems from "./OrderItems";
+import "./PurchaseOrders.css";
 
 export const PurchaseOrders = () => {
   const [productData, setProductData] = useState<ProductData[]>([]);
@@ -49,12 +51,12 @@ export const PurchaseOrders = () => {
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow, state, setGlobalFilter } = tableInstance;
   const { globalFilter } = state;
 
-  const [selectedProducts, setSelectedProducts] = useState<number[] | null>(null);
+  const [selectedProductIds, setSelectedProductsIds] = useState<number[] | null>(null);
 
   const handleAddToOrder = (id: number) => {
     console.log(id, "add to order");
-    if (selectedProducts) setSelectedProducts([...selectedProducts, id]);
-    else setSelectedProducts([id]);
+    if (selectedProductIds) setSelectedProductsIds([...selectedProductIds, id]);
+    else setSelectedProductsIds([id]);
   };
 
   return (
@@ -64,7 +66,7 @@ export const PurchaseOrders = () => {
         <span>Purchase orders</span>
       </h1>
       <>
-        <div className="table-wrapper product-table">
+        <div className="table-wrapper product-table purchase-table">
           {loading && (
             <div className="error-loading">
               <span>Loading.....</span>
@@ -108,7 +110,7 @@ export const PurchaseOrders = () => {
                           );
                         } else if (index === 1) {
                           //adds an order button to each row
-                          const isAlreadySelected = selectedProducts?.find((id) => id === cell.value);
+                          const isAlreadySelected = selectedProductIds?.find((id) => id === cell.value);
                           return (
                             <td>
                               <button disabled={isAlreadySelected ? true : false} onClick={() => handleAddToOrder(cell.value)}>
@@ -129,6 +131,7 @@ export const PurchaseOrders = () => {
         </div>
         <GlobalFilter globalFilter={globalFilter} setGlobalFilter={setGlobalFilter} />
       </>
+      <OrderItems productData={productData} selectedProductIds={selectedProductIds} />
     </>
   );
 };
