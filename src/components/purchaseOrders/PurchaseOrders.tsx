@@ -11,7 +11,7 @@ export const PurchaseOrders = () => {
   const [productData, setProductData] = useState<ProductData[]>([]);
 
   // fetch the productData
-  const { fetchedData, loading, error, refetchData } = useFetchData<ProductData[]>("/product/");
+  const { fetchedData, loading, error } = useFetchData<ProductData[]>("/product/");
 
   useEffect(() => {
     if (fetchedData) {
