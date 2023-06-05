@@ -16,7 +16,12 @@ function OrderItems(props: Inputs) {
     <>
       {selectedProducts &&
         selectedProducts.map((product) => {
-          return <div>{product.name}</div>;
+          return (
+            <>
+              <span>{product.name}</span>
+              {product.purchase_price}
+            </>
+          );
         })}
     </>
   );

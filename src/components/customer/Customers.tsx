@@ -74,7 +74,7 @@ export const Customers = () => {
   // Once we have an id of a selected record, find the record within the data array
   let detailsSelectedCustomer = {} as CustomerData;
   if (idOfCurrentlySelectedRow) {
-    const SingleCustomerData = data?.find((row) => row.customer_id === idOfCurrentlySelectedRow);
+    const SingleCustomerData = data.find((row) => row.customer_id === idOfCurrentlySelectedRow);
     if (SingleCustomerData) {
       detailsSelectedCustomer = SingleCustomerData;
     }

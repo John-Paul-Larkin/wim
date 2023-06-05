@@ -94,6 +94,7 @@ export const Products = () => {
 
   // Once we have an id of a selected record, find the record within the data array
   let detailsSelectedProduct = {} as ProductData;
+
   if (idOfCurrentlySelectedRow) {
     const SingleProductData = data?.find((row) => row.product_id === idOfCurrentlySelectedRow);
     if (SingleProductData) {
