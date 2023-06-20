@@ -4,7 +4,7 @@ import { MainViewArea } from "./components/mainScreen/MainViewArea";
 import { SideMenu } from "./components/mainScreen/SideMenu";
 
 function App() {
-  const [selectedNavComponent, setSelectedNavComponent] = useState("Dashboard");
+  const [selectedNavComponent, setSelectedNavComponent] = useState("Products");
   const [sideMenuOpen, setSideMenuOpen] = useState(false);
 
   return (
