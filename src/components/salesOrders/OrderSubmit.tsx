@@ -1,6 +1,6 @@
 import Swal from "sweetalert2";
 import usePostData from "../../hooks/usePostData";
-import { Products } from "../products/Products";
+// import { Products } from "../products/Products";
 
 interface Inputs {
   selectedProducts: ProductDataQuantity[];
