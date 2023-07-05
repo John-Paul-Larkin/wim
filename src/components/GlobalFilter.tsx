@@ -9,7 +9,7 @@ export const GlobalFilter = ({ globalFilter, setGlobalFilter }: { globalFilter: 
   }, 200);
 
   return (
-    <div className="global-filter">
+    <span className="global-filter">
       Table search:{" "}
       <input
         value={value || ""}
@@ -19,6 +19,6 @@ export const GlobalFilter = ({ globalFilter, setGlobalFilter }: { globalFilter: 
         }}
         placeholder={`records...`}
       />
-    </div>
+    </span>
   );
 };

@@ -59,6 +59,14 @@ export const PurchaseOrders = () => {
     else setSelectedProductsIds([id]);
   };
 
+  const addAllItemsBelowRestockLevel = () => {
+    const idsAllItemsBelowRestockLevel = productData
+      .filter((product) => product.quantity_in_stock < product.restock_level)
+      .map((product) => product.product_id) as number[];
+
+    setSelectedProductsIds(idsAllItemsBelowRestockLevel);
+  };
+
   return (
     <>
       <h1>
@@ -129,7 +137,10 @@ export const PurchaseOrders = () => {
             </table>
           )}
         </div>
-        <GlobalFilter globalFilter={globalFilter} setGlobalFilter={setGlobalFilter} />
+        <div>
+          <GlobalFilter globalFilter={globalFilter} setGlobalFilter={setGlobalFilter} />
+          <button onClick={addAllItemsBelowRestockLevel}>Add low stocked</button>
+        </div>
       </>
       <OrderItems productData={productData} selectedProductIds={selectedProductIds} />
     </>

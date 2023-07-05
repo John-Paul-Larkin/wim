@@ -13,17 +13,157 @@ function OrderItems(props: Inputs) {
   });
 
   return (
-    <>
+    <div className=""
+     >
       {selectedProducts &&
         selectedProducts.map((product) => {
           return (
-            <>
+            <div key={product.product_id}>
               <span>{product.name}</span>
               {product.purchase_price}
-            </>
+            </div>
           );
         })}
-    </>
+    </div>
   );
 }
 export default OrderItems;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
