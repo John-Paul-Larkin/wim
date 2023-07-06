@@ -1,4 +1,4 @@
-export const IndividualOrderDetails = ({ order }: { order: OrderDetails }) => {
+export const IndividualOrderDetails = ({ order }: { order: SalesOrderDetails }) => {
   return (
     <div className="order-details">
       <div>{order.productName}</div>

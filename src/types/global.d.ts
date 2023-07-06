@@ -61,7 +61,7 @@ interface FetchedData {
   refetchData: () => void;
 }
 
-interface OrderDetails {
+interface SalesOrderDetails {
   placedDate: string;
   businessName: string;
   employeeName: string;
@@ -74,6 +74,5 @@ interface OrderDetails {
 }
 
 // interface  ProductOrderDetails {
-  
 
 // }

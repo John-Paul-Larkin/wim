@@ -13,7 +13,7 @@ export const IndividualPickedOrder = (props: Inputs) => {
   const { id, refetchPickedIds, refetchSentIds } = props;
 
   const url = "/saleOrder/" + id.toString();
-  const { fetchedData: orderDetails, error, loading } = useFetchData<OrderDetails[]>(url);
+  const { fetchedData: orderDetails, error, loading } = useFetchData<SalesOrderDetails[]>(url);
   const { postData } = usePostData();
 
   // Seperates time and date from the UTC datetime

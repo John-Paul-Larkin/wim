@@ -1,4 +1,17 @@
 .purchase-table {
+  max-height: 300px;
+}
 
-    max-height: 300px;
+.purchase-order {
+  background-color: wheat;
+  margin: 2rem;
+}
+
+.purchase-order .individual {
+    background-color: white;    
+    margin:.2rem;
+}
+
+.purchase-order button {
+    padding:.05rem;
 }

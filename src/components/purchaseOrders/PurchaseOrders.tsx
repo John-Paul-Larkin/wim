@@ -63,8 +63,11 @@ export const PurchaseOrders = () => {
     const idsAllItemsBelowRestockLevel = productData
       .filter((product) => product.quantity_in_stock < product.restock_level)
       .map((product) => product.product_id) as number[];
-
-    setSelectedProductsIds(idsAllItemsBelowRestockLevel);
+    if (selectedProductIds !== null) {
+      setSelectedProductsIds([...selectedProductIds, ...idsAllItemsBelowRestockLevel]);
+    } else {
+      setSelectedProductsIds(idsAllItemsBelowRestockLevel);
+    }
   };
 
   return (
@@ -142,7 +145,7 @@ export const PurchaseOrders = () => {
           <button onClick={addAllItemsBelowRestockLevel}>Add low stocked</button>
         </div>
       </>
-      <OrderItems productData={productData} selectedProductIds={selectedProductIds} />
+      <OrderItems productData={productData} selectedProductIds={selectedProductIds} setSelectedProductsIds={setSelectedProductsIds}/>
     </>
   );
 };

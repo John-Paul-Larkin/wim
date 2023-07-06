@@ -8,13 +8,12 @@ interface Inputs {
 
 export const IndividualSentOrder = ({ id }: Inputs) => {
   const url = "/saleOrder/" + id.toString();
-  const { fetchedData: orderDetails, error, loading } = useFetchData<OrderDetails[]>(url);
+  const { fetchedData: orderDetails, error, loading } = useFetchData<SalesOrderDetails[]>(url);
   // const { postData } = usePostData();
 
   const parseDate = (date: string) => {
     return date.substring(0, 10);
   };
-
 
   return (
     <div className="individual-order">
