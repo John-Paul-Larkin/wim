@@ -54,6 +54,7 @@
 /* css for styling table */
 
 .table-wrapper {
+  min-height: 250px;
   max-height: 500px;
   border: 2px solid black;
   overflow-y: scroll;

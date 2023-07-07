@@ -34,11 +34,11 @@ export const SalesOrderSubmit = (props: Inputs) => {
       }
     });
 
-    if (productsWithZeroQuantity.length > 0) {
-      const message = productsWithZeroQuantity.join(" - ");
+     if (productsWithZeroQuantity.length > 0) {
+      const message = productsWithZeroQuantity.join(" and ");
       Swal.fire({
         icon: "error",
-        title: "No quantity added",
+        title: "Please add a quantity",
         text: message,
       });
     } else {

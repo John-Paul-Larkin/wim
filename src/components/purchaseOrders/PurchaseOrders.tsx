@@ -152,7 +152,7 @@ export const PurchaseOrders = () => {
         </div>
         <div>
           <GlobalFilter globalFilter={globalFilter} setGlobalFilter={setGlobalFilter} />
-          <button onClick={addAllItemsBelowRestockLevel}>Add low stocked</button>
+        <button onClick={addAllItemsBelowRestockLevel}>Add low stocked</button>
         </div>
       </>
       <OrderItems selectedProducts={selectedProducts} setSelectedProducts={setSelectedProducts} />
