@@ -11,7 +11,7 @@ interface Inputs {
   refetchProductData: () => void;
 }
 
-export const OrderSubmit = (props: Inputs) => {
+export const SalesOrderSubmit = (props: Inputs) => {
   const { selectedCustomer, selectedProducts, setSelectedCustomer, setSelectedProducts, refetchReceivedIds, refetchProductData } = props;
 
   // remove details from local storage and empty state

@@ -8,10 +8,28 @@
 }
 
 .purchase-order .individual {
-    background-color: white;    
-    margin:.2rem;
+  background-color: white;
+  margin: 0.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.purchase-order .individual .name{
+    flex-grow: 1;
 }
 
 .purchase-order button {
-    padding:.05rem;
+  padding: 0.05rem;
+}
+
+.purchase-order .quantity {
+  background-color: lightgrey;
+  width: 2rem;
+}
+
+.purchase-order .delete-btn {
+  background-color: transparent;
+  border: 0;
+  
 }

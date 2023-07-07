@@ -51,22 +51,33 @@ export const PurchaseOrders = () => {
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow, state, setGlobalFilter } = tableInstance;
   const { globalFilter } = state;
 
-  const [selectedProductIds, setSelectedProductsIds] = useState<number[] | null>(null);
+  const [selectedProducts, setSelectedProducts] = useState<ProductDataQuantity[] | null>(null);
 
   const handleAddToOrder = (id: number) => {
-    console.log(id, "add to order");
-    if (selectedProductIds) setSelectedProductsIds([...selectedProductIds, id]);
-    else setSelectedProductsIds([id]);
+    //search by id, find the product and add an order quantity of 0
+    const product: ProductDataQuantity = productData
+      .filter((product) => product.product_id === id)
+      .map((product) => {
+        return { ...product, order_quantity: 0 };
+      })[0];
+
+    if (selectedProducts) setSelectedProducts([...selectedProducts, product]);
+    else setSelectedProducts([product]);
   };
 
   const addAllItemsBelowRestockLevel = () => {
-    const idsAllItemsBelowRestockLevel = productData
+    // filter by bwloe restock, map to add 0 quantity, lastly filter to remove products already added
+    const productsBelowRestockLevel = productData
       .filter((product) => product.quantity_in_stock < product.restock_level)
-      .map((product) => product.product_id) as number[];
-    if (selectedProductIds !== null) {
-      setSelectedProductsIds([...selectedProductIds, ...idsAllItemsBelowRestockLevel]);
+      .map((product) => {
+        return { ...product, order_quantity: 0 };
+      })
+      .filter((product) => !selectedProducts?.find((prod) => prod.product_id === product.product_id));
+
+    if (selectedProducts !== null) {
+      setSelectedProducts([...selectedProducts, ...productsBelowRestockLevel]);
     } else {
-      setSelectedProductsIds(idsAllItemsBelowRestockLevel);
+      setSelectedProducts(productsBelowRestockLevel);
     }
   };
 
@@ -107,7 +118,6 @@ export const PurchaseOrders = () => {
               <tbody {...getTableBodyProps()}>
                 {rows.map((row) => {
                   prepareRow(row);
-
                   return (
                     <motion.tr {...row.getRowProps()} initial={{ y: 50 }} animate={{ y: 0 }}>
                       {row.cells.map((cell, index, cellArray) => {
@@ -121,9 +131,9 @@ export const PurchaseOrders = () => {
                           );
                         } else if (index === 1) {
                           //adds an order button to each row
-                          const isAlreadySelected = selectedProductIds?.find((id) => id === cell.value);
+                          const isAlreadySelected = selectedProducts?.find((product) => product.product_id === cell.value);
                           return (
-                            <td>
+                            <td key={cell.value}>
                               <button disabled={isAlreadySelected ? true : false} onClick={() => handleAddToOrder(cell.value)}>
                                 Order
                               </button>
@@ -145,7 +155,7 @@ export const PurchaseOrders = () => {
           <button onClick={addAllItemsBelowRestockLevel}>Add low stocked</button>
         </div>
       </>
-      <OrderItems productData={productData} selectedProductIds={selectedProductIds} setSelectedProductsIds={setSelectedProductsIds}/>
+      <OrderItems selectedProducts={selectedProducts} setSelectedProducts={setSelectedProducts} />
     </>
   );
 };

@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { FaRegTrashAlt } from "react-icons/fa";
 import NumericInput from "react-numeric-input";
 import Select from "react-select";
-import { OrderSubmit } from "./OrderSubmit";
+import { SalesOrderSubmit } from "./SalesOrderSubmit";
 import { Totals } from "./Totals";
 
 interface Inputs {
@@ -95,9 +95,9 @@ export const SelectedProducts = (props: Inputs) => {
             <div>
               Total : <div>{Math.round(product.sale_price * product.order_quantity * 100) / 100}</div>
             </div>
-            <div className="delete-icon" onClick={() => handleClickRemoveProduct(product.product_id)}>
+            <button className="delete-icon" onClick={() => handleClickRemoveProduct(product.product_id)}>
               <FaRegTrashAlt />
-            </div>
+            </button>
           </motion.div>
         );
       })}
@@ -110,7 +110,7 @@ export const SelectedProducts = (props: Inputs) => {
         value={null}
         openMenuOnFocus={true}
       ></Select>
-      <OrderSubmit
+      <SalesOrderSubmit
         setSelectedProducts={setSelectedProducts}
         selectedProducts={selectedProducts}
         selectedCustomer={selectedCustomer}

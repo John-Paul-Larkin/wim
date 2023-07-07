@@ -49,6 +49,11 @@ interface CustomerSelect {
   label: string;
 }
 
+interface SupplierSelect {
+  value: number;
+  label: string;
+}
+
 interface ProductSelect {
   value: number;
   label: string;
@@ -73,6 +78,11 @@ interface SalesOrderDetails {
   pickedDate: string;
 }
 
-// interface  ProductOrderDetails {
+// interface PurchaseOrderDetails {
+//   productID: number;
+//   quantity: number;
+// }
+
+// interface  ProductOr|derDetails {
 
 // }
