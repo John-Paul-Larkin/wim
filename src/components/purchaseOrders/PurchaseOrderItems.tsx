@@ -9,10 +9,11 @@ interface Inputs {
   // productData: ProductData[];
   selectedProducts: ProductDataQuantity[] | null;
   setSelectedProducts: React.Dispatch<React.SetStateAction<ProductDataQuantity[] | null>>;
+  refetchOrderedIds: () => void;
 }
 
-function OrderItems(props: Inputs) {
-  const { selectedProducts, setSelectedProducts } = props;
+function PurchaseOrderItems(props: Inputs) {
+  const { selectedProducts, setSelectedProducts, refetchOrderedIds } = props;
 
   const handleQuantityChange = (id: number | undefined, e: React.SyntheticEvent) => {
     const target = e.target as HTMLInputElement;
@@ -92,6 +93,7 @@ function OrderItems(props: Inputs) {
           });
         } else {
           clearOrder();
+          refetchOrderedIds();
           Swal.fire("Order has been placed");
         }
       }
@@ -141,4 +143,4 @@ function OrderItems(props: Inputs) {
     </>
   );
 }
-export default OrderItems;
+export default PurchaseOrderItems;

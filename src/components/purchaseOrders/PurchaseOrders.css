@@ -34,8 +34,8 @@
 }
 
 .supplier-name {
-  background-color: wheat;
-  margin: 2rem;
+  background-color: antiquewhite;
+  margin: 1rem;
   padding: 0.2rem 1rem;
 }
 
@@ -43,7 +43,16 @@
   margin-left: 1rem;
 }
 
+.instructions {
+    margin:1rem;
+    padding:.3rem;
+    background-color: antiquewhite;
+}
 
+.low-btn {
+    margin-left: 1rem;
+
+}
 
 @media (max-width: 350px) {
     .purchase-order {

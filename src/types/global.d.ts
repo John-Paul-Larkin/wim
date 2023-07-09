@@ -78,6 +78,17 @@ interface SalesOrderDetails {
   pickedDate: string;
 }
 
+interface PurchaseOrderDetails {
+  productId: number;
+  productName: string;
+  caseSize: number;
+  soldBy: string;
+  quantity: number;
+  orderedDate: string;
+  supplierName: string;
+  employeeName: string;
+}
+
 // interface PurchaseOrderDetails {
 //   productID: number;
 //   quantity: number;

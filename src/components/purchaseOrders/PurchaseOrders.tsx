@@ -4,14 +4,30 @@ import { FaSort, FaSortDown, FaSortUp } from "react-icons/fa";
 import { Column, useGlobalFilter, useSortBy, useTable } from "react-table";
 import useFetchData from "../../hooks/useFetchData";
 import { GlobalFilter } from "./../GlobalFilter";
-import OrderItems from "./OrderItems";
+import Ordered from "./Ordered";
+import PurchaseOrderItems from "./PurchaseOrderItems";
 import "./PurchaseOrders.css";
+import Received from "./Received";
 
 export const PurchaseOrders = () => {
   const [productData, setProductData] = useState<ProductData[]>([]);
 
   // fetch the productData
   const { fetchedData, loading, error } = useFetchData<ProductData[]>("/product/");
+
+  const {
+    fetchedData: orderedIds,
+    loading: loadingOrderedIds,
+    error: errorOrderedIds,
+    refetchData: refetchOrderedIds,
+  } = useFetchData<number[]>("/purchaseOrder/getOrderedIds");
+
+  const {
+    fetchedData: receivedIds,
+    loading: loadingReceivedIds,
+    error: errorReceivedIds,
+    refetchData: refetchReceivedIds,
+  } = useFetchData<number[]>("/purchaseOrder/getReceivedIds");
 
   useEffect(() => {
     if (fetchedData) {
@@ -87,6 +103,11 @@ export const PurchaseOrders = () => {
         {" "}
         <span>Purchase orders</span>
       </h1>
+      <p className="instructions">
+        To place an order first select the items from the table below, then select a supplier. Products marked with red indicates that the quantity on
+        hand has dropped below the designated redorder quantity. Pressing the "Add low stocked" button will add all products from the table which are
+        below the restock level.
+      </p>
       <>
         <div className="table-wrapper product-table purchase-table">
           {loading && (
@@ -152,10 +173,34 @@ export const PurchaseOrders = () => {
         </div>
         <div>
           <GlobalFilter globalFilter={globalFilter} setGlobalFilter={setGlobalFilter} />
-        <button onClick={addAllItemsBelowRestockLevel}>Add low stocked</button>
+          <button className="low-btn" onClick={addAllItemsBelowRestockLevel}>
+            Add low stocked
+          </button>
         </div>
       </>
-      <OrderItems selectedProducts={selectedProducts} setSelectedProducts={setSelectedProducts} />
+      <PurchaseOrderItems selectedProducts={selectedProducts} setSelectedProducts={setSelectedProducts} refetchOrderedIds={refetchOrderedIds} />
+      <h2>
+        Orders waiting for delivery
+        <span> - {orderedIds?.length}</span>
+      </h2>
+      <Ordered
+        orderedIds={orderedIds}
+        loadingOrderedIds={loadingOrderedIds}
+        errorOrderedIds={errorOrderedIds}
+        refetchOrderedIds={refetchOrderedIds}
+      />
+      <h2>
+        Orders received
+        <span> - {receivedIds?.length}</span>
+      </h2>
+      <Received
+        receivedIds={receivedIds}
+        loadingReceivedIds={loadingReceivedIds}
+        errorReceivedIds={errorReceivedIds}
+        refetchReceivedIds={refetchReceivedIds}
+      />
     </>
   );
 };
+
+export default PurchaseOrders;
