@@ -13,7 +13,7 @@ export const PurchaseOrders = () => {
   const [productData, setProductData] = useState<ProductData[]>([]);
 
   // fetch the productData
-  const { fetchedData, loading, error } = useFetchData<ProductData[]>("/product/");
+  const { fetchedData, loading, error, refetchData: refetchProductData } = useFetchData<ProductData[]>("/product/");
 
   const {
     fetchedData: orderedIds,
@@ -30,6 +30,7 @@ export const PurchaseOrders = () => {
   } = useFetchData<number[]>("/purchaseOrder/getReceivedIds");
 
   useEffect(() => {
+    console.log(fetchedData)
     if (fetchedData) {
       // Reverse the array so the last entered item will be at the top of the table
       setProductData(fetchedData.reverse());
@@ -103,11 +104,14 @@ export const PurchaseOrders = () => {
         {" "}
         <span>Purchase orders</span>
       </h1>
-      <p className="instructions">
-        To place an order first select the items from the table below, then select a supplier. Products marked with red indicates that the quantity on
-        hand has dropped below the designated redorder quantity. Pressing the "Add low stocked" button will add all products from the table which are
-        below the restock level.
-      </p>
+      <div className="instructions">
+        <p>
+          To place an order first select the items from the table below, then select a supplier. Products marked with red indicates that the quantity
+          on hand has dropped below the designated redorder quantity. Pressing the "Add low stocked" button will add all products from the table which
+          are below the restock level.
+        </p>
+        <p>Once an order has been marked as received the product table will be updated with the quantity in stock.</p>
+      </div>
       <>
         <div className="table-wrapper product-table purchase-table">
           {loading && (
@@ -188,7 +192,10 @@ export const PurchaseOrders = () => {
         loadingOrderedIds={loadingOrderedIds}
         errorOrderedIds={errorOrderedIds}
         refetchOrderedIds={refetchOrderedIds}
-      />
+        refetchProductData={refetchProductData}
+        refetchReceivedIds={refetchReceivedIds}
+
+/>
       <h2>
         Orders received
         <span> - {receivedIds?.length}</span>
@@ -197,7 +204,6 @@ export const PurchaseOrders = () => {
         receivedIds={receivedIds}
         loadingReceivedIds={loadingReceivedIds}
         errorReceivedIds={errorReceivedIds}
-        refetchReceivedIds={refetchReceivedIds}
       />
     </>
   );

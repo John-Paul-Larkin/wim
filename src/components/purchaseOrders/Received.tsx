@@ -4,11 +4,10 @@ interface Inputs {
   receivedIds: number[] | null;
   loadingReceivedIds: boolean;
   errorReceivedIds: Error | null;
-  refetchReceivedIds: () => void;
 }
 
-export default function Ordered(props: Inputs) {
-  const { receivedIds, loadingReceivedIds, errorReceivedIds, refetchReceivedIds } = props;
+export default function Received(props: Inputs) {
+  const { receivedIds, loadingReceivedIds, errorReceivedIds } = props;
 
   return (
     <div className="order-container">
@@ -23,14 +22,11 @@ export default function Ordered(props: Inputs) {
         </div>
       )}
       {!loadingReceivedIds && !errorReceivedIds && receivedIds && receivedIds.length > 0 && (
-        <>
-          {receivedIds &&
-            [...receivedIds].reverse().map((id) => <IndividualOrdered key={id} id={id} refetchReceivedIds={refetchReceivedIds} showButton={false} />)}
-        </>
+        <>{receivedIds && [...receivedIds].reverse().map((id) => <IndividualOrdered key={id} id={id} showButton={false} />)}</>
       )}
       {!loadingReceivedIds && !errorReceivedIds && receivedIds && receivedIds.length === 0 && (
         <div className="error-loading">
-          <span>No current orders</span>
+          <span>No Received orders</span>
         </div>
       )}
     </div>

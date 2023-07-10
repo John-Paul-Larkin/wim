@@ -7,12 +7,12 @@ interface Inputs {
   id: number;
   refetchOrderedIds?: () => void;
   refetchReceivedIds?: () => void;
-
+  refetchProductData?: () => void;
   showButton: boolean;
 }
 
 export default function IndividualOrdered(props: Inputs) {
-  const { id, refetchOrderedIds, refetchReceivedIds, showButton } = props;
+  const { id, refetchOrderedIds, refetchReceivedIds, showButton, refetchProductData } = props;
 
   const url = "/purchaseOrder/" + id.toString();
 
@@ -46,9 +46,13 @@ export default function IndividualOrdered(props: Inputs) {
           title: "Something went wrong!",
           text: error.message,
         });
+      } else {
+        console.log(refetchProductData, "refetchProductData");
+
+        if (refetchOrderedIds) refetchOrderedIds();
+        if (refetchReceivedIds) refetchReceivedIds();
+        if (refetchProductData) refetchProductData();
       }
-      refetchOrderedIds && refetchOrderedIds();
-      refetchReceivedIds && refetchReceivedIds();
     }
   };
 
