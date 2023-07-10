@@ -1,21 +1,19 @@
-import useFetchData from "../../hooks/useFetchData";
+import TotalPurchaseValueOfStock from "./TotalPurchaseValueOfStock";
+import './Dashboard.css'
+import TotalSaleValueOfStock from "./TotalSaleValueOfStock";
+import LowStockedItems from "./LowStockedItems";
+import SalesBetweenDates from "./SalesBetweenDates";
+
 
 export const Dashboard = () => {
-  
 
-  interface test {
-    total_cost:number;
-  }
-  
-  const {fetchedData} = useFetchData<test[]>('/dashboard/getTotalValueOfStock')
+  return <>
+    <div className="sale-orders">Sales Orders
+    <TotalPurchaseValueOfStock/>   
+    <TotalSaleValueOfStock/>
+    <LowStockedItems/>
+    <SalesBetweenDates/>
 
-
-  console.log(fetchedData?[0])
-
-
-  return <div>s</div>;
-
-
-
-
+    </div>
+  </>
 };
