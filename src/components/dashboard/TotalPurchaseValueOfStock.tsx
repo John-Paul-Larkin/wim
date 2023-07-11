@@ -20,7 +20,7 @@ export default function TotalPurchaseValueOfStock() {
 
       <div>
         {loading && <div>loading...</div>}
-        {error && <div>Something went wrong...{error.message}</div>}
+        {error && <div>Error...{error.message}</div>}
         {totalCost && <div>€{totalCost}</div>}
       </div>
     </div>

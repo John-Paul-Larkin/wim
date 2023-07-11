@@ -1,3 +1,6 @@
+
+
+import { FaExclamationTriangle } from "react-icons/fa";
 import useFetchData from "../../hooks/useFetchData";
 
 export default function LowStockedItems() {
@@ -11,13 +14,17 @@ export default function LowStockedItems() {
     // console.log(typeof fetchedData[0].product_id);
   }
 
+
+  const style = { color: "red", fontSize: "3rem" }
+
   return (
     <div className="total-value">
       {loading && <div>loading...</div>}
-      {error && <div>Something went wrong...{error.message}</div>}
+      {error && <div>Error...{error.message}</div>}
       {fetchedData && (
         <>
           <div>Items below restock : {fetchedData?.length}</div>
+          <FaExclamationTriangle style={style}/>
           {fetchedData?.map((product) => (
             <div key={product.product_id}>{product.name}</div>
           ))}
