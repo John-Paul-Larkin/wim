@@ -1,6 +1,8 @@
 import { MdPointOfSale } from "react-icons/md";
 import useFetchData from "../../hooks/useFetchData";
 import SalesBetweenDates from "./SalesBetweenDates";
+import SalesChart from "./SalesChart";
+
 
 export default function SalesOrdersDashboard() {
   const {
@@ -34,6 +36,8 @@ export default function SalesOrdersDashboard() {
           </div>
         </>
       )}
+      <SalesChart />
+
     </div>
   );
 }

@@ -6,8 +6,6 @@ interface Inputs {
 
 export const OrdersSent = ({ sentFetchedData }: Inputs) => {
 
-
-
   
   return (
     <>

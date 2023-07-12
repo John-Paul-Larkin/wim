@@ -12,7 +12,6 @@ export const Dashboard = () => {
       <SalesOrdersDashboard />
       <PurchaseOrdersDashboard />
 
-      {/* <SalesBetweenDates /> */}
       <LowStockedItems />
     </>
   );

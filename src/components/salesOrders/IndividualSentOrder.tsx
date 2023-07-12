@@ -40,6 +40,8 @@ export const IndividualSentOrder = ({ id }: Inputs) => {
                 {order.quantity}
                 {order.soldBy}
                 {order.caseSize}
+                
+
               </div>
             );
           })}
