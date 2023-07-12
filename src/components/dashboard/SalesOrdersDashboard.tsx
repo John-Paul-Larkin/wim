@@ -1,4 +1,6 @@
+import { MdPointOfSale } from "react-icons/md";
 import useFetchData from "../../hooks/useFetchData";
+import SalesBetweenDates from "./SalesBetweenDates";
 
 export default function SalesOrdersDashboard() {
   const {
@@ -9,16 +11,27 @@ export default function SalesOrdersDashboard() {
   const { fetchedData: OrdersSentFetchedData, error: sentError, loading: sentLoading } = useFetchData<number[]>("/saleOrder/getOrderSentIds");
   const { fetchedData: OrdersPickedFetchedData, error: pickedError, loading: pickedLoading } = useFetchData<number[]>("/saleOrder/getOrderPickedIds");
 
+  const iconStyle = { color: "white", fontSize: "3rem" };
+
   return (
-    <div className="total-value">
-      <h3>Sales orders</h3>
+    <div className="sales-orders-wrapper">
+      <h2>Sales orders</h2>
+      <MdPointOfSale style={iconStyle} />
+
+      <SalesBetweenDates />
       {(receivedError || pickedError || sentError) && <div>Error...</div>}
       {(receivedLoading || pickedLoading || sentLoading) && <div>Loading...</div>}
       {!(receivedError || pickedError || sentError || receivedLoading || pickedLoading || sentLoading) && (
         <>
-          <div>Orders waiting to be picked {OrdersReceivedFetchedData?.length}</div>
-          <div>Picked orders waiting to be be shipped {OrdersPickedFetchedData?.length}</div>
-          <div>Closed orders {OrdersSentFetchedData?.length}</div>
+          <div className="bubble">
+            Orders waiting to be picked <div className="number">{OrdersReceivedFetchedData?.length}</div>
+          </div>
+          <div className="bubble">
+            Picked orders waiting to be be shipped<div className="number"> {OrdersPickedFetchedData?.length}</div>
+          </div>
+          <div className="bubble">
+            Closed orders <div className="number">{OrdersSentFetchedData?.length}</div>
+          </div>
         </>
       )}
     </div>

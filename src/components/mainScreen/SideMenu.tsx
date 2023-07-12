@@ -42,15 +42,15 @@ export const SideMenu = (props: Inputs) => {
             <span>Dashboard</span>
             {selectedNavComponent === "Dashboard" && <motion.div initial={{ width: 0 }} animate={{ width: "80%" }}></motion.div>}
           </li>
-          <li data-menu="Products">
-            <FaProductHunt />
-            <span>Products</span>
-            {selectedNavComponent === "Products" && <motion.div initial={{ width: 0 }} animate={{ width: "80%" }}></motion.div>}
-          </li>
           <li data-menu="Sales Orders">
             <FaThList />
             <span>Sales Orders</span>
             {selectedNavComponent === "Sales Orders" && <motion.div initial={{ width: 0 }} animate={{ width: "80%" }}></motion.div>}
+          </li>
+          <li data-menu="Products">
+            <FaProductHunt />
+            <span>Products</span>
+            {selectedNavComponent === "Products" && <motion.div initial={{ width: 0 }} animate={{ width: "80%" }}></motion.div>}
           </li>
           <li data-menu="Purchase Orders">
             <FaThList />

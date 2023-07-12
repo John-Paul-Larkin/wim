@@ -9,15 +9,15 @@ export default function PurchaseOrdersDashboard() {
   } = useFetchData<number[]>("/purchaseOrder/getReceivedIds");
 
   return (
-    <div className="total-value">
-      <h3>Purchase orders</h3>
+    <div className="purchase-orders-wrapper">
+      <h2>Purchase orders</h2>
       {(receivedError || orderedError) && <div>Error...</div>}
       {(receivedLoading || orderedLoading) && <div>Loading...</div>}
 
       {!(receivedError || orderedError || receivedLoading || orderedLoading) && (
         <>
-          <div>Placed orders waiting to be delivered {orderedFetchedData?.length}</div>
-          <div>Orders delivered {receivedFetchedData?.length}</div>
+          <div className="bubble">Placed orders waiting to be delivered<div className="number">{orderedFetchedData?.length}</div></div>
+          <div className="bubble">Orders delivered<div className="number">{receivedFetchedData?.length}</div></div>
         </>
       )}
     </div>

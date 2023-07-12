@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Select from "react-select";
 import useFetchData from "../../hooks/useFetchData";
-import NumberOfSales from "./NumberOfSales";
 
 export default function SalesBetweenDates() {
   type Interval = "week" | "month" | "all-time";
@@ -13,6 +12,10 @@ export default function SalesBetweenDates() {
     label: Interval;
   }
 
+  interface Count {
+    count: number;
+  }
+
   const selectOptions: IntervalSelect[] = [
     { value: "week", label: "week" },
     { value: "month", label: "month" },
@@ -21,7 +24,12 @@ export default function SalesBetweenDates() {
 
   const [timeInterval, setTimeInterval] = useState<IntervalSelect>({ value: "all-time", label: "all-time" });
 
-  const { fetchedData, loading, error, refetchData } = useFetchData<Total[]>("/dashboard/getSalesBetweenDates/" + timeInterval.value);
+  const {
+    fetchedData: fetchedTotalSales,
+    loading: loadingTotalSales,
+    error: errorTotalSales,
+    refetchData,
+  } = useFetchData<Total[]>("/dashboard/getSalesBetweenDates/" + timeInterval.value);
 
   let totalValue: null | string = null;
   const handleChangeIntervalSelect = (selectedOption: IntervalSelect | null) => {
@@ -32,13 +40,19 @@ export default function SalesBetweenDates() {
     }
   };
 
-  if (fetchedData) {
+  if (fetchedTotalSales) {
     // adds comma formatting to currency value
-    totalValue = fetchedData[0].total_value.toString().replace(/\d(?=(\d{3})+\.)/g, "$&,");
+    totalValue = fetchedTotalSales[0].total_value.toString().replace(/\d(?=(\d{3})+\.)/g, "$&,");
   }
 
+  const {
+    fetchedData: countSalesFetched,
+    loading: countLoading,
+    error: countError,
+  } = useFetchData<Count[]>("/dashboard/getNumberOfSalesBetweenDates/" + timeInterval.value);
+
   return (
-    <div className="total-value">
+    <div className="bubble">
       <div>
         <Select
           className=""
@@ -64,23 +78,25 @@ export default function SalesBetweenDates() {
         ></Select>
       </div>
       <div>
-        {loading && <div>Total sales</div>}
-
-        {loading && <div>loading...</div>}
-        {error && <div>Error...{error.message}</div>}
+        {loadingTotalSales && <div>Total sales</div>}
+        {(loadingTotalSales || countLoading) && <div>loading...</div>}
+        {(errorTotalSales || countError) && <div>Error...{errorTotalSales?.message || countError?.message}</div>}
         {totalValue && (
           <>
             {timeInterval && timeInterval.label === "all-time" ? (
-              <div>All time sales €{totalValue}</div>
+              <div>
+                All time sales <div className="currency">€{totalValue}</div> from a total of {countSalesFetched && <>{countSalesFetched[0].count}</>}{" "}
+                orders.
+              </div>
             ) : (
               <div>
-                Total sales this {timeInterval.label} €{totalValue}
+                Total sales this {timeInterval.label} <div className="currency">€{totalValue}</div> from a total of{" "}
+                {countSalesFetched && <>{countSalesFetched[0].count}</>} orders.
               </div>
             )}
           </>
         )}
       </div>
-      <NumberOfSales timeInterval={timeInterval.label} />
     </div>
   );
 }

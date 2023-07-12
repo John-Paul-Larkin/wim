@@ -1,3 +1,55 @@
+.bubble {
+  display: inline-block;
+  width: 200px;
+  /* height: 120px; */
+  border: 1px solid black;
+  border-radius: 1rem;
+  vertical-align: middle;
+  margin: 1rem;
+  padding: 1rem;
+}
+
+
+.icon-wrapper {
+  /* border: 1px solid yellow; */
+  width: 130px;
+  height: 120px;
+  margin: 1rem;
+  /* display: inline-block; */
+  vertical-align: middle;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.currency {
+  font-size: 2rem;
+  text-align: center;
+
+}
+
+.number {
+  font-size: 6rem;
+  text-align: center;
+}
+
+.sales-between-wrapper, .total-value-wrapper, .sales-orders-wrapper, .purchase-orders-wrapper {
+  border: 2px solid white;
+  margin: 1rem;
+}
+
+.sales-orders-wrapper .bubble {
+  height: 200px;
+}
+
+.purchase-orders-wrapper .bubble {
+  height: 200px;
+}
+
+
+/* ///////////////////////////// */
+
 .total-value {
   width: 120px;
   min-height: 100px;
@@ -10,11 +62,10 @@
   justify-content: center;
 }
 
-.sale-orders{
-    /* width: 120px; */
+.sale-orders {
+  /* width: 120px; */
   min-height: 100px;
   border: 1px solid black;
   border-radius: 1rem;
   margin: 1rem;
-
 }
