@@ -9,7 +9,6 @@
   padding: 1rem;
 }
 
-
 .icon-wrapper {
   /* border: 1px solid yellow; */
   width: 130px;
@@ -26,7 +25,6 @@
 .currency {
   font-size: 2rem;
   text-align: center;
-
 }
 
 .number {
@@ -34,7 +32,10 @@
   text-align: center;
 }
 
-.sales-between-wrapper, .total-value-wrapper, .sales-orders-wrapper, .purchase-orders-wrapper {
+.sales-between-wrapper,
+.total-value-wrapper,
+.sales-orders-wrapper,
+.purchase-orders-wrapper {
   border: 2px solid white;
   margin: 1rem;
 }
@@ -46,7 +47,6 @@
 .purchase-orders-wrapper .bubble {
   height: 200px;
 }
-
 
 /* ///////////////////////////// */
 
@@ -68,4 +68,11 @@
   border: 1px solid black;
   border-radius: 1rem;
   margin: 1rem;
+}
+
+.pie-chart {
+  display: inline-block;
+  background-color: white;
+  width: 175px;
+  height: 175px;
 }

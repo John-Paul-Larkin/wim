@@ -1,9 +1,14 @@
 import { GiReceiveMoney } from "react-icons/gi";
 import useFetchData from "../../hooks/useFetchData";
+import PieChartStock from "./PieChartStock";
 
 export default function TotalStockValues() {
   interface TotalCost {
     total_cost: number;
+  }
+
+  interface TotalSale {
+    total_sale: number;
   }
 
   const {
@@ -17,23 +22,19 @@ export default function TotalStockValues() {
     totalPurchaseCost = purchaseFetched[0].total_cost.toString().replace(/\d(?=(\d{3})+\.)/g, "$&,");
   }
 
-  const { fetchedData: salesFetched, error: errorSales, loading: loadingSales } = useFetchData<TotalCost[]>("/dashboard/getTotalSaleValueOfStock");
+  const { fetchedData: salesFetched, error: errorSales, loading: loadingSales } = useFetchData<TotalSale[]>("/dashboard/getTotalSaleValueOfStock");
   let totalSaleCost: null | string = null;
   if (salesFetched) {
     // adds comma formatting to currency value
     totalSaleCost = salesFetched[0].total_sale.toString().replace(/\d(?=(\d{3})+\.)/g, "$&,");
   }
 
-
   const iconStyle = { color: "white", fontSize: "3rem" };
-  interface TotalCost {
-    total_sale: number;
-  }
 
   return (
     <div className="total-value-wrapper">
-      <div className="icon-wrapper">
         <h2>Stock on hand</h2>
+      <div className="icon-wrapper">
         <GiReceiveMoney style={iconStyle} />
       </div>
       <div className="bubble">
@@ -52,6 +53,7 @@ export default function TotalStockValues() {
         </div>
         <div>Total sale value </div>
       </div>
+      {salesFetched && purchaseFetched && <PieChartStock sales={salesFetched[0].total_sale} purchases={purchaseFetched[0].total_cost} />}
     </div>
   );
 }
