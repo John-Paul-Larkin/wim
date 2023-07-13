@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Select from "react-select";
 import useFetchData from "../../hooks/useFetchData";
+import { SyncLoader } from "react-spinners";
 
 export default function SalesBetweenDates() {
   type Interval = "week" | "month" | "all-time";
@@ -52,8 +53,29 @@ export default function SalesBetweenDates() {
   } = useFetchData<Count[]>("/dashboard/getNumberOfSalesBetweenDates/" + timeInterval.value);
 
   return (
-    <div className="bubble">
+    <div className="sales-between-dates">
       <div>
+        {(errorTotalSales || countError) && <div>Error...{errorTotalSales?.message || countError?.message}</div>}
+
+      <div>Total sales</div>
+        {(loadingTotalSales || countLoading) && <SyncLoader size={".4rem"} />}
+        {totalValue && (
+          <>
+            {timeInterval && timeInterval.label === "all-time" ? (
+              <div>
+                All time sales <div className="currency">€{totalValue}</div> from a total of {countSalesFetched && <>{countSalesFetched[0].count}</>}{" "}
+                orders.
+              </div>
+            ) : (
+              <div>
+                Total sales this {timeInterval.label} <div className="currency">€{totalValue}</div> from a total of{" "}
+                {countSalesFetched && <>{countSalesFetched[0].count}</>} orders.
+              </div>
+            )}
+          </>
+        )}
+      </div>
+      <div className="select-wrapper">
         <Select
           className=""
           //   placeholder='sdsd'
@@ -76,26 +98,6 @@ export default function SalesBetweenDates() {
             }),
           }}
         ></Select>
-      </div>
-      <div>
-        {loadingTotalSales && <div>Total sales</div>}
-        {(loadingTotalSales || countLoading) && <div>loading...</div>}
-        {(errorTotalSales || countError) && <div>Error...{errorTotalSales?.message || countError?.message}</div>}
-        {totalValue && (
-          <>
-            {timeInterval && timeInterval.label === "all-time" ? (
-              <div>
-                All time sales <div className="currency">€{totalValue}</div> from a total of {countSalesFetched && <>{countSalesFetched[0].count}</>}{" "}
-                orders.
-              </div>
-            ) : (
-              <div>
-                Total sales this {timeInterval.label} <div className="currency">€{totalValue}</div> from a total of{" "}
-                {countSalesFetched && <>{countSalesFetched[0].count}</>} orders.
-              </div>
-            )}
-          </>
-        )}
       </div>
     </div>
   );

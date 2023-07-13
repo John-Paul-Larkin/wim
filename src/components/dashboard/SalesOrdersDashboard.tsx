@@ -1,8 +1,6 @@
-import { MdPointOfSale } from "react-icons/md";
+import { SyncLoader } from "react-spinners";
 import useFetchData from "../../hooks/useFetchData";
 import SalesBetweenDates from "./SalesBetweenDates";
-import SalesChart from "./SalesChart";
-
 
 export default function SalesOrdersDashboard() {
   const {
@@ -18,26 +16,48 @@ export default function SalesOrdersDashboard() {
   return (
     <div className="sales-orders-wrapper">
       <h2>Sales orders</h2>
-      <MdPointOfSale style={iconStyle} />
-
+      {/* <MdPointOfSale style={iconStyle} />/ */}
+      <div className="sales-numbers">
+        {(receivedError || pickedError || sentError) && <div>Error...</div>}
+        {/* {(receivedLoading || pickedLoading || sentLoading) && <div>Loading...</div>} */}
+        {!(receivedError || pickedError || sentError) && (
+          <div className="info-wrapper">
+            <div className="info">
+              <div>
+                {receivedLoading && <SyncLoader size={".2rem"} />}
+                {!receivedLoading && OrdersReceivedFetchedData?.length}{" "}
+              </div>
+              <div>Orders waiting to be picked.</div>
+            </div>
+            <div className="info">
+              <div>
+                {pickedLoading && <SyncLoader size={".2rem"} />}
+                {!pickedLoading && OrdersPickedFetchedData?.length}{" "}
+              </div>
+              <div>Picked orders waiting to be be shipped.</div>
+            </div>
+            <div className="info">
+              <div>
+                {sentLoading && <SyncLoader size={".2rem"} />}
+                {!sentLoading && OrdersSentFetchedData?.length}{" "}
+              </div>
+              <div>Closed orders.</div>
+            </div>
+          </div>
+        )}
+      </div>
       <SalesBetweenDates />
-      {(receivedError || pickedError || sentError) && <div>Error...</div>}
-      {(receivedLoading || pickedLoading || sentLoading) && <div>Loading...</div>}
-      {!(receivedError || pickedError || sentError || receivedLoading || pickedLoading || sentLoading) && (
-        <>
-          <div className="bubble">
-            Orders waiting to be picked <div className="number">{OrdersReceivedFetchedData?.length}</div>
-          </div>
-          <div className="bubble">
-            Picked orders waiting to be be shipped<div className="number"> {OrdersPickedFetchedData?.length}</div>
-          </div>
-          <div className="bubble">
-            Closed orders <div className="number">{OrdersSentFetchedData?.length}</div>
-          </div>
-        </>
-      )}
-      <SalesChart />
-
     </div>
   );
+}
+
+{
+  /* <ClipLoader
+color={color}
+loading={loading}
+cssOverride={override}
+size={150}
+aria-label="Loading Spinner"
+data-testid="loader"
+/> */
 }

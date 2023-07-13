@@ -4,13 +4,17 @@ import PurchaseOrdersDashboard from "./PurchaseOrdersDashboard";
 import SalesOrdersDashboard from "./SalesOrdersDashboard";
 
 import TotalStockValues from "./TotalStockValues";
+import SalesChart from "./SalesChart";
+
 
 export const Dashboard = () => {
   return (
     <>
-      <TotalStockValues />
       <SalesOrdersDashboard />
+      <TotalStockValues />
+      <SalesChart />
       <PurchaseOrdersDashboard />
+
 
       <LowStockedItems />
     </>

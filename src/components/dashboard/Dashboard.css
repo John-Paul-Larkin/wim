@@ -1,12 +1,22 @@
-.bubble {
-  display: inline-block;
-  width: 200px;
-  /* height: 120px; */
+/* ///////////////////////////// */
+/* ///////////////////////////// */
+/* ///////////////////////////// */
+/* ///////////////////////////// */
+
+.purchase-orders-wrapper .bubble {
+  height: 200px;
+}
+
+.total-value {
+  width: 120px;
+  min-height: 100px;
   border: 1px solid black;
   border-radius: 1rem;
-  vertical-align: middle;
   margin: 1rem;
-  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .icon-wrapper {
@@ -22,14 +32,20 @@
   justify-content: center;
 }
 
-.currency {
-  font-size: 2rem;
-  text-align: center;
-}
-
-.number {
+/* .number {
   font-size: 6rem;
   text-align: center;
+} */
+
+.bubble {
+  display: inline-block;
+  width: 200px;
+  /* height: 120px; */
+  border: 1px solid black;
+  border-radius: 1rem;
+  vertical-align: middle;
+  margin: 1rem;
+  padding: 1rem;
 }
 
 .sales-between-wrapper,
@@ -39,40 +55,157 @@
   border: 2px solid white;
   margin: 1rem;
 }
-
-.sales-orders-wrapper .bubble {
-  height: 200px;
-}
-
-.purchase-orders-wrapper .bubble {
-  height: 200px;
-}
-
+/* ///////////////////////////// */
+/* ///////////////////////////// */
+/* ///////////////////////////// */
 /* ///////////////////////////// */
 
-.total-value {
-  width: 120px;
-  min-height: 100px;
-  border: 1px solid black;
-  border-radius: 1rem;
+.total-value-wrapper {
+  width: 450px;
+  height: 250px;
+  display: inline-block;
+  vertical-align: top;
+  border: 2px solid white;
   margin: 1rem;
+}
+
+.total-value-wrapper .bubble-container {
+  width: 174px;
+  /* background-color: black; */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-right: 1rem;
+}
+
+.total-value-wrapper .bubble-container-wrapper {
+  display: flex;
+  /* flex-direction: column; */
+  align-items: center;
+  justify-content: center;
+}
+
+.total-value-wrapper .currency {
+  font-size: 2rem;
+  text-align: center;
+  /* background-color: antiquewhite; */
+  width: 11rem;
+  height: 3rem;
+}
+
+.total-value-wrapper .bubble-sale {
+  background-color: green;
+  border: 2px solid white;
+  border-radius: 1rem;
+  margin: 0.1rem;
+  height: 87px;
+  width: 174px;
+  padding: 0;
+  margin-bottom: 1rem;
+}
+
+.total-value-wrapper .bubble-purchase {
+  /* vertical-align: middle; */
+  background-color: red;
+  border: 2px solid white;
+  border-radius: 1rem;
+  margin: 0.1rem;
+  height: 87px;
+  width: 174px;
+  padding: 0;
+}
+
+.total-value-wrapper h3 {
+  text-align: center;
+}
+
+.total-value-wrapper .pie-chart {
+  display: inline-block;
+  /* background-color: white; */
+  width: 174px;
+  height: 174px;
+}
+
+/* sales order wrapper */
+/* sales order wrapper */
+/* sales order wrapper */
+
+.sales-orders-wrapper {
+  display: inline-block;
+  height: 250px;
+  width: 450px;
+}
+
+.sales-orders-wrapper .sales-numbers {
+  height: 200px;
+  width: 222px;
+
+  /* border: 2px solid black; */
+  display: inline-block;
+  vertical-align: top;
+}
+
+.sales-orders-wrapper .sales-between-dates {
+  display: inline-flex;
+  flex-direction: column;
+  padding-top: 2rem;
+
+  /* border: 2px solid yellow; */
+  width: 222px;
+  /* border-left: 2px solid black; */
+  height: 200px;
+  text-align: center;
+}
+
+.sales-orders-wrapper .sales-between-dates > div:first-child {
+  flex-grow: 1;
+  /* background-color: aqua; */
+}
+
+.sales-orders-wrapper .select-wrapper {
+  /* background-color: antiquewhite; */
+  display: flex;
+  justify-content: center;
+}
+
+.sales-orders-wrapper .currency {
+  font-size: 2rem;
+  text-align: center;
+}
+
+.sales-orders-wrapper .info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sales-orders-wrapper .info-wrapper {
+  /* background-color: aliceblue; */
+  margin-top: 2rem;
+}
+
+.sales-orders-wrapper .info > div:first-child {
+  font-size: 2rem;
+  width: 100%;
+  max-width: 4rem;
+  /* text-align: center; */
+  /* background-color: antiquewhite; */
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sales-orders-wrapper .info > div:nth-child(2) {
+
+  height: 3rem;
+  flex-grow: 1;
 }
 
 .sale-orders {
-  /* width: 120px; */
   min-height: 100px;
   border: 1px solid black;
   border-radius: 1rem;
   margin: 1rem;
-}
-
-.pie-chart {
-  display: inline-block;
-  background-color: white;
-  width: 175px;
-  height: 175px;
 }
