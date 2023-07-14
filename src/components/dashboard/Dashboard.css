@@ -159,7 +159,8 @@
 }
 
 .sales-orders-wrapper .sales-between-dates > div:first-child {
-  flex-grow: 1;
+  /* flex-grow: 1; */
+  height: 219px;
   /* background-color: aqua; */
 }
 
@@ -195,12 +196,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  color: white;
+  /* position: relative; */
+  /* top: -5px; */
+  border-bottom: 2px solid white;
 }
 
 .sales-orders-wrapper .info > div:nth-child(2) {
-
   height: 3rem;
   flex-grow: 1;
+  /* margin-bottom: 0.3rem; */
+  border-bottom: 2px solid white;
 }
 
 .sale-orders {

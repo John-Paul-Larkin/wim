@@ -11,7 +11,7 @@ export default function SalesOrdersDashboard() {
   const { fetchedData: OrdersSentFetchedData, error: sentError, loading: sentLoading } = useFetchData<number[]>("/saleOrder/getOrderSentIds");
   const { fetchedData: OrdersPickedFetchedData, error: pickedError, loading: pickedLoading } = useFetchData<number[]>("/saleOrder/getOrderPickedIds");
 
-  const iconStyle = { color: "white", fontSize: "3rem" };
+  // const iconStyle = { color: "white", fontSize: "3rem" };
 
   return (
     <div className="sales-orders-wrapper">

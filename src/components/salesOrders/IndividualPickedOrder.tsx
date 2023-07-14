@@ -68,6 +68,8 @@ export const IndividualPickedOrder = (props: Inputs) => {
             <div>{orderDetails[0].businessName}</div>
             <div>Rep : {orderDetails[0].employeeName}</div>
             <div>Picked at : {parseDate(orderDetails[0].pickedDate)}</div>
+            <div>Order ID : {id}</div>
+
           </div>
 
           <div className="order-details-wrapper">

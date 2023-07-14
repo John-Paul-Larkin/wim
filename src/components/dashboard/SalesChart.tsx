@@ -36,7 +36,7 @@ export default function SalesChart() {
   return (
     <>
       {fetchedData2 && (
-        <div style={{ backgroundColor: "white", width: "100%", height: "400px", paddingTop: "1rem" }}>
+        <div style={{ backgroundColor: "white", width: "50%", height: "400px", paddingTop: "1rem" }}>
           {/* <ResponsiveContainer width={'200px'} height={'200px'}> */}
           <ResponsiveContainer height={400} width="100%">
             <BarChart
@@ -56,8 +56,8 @@ export default function SalesChart() {
               <YAxis type="number" domain={[0, highestValue]} />
               <Tooltip />
               <Legend verticalAlign="top" height={10} />
-              <Bar dataKey="sales" fill="#8884d8" />
-              <Bar dataKey="purchases" fill="#82ca9d" />
+              <Bar dataKey="sales" fill="green" />
+              <Bar dataKey="purchases" fill="red" />
             </BarChart>
           </ResponsiveContainer>
         </div>

@@ -53,6 +53,8 @@ export const IndividualReceivedOrder = (props: Inputs) => {
             <div>{orderDetails[0].businessName}</div>
             <div>Rep : {orderDetails[0].employeeName}</div>
             <div>Placed on :{parseDate(orderDetails[0].placedDate)}</div>
+            <div>Order ID : {id}</div>
+
           </div>
 
           <div className="order-details-wrapper">

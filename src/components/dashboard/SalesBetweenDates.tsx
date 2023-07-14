@@ -1,10 +1,10 @@
 import { useState } from "react";
 import Select from "react-select";
-import useFetchData from "../../hooks/useFetchData";
 import { SyncLoader } from "react-spinners";
+import useFetchData from "../../hooks/useFetchData";
 
 export default function SalesBetweenDates() {
-  type Interval = "week" | "month" | "all-time";
+  type Interval = "week" | "month" | "all-time" | "today";
   interface Total {
     total_value: number;
   }
@@ -18,6 +18,7 @@ export default function SalesBetweenDates() {
   }
 
   const selectOptions: IntervalSelect[] = [
+    { value: "today", label: "today" },
     { value: "week", label: "week" },
     { value: "month", label: "month" },
     { value: "all-time", label: "all-time" },
@@ -43,7 +44,8 @@ export default function SalesBetweenDates() {
 
   if (fetchedTotalSales) {
     // adds comma formatting to currency value
-    totalValue = fetchedTotalSales[0].total_value.toString().replace(/\d(?=(\d{3})+\.)/g, "$&,");
+    if(fetchedTotalSales[0].total_value===null) totalValue = '0'
+    else totalValue = fetchedTotalSales[0].total_value.toString().replace(/\d(?=(\d{3})+\.)/g, "$&,");
   }
 
   const {
@@ -57,7 +59,7 @@ export default function SalesBetweenDates() {
       <div>
         {(errorTotalSales || countError) && <div>Error...{errorTotalSales?.message || countError?.message}</div>}
 
-      <div>Total sales</div>
+        <div>Total sales</div>
         {(loadingTotalSales || countLoading) && <SyncLoader size={".4rem"} />}
         {totalValue && (
           <>
@@ -68,7 +70,7 @@ export default function SalesBetweenDates() {
               </div>
             ) : (
               <div>
-                Total sales this {timeInterval.label} <div className="currency">€{totalValue}</div> from a total of{" "}
+                Total sales {timeInterval.label!=='today' && <span>this</span>} {timeInterval.label} <div className="currency">€{totalValue}</div> from a total of{" "}
                 {countSalesFetched && <>{countSalesFetched[0].count}</>} orders.
               </div>
             )}
