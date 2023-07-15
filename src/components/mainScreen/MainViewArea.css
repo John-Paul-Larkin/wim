@@ -3,12 +3,12 @@
   height: 100%;
   min-height: 100vh;
   display: block;
-  width: 100%;
+  width: calc(100% - 270px);
 }
 
 .spacer {
   display: inline-block;
-  min-width: 270px;
+  width: 270px;
 }
 
 .side-menu {
@@ -63,7 +63,11 @@ li div {
 
 @media (max-width: 1024px) {
   .spacer {
-    min-width: 0px;
+    width: 0px;
+  }
+
+  .section-view-area {
+    width: 100%;
   }
 
   .burger-wrapper {
@@ -135,7 +139,6 @@ li div {
   input[type="checkbox"]:checked ~ .hamburger-lines .line1 {
     transform: rotate(45deg);
     background: black;
-
   }
 
   input[type="checkbox"]:checked ~ .hamburger-lines .line2 {
@@ -145,6 +148,5 @@ li div {
   input[type="checkbox"]:checked ~ .hamburger-lines .line3 {
     transform: rotate(-45deg);
     background: black;
-
   }
 }

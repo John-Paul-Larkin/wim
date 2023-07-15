@@ -3,19 +3,20 @@ import LowStockedItems from "./LowStockedItems";
 import PurchaseOrdersDashboard from "./PurchaseOrdersDashboard";
 import SalesOrdersDashboard from "./SalesOrdersDashboard";
 
-import TotalStockValues from "./TotalStockValues";
 import SalesChart from "./SalesChart";
-
+import StockOnHand from "./StockOnHand";
 
 export const Dashboard = () => {
   return (
     <>
-      <SalesOrdersDashboard />
-      <TotalStockValues />
-      <SalesChart />
+      <h1>Dashboard</h1>
+      <div className="test-wr">
+        <StockOnHand />
+        <SalesOrdersDashboard />
+      </div>
+
       <PurchaseOrdersDashboard />
-
-
+      <SalesChart />
       <LowStockedItems />
     </>
   );

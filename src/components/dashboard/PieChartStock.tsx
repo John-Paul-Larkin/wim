@@ -1,3 +1,4 @@
+import { ScaleLoader } from "react-spinners";
 import { Cell, Pie, PieChart, ResponsiveContainer, } from "recharts";
 
 interface Inputs {
@@ -34,8 +35,8 @@ export default function PieChartStock(props: Inputs) {
 
   return (
     <>
-      {data.length > 0 && (
         <div className="pie-chart">
+      {data.length > 0 && (
           <ResponsiveContainer width="100%" height="100%">
             <PieChart width={400} height={400}>
               <Pie
@@ -54,8 +55,8 @@ export default function PieChartStock(props: Inputs) {
               </Pie>
             </PieChart>
           </ResponsiveContainer>
-        </div>
       )}
+        </div>
     </>
   );
 }

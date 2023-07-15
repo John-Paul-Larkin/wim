@@ -1,6 +1,7 @@
 import { SyncLoader } from "react-spinners";
 import useFetchData from "../../hooks/useFetchData";
 import SalesBetweenDates from "./SalesBetweenDates";
+import './SalesOrdersDashboard.css'
 
 export default function SalesOrdersDashboard() {
   const {
@@ -17,11 +18,12 @@ export default function SalesOrdersDashboard() {
     <div className="sales-orders-wrapper">
       <h2>Sales orders</h2>
       {/* <MdPointOfSale style={iconStyle} />/ */}
-      <div className="sales-numbers">
+      <div className="left-side">
         {(receivedError || pickedError || sentError) && <div>Error...</div>}
         {/* {(receivedLoading || pickedLoading || sentLoading) && <div>Loading...</div>} */}
         {!(receivedError || pickedError || sentError) && (
           <div className="info-wrapper">
+
             <div className="info">
               <div>
                 {receivedLoading && <SyncLoader size={".2rem"} />}
@@ -29,6 +31,7 @@ export default function SalesOrdersDashboard() {
               </div>
               <div>Orders waiting to be picked.</div>
             </div>
+
             <div className="info">
               <div>
                 {pickedLoading && <SyncLoader size={".2rem"} />}
@@ -36,6 +39,7 @@ export default function SalesOrdersDashboard() {
               </div>
               <div>Picked orders waiting to be be shipped.</div>
             </div>
+
             <div className="info">
               <div>
                 {sentLoading && <SyncLoader size={".2rem"} />}
@@ -44,6 +48,7 @@ export default function SalesOrdersDashboard() {
               <div>Closed orders.</div>
             </div>
           </div>
+          
         )}
       </div>
       <SalesBetweenDates />
@@ -51,13 +56,3 @@ export default function SalesOrdersDashboard() {
   );
 }
 
-{
-  /* <ClipLoader
-color={color}
-loading={loading}
-cssOverride={override}
-size={150}
-aria-label="Loading Spinner"
-data-testid="loader"
-/> */
-}

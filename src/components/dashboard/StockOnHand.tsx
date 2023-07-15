@@ -1,8 +1,9 @@
 import { GiReceiveMoney } from "react-icons/gi";
 import useFetchData from "../../hooks/useFetchData";
 import PieChartStock from "./PieChartStock";
+import './StockOnHand.css'
 
-export default function TotalStockValues() {
+export default function StockOnHand() {
   interface TotalCost {
     total_cost: number;
   }
@@ -32,7 +33,7 @@ export default function TotalStockValues() {
   // const iconStyle = { color: "white", fontSize: "3rem" };
 
   return (
-    <div className="total-value-wrapper">
+    <div className="stock-on-hand-wrapper">
       <h2>Stock on hand</h2>
       <div className="bubble-container-wrapper">
         <div className="bubble-container">

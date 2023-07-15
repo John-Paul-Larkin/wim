@@ -71,7 +71,9 @@ export default function IndividualOrdered(props: Inputs) {
       {!loading && !error && orderDetails && (
         <>
           <div className="individual-order-heading">
-            <div>Order placed at : {parseDate(orderDetails[0].orderedDate)}</div>
+            {showButton && <div>Order placed at : {parseDate(orderDetails[0].orderedDate)}</div>}
+            {!showButton && <div>Order received at : {parseDate(orderDetails[0].receivedDate)}</div>}
+
             <div>{orderDetails[0].supplierName}</div>
             <div>Rep : {orderDetails[0].employeeName}</div>
             <div>Order ID : {id}</div>

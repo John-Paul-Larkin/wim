@@ -1,5 +1,9 @@
+import { useState } from "react";
+import Select from "react-select";
+import { ScaleLoader } from "react-spinners";
 import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import useFetchData from "../../hooks/useFetchData";
+import './SalesChart.css'
 
 interface GraphData {
   purchases: string;
@@ -8,7 +12,16 @@ interface GraphData {
 }
 
 export default function SalesChart() {
-  const { fetchedData } = useFetchData<GraphData[]>("/dashboard/getDetailsForGraph/10");
+  const [timeInterval, setTimeInterval] = useState<IntervalSelect>({ value: "all-time", label: "all-time" });
+
+  let numberOfDays = "7";
+
+  if (timeInterval.value === "today") numberOfDays = "1";
+  else if (timeInterval.value === "week") numberOfDays = "7";
+  else if (timeInterval.value === "month") numberOfDays = "28";
+  else if (timeInterval.value === "all-time") numberOfDays = "400";
+
+  const { fetchedData, refetchData } = useFetchData<GraphData[]>("/dashboard/getDetailsForGraph/" + numberOfDays);
 
   let fetchedData2: null | GraphData[] = null;
 
@@ -16,11 +29,13 @@ export default function SalesChart() {
   // add 0 instead of null
   if (fetchedData) {
     fetchedData2 = fetchedData?.map((el) => {
-      const datesReversed = el.order_date.substring(8, 10) + "-" + el.order_date.substring(5, 7);
+      const date = new Date(el.order_date);
+      const datesReversed = date.getDate().toString() + "-" + date.getMonth().toString();
       if (el.purchases === null) return { ...el, purchases: "0", order_date: datesReversed };
       else if (el.sales === null) return { ...el, sales: "0", order_date: datesReversed };
       return { ...el, order_date: datesReversed };
     });
+    fetchedData2.reverse();
   }
 
   // find the highest value that the graph can go to
@@ -33,12 +48,64 @@ export default function SalesChart() {
     }, 0);
   }
 
+  const selectOptions: IntervalSelect[] = [
+    { value: "today", label: "today" },
+    { value: "week", label: "week" },
+    { value: "month", label: "month" },
+    { value: "all-time", label: "all-time" },
+  ];
+
+  const handleChangeIntervalSelect = (selectedOption: IntervalSelect | null) => {
+    if (selectedOption) {
+      setTimeInterval(selectedOption);
+      refetchData();
+    }
+  };
+
   return (
-    <>
-      {fetchedData2 && (
-        <div style={{ backgroundColor: "white", width: "50%", height: "400px", paddingTop: "1rem" }}>
-          {/* <ResponsiveContainer width={'200px'} height={'200px'}> */}
-          <ResponsiveContainer height={400} width="100%">
+    <div className="sales-chart-wrapper">
+      <div className="sales-chart-select-wrapper">
+        <Select
+          className=""
+          //   placeholder='sdsd'
+          options={selectOptions}
+          onChange={handleChangeIntervalSelect}
+          value={timeInterval}
+          defaultValue={timeInterval}
+          // menuIsOpen={true}
+          // styles={{
+          //   control: (baseStyles) => ({
+          //     ...baseStyles,
+          //     border: 0,
+          //     width: "110px",
+          //     backgroundColor: "blue",
+          //     color: 'white',
+          //   }),
+          //   container: (baseStyles) => ({
+          //     ...baseStyles,
+          //     border: 0,
+          //     width: "110px",
+          //     color: 'white',
+          //     backgroundColor: "blue",
+          //   }),
+          //   option: (baseStyles) => ({
+          //     ...baseStyles,
+          //     border: 0,
+          //     width: "110px",
+          //     // color: "white",
+          //     backgroundColor: "blue",
+          //   }),
+          // }}
+        ></Select>
+      </div>
+      <div className="sales-chart">
+        {!fetchedData2 && (
+          <div className="loader-wrapper">
+            <ScaleLoader />
+          </div>
+        )}
+        {fetchedData2 && (
+          <ResponsiveContainer height="100%" width="100%">
             <BarChart
               barSize={10}
               width={100}
@@ -60,8 +127,8 @@ export default function SalesChart() {
               <Bar dataKey="purchases" fill="red" />
             </BarChart>
           </ResponsiveContainer>
-        </div>
-      )}
-    </>
+        )}
+      </div>
+    </div>
   );
 }

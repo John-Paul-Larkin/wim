@@ -1,0 +1,68 @@
+.stock-on-hand-wrapper {
+  width: 450px;
+  height: 250px;
+  display: inline-block;
+  vertical-align: top;
+  border: 2px solid white;
+  margin: 1rem;
+  border: 2px solid white;
+  margin: 1rem;
+}
+
+.stock-on-hand-wrapper .bubble-container {
+  width: 174px;
+  /* background-color: black; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+}
+
+.stock-on-hand-wrapper .bubble-container-wrapper {
+  display: flex;
+  /* flex-direction: column; */
+  align-items: center;
+  justify-content: center;
+}
+
+.stock-on-hand-wrapper .currency {
+  font-size: 2rem;
+  text-align: center;
+  /* background-color: antiquewhite; */
+  width: 11rem;
+  height: 3rem;
+}
+
+.stock-on-hand-wrapper .bubble-sale {
+  background-color: green;
+  border: 2px solid white;
+  border-radius: 1rem;
+  margin: 0.1rem;
+  height: 87px;
+  width: 174px;
+  padding: 0;
+  margin-bottom: 1rem;
+}
+
+.stock-on-hand-wrapper .bubble-purchase {
+  /* vertical-align: middle; */
+  background-color: red;
+  border: 2px solid white;
+  border-radius: 1rem;
+  margin: 0.1rem;
+  height: 87px;
+  width: 174px;
+  padding: 0;
+}
+
+.stock-on-hand-wrapper h3 {
+  text-align: center;
+}
+
+.stock-on-hand-wrapper .pie-chart {
+  display: inline-block;
+  /* background-color: white; */
+  width: 174px;
+  height: 174px;
+}

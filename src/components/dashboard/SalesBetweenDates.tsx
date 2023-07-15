@@ -4,19 +4,14 @@ import { SyncLoader } from "react-spinners";
 import useFetchData from "../../hooks/useFetchData";
 
 export default function SalesBetweenDates() {
-  type Interval = "week" | "month" | "all-time" | "today";
   interface Total {
     total_value: number;
   }
-  interface IntervalSelect {
-    value: Interval;
-    label: Interval;
-  }
-
   interface Count {
     count: number;
   }
 
+  
   const selectOptions: IntervalSelect[] = [
     { value: "today", label: "today" },
     { value: "week", label: "week" },
@@ -55,7 +50,7 @@ export default function SalesBetweenDates() {
   } = useFetchData<Count[]>("/dashboard/getNumberOfSalesBetweenDates/" + timeInterval.value);
 
   return (
-    <div className="sales-between-dates">
+    <div className="right-side">
       <div>
         {(errorTotalSales || countError) && <div>Error...{errorTotalSales?.message || countError?.message}</div>}
 

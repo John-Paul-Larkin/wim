@@ -85,15 +85,13 @@ interface PurchaseOrderDetails {
   soldBy: string;
   quantity: number;
   orderedDate: string;
+  receivedDate:string;
   supplierName: string;
   employeeName: string;
 }
 
-// interface PurchaseOrderDetails {
-//   productID: number;
-//   quantity: number;
-// }
-
-// interface  ProductOr|derDetails {
-
-// }
+type Interval = "week" | "month" | "all-time" | "today";
+interface IntervalSelect {
+  value: Interval;
+  label: Interval;
+}

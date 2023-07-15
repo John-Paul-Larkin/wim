@@ -1,4 +1,5 @@
 import useFetchData from "../../hooks/useFetchData";
+import './PurchaseOrdersDashboard.css'
 
 export default function PurchaseOrdersDashboard() {
   const { fetchedData: orderedFetchedData, error: orderedError, loading: orderedLoading } = useFetchData<number[]>("/purchaseOrder/getOrderedIds");
@@ -16,8 +17,8 @@ export default function PurchaseOrdersDashboard() {
 
       {!(receivedError || orderedError || receivedLoading || orderedLoading) && (
         <>
-          <div className="bubble">Placed orders waiting to be delivered<div className="number">{orderedFetchedData?.length}</div></div>
-          <div className="bubble">Orders delivered<div className="number">{receivedFetchedData?.length}</div></div>
+          <div >Placed orders waiting to be delivered<div >{orderedFetchedData?.length}</div></div>
+          <div >Orders delivered<div>{receivedFetchedData?.length}</div></div>
         </>
       )}
     </div>

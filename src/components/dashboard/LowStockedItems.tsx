@@ -1,5 +1,6 @@
 import { FaExclamationTriangle } from "react-icons/fa";
 import useFetchData from "../../hooks/useFetchData";
+import './LowStockedItems.css'
 
 export default function LowStockedItems() {
   interface LowStocked {
@@ -11,7 +12,7 @@ export default function LowStockedItems() {
   const iconStyle = { color: "red", fontSize: "3rem" }
 
   return (
-    <div className="total-value">
+    <div className="low-stocked-wrapper">
       {loading && <div>loading...</div>}
       {error && <div>Error...{error.message}</div>}
       {fetchedData && (
