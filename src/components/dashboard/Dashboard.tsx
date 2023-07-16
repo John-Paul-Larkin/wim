@@ -11,13 +11,14 @@ export const Dashboard = () => {
     <>
       <h1>Dashboard</h1>
       <div className="test-wr">
-        <StockOnHand />
         <SalesOrdersDashboard />
+        <PurchaseOrdersDashboard />
       </div>
-
-      <PurchaseOrdersDashboard />
+      <div className="test-wr">
+        <LowStockedItems />
+        <StockOnHand />
+      </div>
       <SalesChart />
-      <LowStockedItems />
     </>
   );
 };

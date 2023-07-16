@@ -1,37 +1,36 @@
+.sales-chart-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem;
+}
+
+.sales-chart-wrapper > div {
+  position: relative;
+  height: 250px;
+  display: inline-block;
+  max-width: 900px;
+  width: 100%;
+}
 
 .sales-chart {
-    background-color: white;
-    width: 100%;
-    /* height: 400px; */
-    height: 250px;
-  
-    /*   
-    margin: 0 1rem 1rem 1rem; */
-  }
-  
-  .loader-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-  }
-  
-  .sales-chart-wrapper {
-    position: relative;
-    height: 250px;
-    display: inline-block;
-    max-width: 800px;
-    min-width: 400px;
-    width: 100%;
-    margin: 1rem;
-  }
-  
-  .sales-chart-select-wrapper {
-    /* width:200px; */
-    /* background-color: antiquewhite; */
-    position: absolute;
-    right: 0;
-    z-index: 2;
-    /* color:white; */
-    border: 2px solid black;
-  }
+  background-color: white;
+  width: 100%;
+  height: 250px;
+}
+
+.loader-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.sales-chart-select-wrapper {
+  /* background-color: antiquewhite; */
+  /* color:white; */
+  position: absolute;
+  right: 0;
+  z-index: 2;
+  border: 2px solid black;
+}

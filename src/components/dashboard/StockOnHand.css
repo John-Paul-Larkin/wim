@@ -1,40 +1,27 @@
 .stock-on-hand-wrapper {
-  width: 450px;
-  height: 250px;
-  display: inline-block;
-  vertical-align: top;
   border: 2px solid white;
   margin: 1rem;
-  border: 2px solid white;
-  margin: 1rem;
+  padding: 1rem;
 }
 
-.stock-on-hand-wrapper .bubble-container {
-  width: 174px;
-  /* background-color: black; */
+.stock-on-hand-wrapper > div {
   display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.stock-on-hand-wrapper .left-side {
+  width: 222px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-right: 1rem;
 }
 
-.stock-on-hand-wrapper .bubble-container-wrapper {
-  display: flex;
-  /* flex-direction: column; */
-  align-items: center;
-  justify-content: center;
-}
 
-.stock-on-hand-wrapper .currency {
-  font-size: 2rem;
-  text-align: center;
-  /* background-color: antiquewhite; */
-  width: 11rem;
-  height: 3rem;
-}
-
-.stock-on-hand-wrapper .bubble-sale {
+.stock-on-hand-wrapper .bubble-sales {
   background-color: green;
   border: 2px solid white;
   border-radius: 1rem;
@@ -43,9 +30,10 @@
   width: 174px;
   padding: 0;
   margin-bottom: 1rem;
+  text-align: center;
 }
 
-.stock-on-hand-wrapper .bubble-purchase {
+.stock-on-hand-wrapper .bubble-purchases {
   /* vertical-align: middle; */
   background-color: red;
   border: 2px solid white;
@@ -54,15 +42,17 @@
   height: 87px;
   width: 174px;
   padding: 0;
-}
-
-.stock-on-hand-wrapper h3 {
   text-align: center;
 }
 
 .stock-on-hand-wrapper .pie-chart {
-  display: inline-block;
-  /* background-color: white; */
-  width: 174px;
-  height: 174px;
+  width: 222px;
+  height: 200px;
 }
+
+  .stock-on-hand-wrapper .currency {
+    font-size: 2rem;
+    text-align: center;
+    width: 11rem;
+    height: 3rem;
+  }

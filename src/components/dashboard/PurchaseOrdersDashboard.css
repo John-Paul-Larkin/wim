@@ -1,5 +1,67 @@
-.purchase-orders-wrapper  {
+
+  
+  .purchase-orders-wrapper {
     border: 2px solid white;
     margin: 1rem;
+    padding: 1rem;
+  }
+  
+  .purchase-orders-wrapper > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  
+  .purchase-orders-wrapper .left-side {
+    width: 222px;
+    height: 200px;
+  }
+  
+  .purchase-orders-wrapper .right-side {
+    width: 222px;
+    height: 200px;
+    text-align: center;
+  }
+  
+  .purchase-orders-wrapper .select-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .purchase-orders-wrapper .info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .purchase-orders-wrapper .info-wrapper {
+    margin-top: 2rem;
+  }
+  
+  .purchase-orders-wrapper .info > div:first-child {
+    font-size: 2rem;
+    width: 100%;
+    max-width: 4rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    border-bottom: 2px solid white;
+  }
+  
+  .purchase-orders-wrapper .info > div:nth-child(2) {
+    height: 3rem;
+    flex-grow: 1;
+    /* margin-bottom: 0.3rem; */
+    border-bottom: 2px solid white;
+  }
+  
+  .purchase-orders-wrapper .currency {
+    font-size: 2rem;
+    text-align: center;
   }
   

@@ -64,6 +64,7 @@ export default function SalesChart() {
 
   return (
     <div className="sales-chart-wrapper">
+      <div>
       <div className="sales-chart-select-wrapper">
         <Select
           className=""
@@ -128,6 +129,7 @@ export default function SalesChart() {
             </BarChart>
           </ResponsiveContainer>
         )}
+      </div>
       </div>
     </div>
   );

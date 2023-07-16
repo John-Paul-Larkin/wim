@@ -2,6 +2,7 @@ import { GiReceiveMoney } from "react-icons/gi";
 import useFetchData from "../../hooks/useFetchData";
 import PieChartStock from "./PieChartStock";
 import './StockOnHand.css'
+import { SyncLoader } from "react-spinners";
 
 export default function StockOnHand() {
   interface TotalCost {
@@ -35,30 +36,26 @@ export default function StockOnHand() {
   return (
     <div className="stock-on-hand-wrapper">
       <h2>Stock on hand</h2>
-      <div className="bubble-container-wrapper">
-        <div className="bubble-container">
-          <div className="bubble-sale">
+      <div>
+        <div className="left-side">
+          <div className="bubble-sales">
             <h3>Sale value </h3>
             <div>
               {loadingSales && (
                 <div className="currency" style={{ fontSize: "1rem" }}>
-                  loading...
+                  <SyncLoader size={".2rem"} />
                 </div>
               )}
               {errorSales && <div>Error...{errorSales.message}</div>}
               {totalSaleCost && <div className="currency">€{totalSaleCost}</div>}
             </div>
           </div>
-          {/* <div>
-            <GiReceiveMoney style={iconStyle} />
-          </div> */}
-          <div className="bubble-purchase">
+          <div className="bubble-purchases">
             <h3>Purchase value </h3>
-
             <div>
               {loadingPurchase && (
                 <div className="currency" style={{ fontSize: "1rem" }}>
-                  loading...
+                  <SyncLoader size={".2rem"} />
                 </div>
               )}
 

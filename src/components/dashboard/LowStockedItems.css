@@ -1,5 +1,43 @@
-.low-stocked-wrapper  {
-    border: 2px solid white;
-    margin: 1rem;
-  }
-  
+.low-stocked-wrapper {
+  border: 2px solid white;
+  margin: 1rem;
+  padding: 1rem;
+}
+
+.low-stocked-wrapper > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.low-stocked-wrapper .left-side {
+  width: 222px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  /* flex-direction: column; */
+  /* border: 2px solid yellow; */
+}
+
+.low-stocked-wrapper .right-side {
+  width: 222px;
+  height: 200px;
+  /* border: 2px solid green; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  font-size: 1.3rem;
+  /* overflow-y: scroll; */
+}
+
+
+.low-stocked-wrapper .number {
+
+  font-size: 6rem;
+  color:white;
+  /* background-color: antiquewhite; */
+  width:3rem
+}
