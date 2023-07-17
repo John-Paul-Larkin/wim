@@ -1,3 +1,4 @@
+import { SyncLoader } from "react-spinners";
 import { IndividualSentOrder } from "./IndividualSentOrder";
 
 interface Inputs {
@@ -13,7 +14,7 @@ export const OrdersSent = ({ sentFetchedData }: Inputs) => {
         <div></div>
         {sentFetchedData.loading && (
           <div className="error-loading">
-            <span>Loading.....</span>
+            <SyncLoader size={".3rem"}/>
           </div>
         )}
         {sentFetchedData.error && (

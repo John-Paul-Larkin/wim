@@ -30,7 +30,12 @@
   justify-content: center;
   flex-direction: column;
   font-size: 1.3rem;
-  /* overflow-y: scroll; */
+}
+
+.show-scroll {
+  
+  overflow-y: scroll;
+
 }
 
 

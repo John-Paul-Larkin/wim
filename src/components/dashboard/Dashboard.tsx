@@ -10,15 +10,16 @@ export const Dashboard = () => {
   return (
     <>
       <h1>Dashboard</h1>
+
+      <div className="test-wr">
+        <StockOnHand />
+        <LowStockedItems />
+      </div>
+      <SalesChart />
       <div className="test-wr">
         <SalesOrdersDashboard />
         <PurchaseOrdersDashboard />
       </div>
-      <div className="test-wr">
-        <LowStockedItems />
-        <StockOnHand />
-      </div>
-      <SalesChart />
     </>
   );
 };

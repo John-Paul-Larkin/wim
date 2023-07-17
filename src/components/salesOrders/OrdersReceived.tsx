@@ -1,3 +1,4 @@
+import { SyncLoader } from "react-spinners";
 import { IndividualReceivedOrder } from "./IndividualReceivedOrder";
 
 interface Inputs {
@@ -18,7 +19,7 @@ export const OrdersReceived = (props: Inputs) => {
         <div></div>
         {loading && (
           <div className="error-loading">
-            <span>Loading.....</span>
+           <SyncLoader size={".3rem"}/>
           </div>
         )}
         {error && (

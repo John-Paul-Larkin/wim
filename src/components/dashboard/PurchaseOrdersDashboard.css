@@ -17,12 +17,15 @@
   .purchase-orders-wrapper .left-side {
     width: 222px;
     height: 200px;
+    /* border: 2px solid yellow; */
   }
   
   .purchase-orders-wrapper .right-side {
     width: 222px;
     height: 200px;
     text-align: center;
+    /* border: 2px solid green; */
+
   }
   
   .purchase-orders-wrapper .select-wrapper {

@@ -21,23 +21,20 @@ export default function LowStockedItems() {
       <h2>Items below restock</h2>
       <div>
         <div className="left-side">
-        {loading && <SyncLoader size={".3rem"}/>}
+          {loading && <SyncLoader size={".3rem"} />}
           <div className="number">{fetchedData?.length}</div>
-        {loading && <SyncLoader size={".3rem"}/>}
-         {!loading && fetchedData && fetchedData?.length>0 && <FaExclamationTriangle style={exclamationIconStyle} />}
-         {!loading && fetchedData && fetchedData?.length===0 && <FaRegCheckCircle style={tickIconStyle} />}
-
+          {loading && <SyncLoader size={".3rem"} />}
+          {!loading && fetchedData && fetchedData?.length > 0 && <FaExclamationTriangle style={exclamationIconStyle} />}
+          {!loading && fetchedData && fetchedData?.length === 0 && <FaRegCheckCircle style={tickIconStyle} />}
         </div>
-        <div className="right-side">
+        <div className={fetchedData ? (fetchedData.length > 5 ? "show-scroll right-side" : "right-side") : "right-side"}>
           <div>
-
-
-           {loading && <SyncLoader size={".3rem"}/>}
+            {loading && <SyncLoader size={".3rem"} />}
 
             {fetchedData?.map((product) => (
               <div key={product.product_id}>
-                {product.name} (- 
-                {product.shortage}) 
+                {product.name} (-
+                {product.shortage})
               </div>
             ))}
           </div>

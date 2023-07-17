@@ -2,6 +2,7 @@ import Swal from "sweetalert2";
 import useFetchData from "../../hooks/useFetchData";
 import usePostData from "../../hooks/usePostData";
 import { IndividualOrderDetails } from "./IndividualOrderDetails";
+import { SyncLoader } from "react-spinners";
 
 interface Inputs {
   refetchReceivedIds: () => void;
@@ -39,7 +40,7 @@ export const IndividualReceivedOrder = (props: Inputs) => {
     <div className="individual-order-container">
       {loading && (
         <div className="error-loading">
-          <span>Loading.....</span>
+         <SyncLoader size={".3rem"}/>
         </div>
       )}
       {error && (

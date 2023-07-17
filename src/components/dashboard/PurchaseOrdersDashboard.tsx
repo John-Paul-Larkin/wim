@@ -14,7 +14,7 @@ export default function PurchaseOrdersDashboard() {
   return (
     <div className="purchase-orders-wrapper">
       <h2>Purchase orders</h2>
-
+<div>
       <div className="left-side">
         {/* {(receivedError || pickedError || sentError) && <div>Error...</div>} */}
         {!(receivedError || orderedError) && (
@@ -24,7 +24,7 @@ export default function PurchaseOrdersDashboard() {
                 {orderedLoading && <SyncLoader size={".2rem"} />}
                 {!orderedLoading && orderedFetchedData?.length}{" "}
               </div>
-              <div>Ordered.</div>
+              <div>Awaiting delivery.</div>
             </div>
 
             <div className="info">
@@ -39,19 +39,8 @@ export default function PurchaseOrdersDashboard() {
       </div>
 
       <PurchasesBetweenDates />
+      </div>
     </div>
   );
 }
 
-{
-  /* 
-  {(receivedError || orderedError) && <div>Error...</div>}
-  {(receivedLoading || orderedLoading) && <div>Loading...</div>}
-
-  {!(receivedError || orderedError || receivedLoading || orderedLoading) && (
-    <>
-      <div >Placed orders waiting to be delivered<div >{orderedFetchedData?.length}</div></div>
-      <div >Orders delivered<div>{receivedFetchedData?.length}</div></div>
-    </>
-  )} */
-}

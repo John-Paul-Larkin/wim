@@ -54,18 +54,19 @@ export default function PurchasesBetweenDates() {
       <div>
         {(errorTotalPurchases || countError) && <div>Error...{errorTotalPurchases?.message || countError?.message}</div>}
 
-        <div>Total sales</div>
+        <div>Total purchases</div>
         {(loadingTotalPurchases || countLoading) && <SyncLoader size={".4rem"} />}
         {totalValue && (
           <>
             {timeInterval && timeInterval.label === "all-time" ? (
               <div>
-                All time sales <div className="currency">€{totalValue}</div> from a total of {countPurchasesFetched && <>{countPurchasesFetched[0].count}</>}{" "}
+                All time purchases <div className="currency">€{totalValue}</div> from a total of {countPurchasesFetched && <>{countPurchasesFetched[0].count}</>}{" "}
                 orders.
               </div>
             ) : (
               <div>
-                Total sales {timeInterval.label!=='today' && <span>this</span>} {timeInterval.label} <div className="currency">€{totalValue}</div> from a total of{" "}
+                Total purchases {timeInterval.label!=='today' && <span>this</span>} {timeInterval.label} <div className="currency">€{totalValue}</div> from a total of{" "}
+                
                 {countPurchasesFetched && <>{countPurchasesFetched[0].count}</>} orders.
               </div>
             )}

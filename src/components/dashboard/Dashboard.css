@@ -1,12 +1,11 @@
-
-.test-wr  {
+.test-wr {
   display: flex;
   justify-content: space-around;
+  margin-bottom: 7rem;
 }
 
 @media (max-width: 600px) {
-  .test-wr  {
+  .test-wr {
     flex-wrap: wrap;
-
   }
 }

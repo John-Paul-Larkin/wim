@@ -1,3 +1,4 @@
+import { SyncLoader } from "react-spinners";
 import useFetchData from "../../hooks/useFetchData";
 // import usePostData from "../../hooks/usePostData";
 
@@ -19,7 +20,7 @@ export const IndividualSentOrder = ({ id }: Inputs) => {
     <div className="individual-order">
       {loading && (
         <div className="error-loading">
-          <span>Loading.....</span>
+          <SyncLoader size={".3rem"}/>
         </div>
       )}
       {error && (

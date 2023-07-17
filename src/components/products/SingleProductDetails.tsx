@@ -3,6 +3,7 @@ import Swal from "sweetalert2";
 import useDeleteData from "../../hooks/useDeleteData";
 import usePostData from "../../hooks/usePostData";
 import { FormButtons } from "../FormButtons";
+import { SyncLoader } from "react-spinners";
 
 interface Inputs {
   setIdOfCurrentlySelectedRow: React.Dispatch<React.SetStateAction<number | null>>;
@@ -158,7 +159,7 @@ export const SingleProductDetails = (props: Inputs) => {
           </div>
           {loading && (
             <div className="error-loading">
-              <span>Loading.....</span>
+             <SyncLoader size={".3rem"}/>
             </div>
           )}
 

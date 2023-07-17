@@ -8,6 +8,7 @@ import Ordered from "./Ordered";
 import PurchaseOrderItems from "./PurchaseOrderItems";
 import "./PurchaseOrders.css";
 import Received from "./Received";
+import { SyncLoader } from "react-spinners";
 
 export const PurchaseOrders = () => {
   const [productData, setProductData] = useState<ProductData[]>([]);
@@ -116,7 +117,7 @@ export const PurchaseOrders = () => {
         <div className="table-wrapper product-table purchase-table">
           {loading && (
             <div className="error-loading">
-              <span>Loading.....</span>
+              <SyncLoader size={".3rem"}/>
             </div>
           )}
           {error && (

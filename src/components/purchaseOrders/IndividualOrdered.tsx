@@ -2,6 +2,7 @@ import Swal from "sweetalert2";
 import useFetchData from "../../hooks/useFetchData";
 import usePostData from "../../hooks/usePostData";
 import { IndividualOrderedDetails } from "./IndividualOrderedDetails";
+import { SyncLoader } from "react-spinners";
 
 interface Inputs {
   id: number;
@@ -60,7 +61,7 @@ export default function IndividualOrdered(props: Inputs) {
     <div className="individual-order-container">
       {loading && (
         <div className="error-loading">
-          <span>Loading.....</span>
+          <SyncLoader size={".3rem"}/>
         </div>
       )}
       {error && (

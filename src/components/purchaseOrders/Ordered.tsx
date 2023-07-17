@@ -1,3 +1,4 @@
+import { SyncLoader } from "react-spinners";
 import IndividualOrdered from "./IndividualOrdered";
 
 interface Inputs {
@@ -16,7 +17,7 @@ export default function Ordered(props: Inputs) {
     <div className="order-container">
       {loadingOrderedIds && (
         <div className="error-loading">
-          <span>Loading.....</span>
+          <SyncLoader size={".3rem"}/>
         </div>
       )}
       {errorOrderedIds && (

@@ -6,6 +6,7 @@ import useFetchData from "../../hooks/useFetchData";
 import { GlobalFilter } from "./../GlobalFilter";
 import "./Products.css";
 import { SingleProductDetails } from "./SingleProductDetails";
+import { SyncLoader } from "react-spinners";
 export const Products = () => {
   const [data, setData] = useState<ProductData[]>([]);
   const [idOfCurrentlySelectedRow, setIdOfCurrentlySelectedRow] = useState<number | null>(null);
@@ -112,7 +113,7 @@ export const Products = () => {
         <div className="table-wrapper product-table">
           {loading && (
             <div className="error-loading">
-              <span>Loading.....</span>
+             <SyncLoader size={".3rem"}/>
             </div>
           )}
           {error && (
