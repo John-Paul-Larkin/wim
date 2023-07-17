@@ -1,4 +1,3 @@
-import { ScaleLoader } from "react-spinners";
 import { Cell, Pie, PieChart, ResponsiveContainer, } from "recharts";
 
 interface Inputs {

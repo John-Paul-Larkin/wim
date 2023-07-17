@@ -1,8 +1,7 @@
-import { GiReceiveMoney } from "react-icons/gi";
+import { SyncLoader } from "react-spinners";
 import useFetchData from "../../hooks/useFetchData";
 import PieChartStock from "./PieChartStock";
-import './StockOnHand.css'
-import { SyncLoader } from "react-spinners";
+import "./StockOnHand.css";
 
 export default function StockOnHand() {
   interface TotalCost {

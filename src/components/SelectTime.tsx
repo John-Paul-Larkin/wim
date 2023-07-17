@@ -29,7 +29,7 @@ export default function SelectTime(props:Inputs) {
       <Select
           className=""
           //   placeholder='sdsd'
-          options={selectOptions}
+          // options={selectOptions}
           onChange={handleChangeIntervalSelect}
           value={timeInterval}
           defaultValue={timeInterval}
