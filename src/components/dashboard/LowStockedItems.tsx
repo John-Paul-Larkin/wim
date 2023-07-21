@@ -44,14 +44,3 @@ export default function LowStockedItems() {
   );
 }
 
-// {loading && <SyncLoader/>}
-// {error && <div>Error...{error.message}</div>}
-// {fetchedData && (
-//   <>
-//     <div>Items below restock : {fetchedData?.length}</div>
-//     <FaExclamationTriangle style={iconStyle}/>
-//     {fetchedData?.map((product) => (
-//       <div key={product.product_id}>{product.name}</div>
-//     ))}
-//   </>
-// )}
