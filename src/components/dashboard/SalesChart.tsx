@@ -96,6 +96,7 @@ export default function SalesChart() {
           //     // color: "white",
           //     backgroundColor: "blue",
           //   }),
+          //
           // }}
         ></Select>
       </div>
