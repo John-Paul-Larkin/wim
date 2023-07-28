@@ -30,9 +30,9 @@ The back end uses Node/Express.js and a mySQL database. Hosted on railway.
 
 ### Initial design using excalidraw
 <span>
-
+    <a href="https://wim-front-end.netlify.app/">
       <img src="https://github.com/Fishamble/wim/blob/master/images/Excalidraw.png" alt="initial excalidraw design" width="600px" />      
-
+    </a>
     <br>
 </span>
 
