@@ -9,6 +9,8 @@ interface FetchDataResult<T> {
 
 const baseURL = import.meta.env.VITE_BACK_END_BASE_URL;
 
+console.log(baseURL);
+
 const useFetchData = <T>(inputURL: string): FetchDataResult<T> => {
   const [fetchedData, setFetchedData] = useState<T | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
