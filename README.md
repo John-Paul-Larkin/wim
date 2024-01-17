@@ -38,6 +38,14 @@ The back end uses Node/Express.js and a mySQL database. Hosted on railway.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+
+### Project 
+
+<img src="https://github.com/John-Paul-Larkin/wim/assets/107807466/a3aa6df8-5f2e-4f1a-9dc1-bd88104d3b55" alt="screenshot of customer table" width="400px" />
+
+<img src="https://github.com/John-Paul-Larkin/wim/assets/107807466/a22b4c53-ffc2-4f7a-bbec-eab2a70a374f" alt="screenshot of main page" width="400px" />      
+
+
 ## Contact
 
 John Paul Larkin - johnplarkin@gmail.com
