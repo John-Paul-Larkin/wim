@@ -6,7 +6,8 @@ That said, feel free to check it out <a href="https://wim-front-end.netlify.app/
 Warehouse inventory management is an application for tracking product stock levels. Deliveries are entered into the system, increasing the stock on hand and correspondingly sales orders are deducted from the stock levels. When items run low the user is notified that they will need to place orders to restock. 
 
 The front end is built using react, typescript and react-table and is hosted on netlify.
-The back end uses Node/Express.js and a mySQL database. Hosted on railway.
+
+The back end uses Node/Express.js and a mySQL database. Hosted on an Ubuntu VPS.
 ## Built with
 
 ![Node](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
@@ -40,10 +41,10 @@ The back end uses Node/Express.js and a mySQL database. Hosted on railway.
 
 
 ### Project 
-
-<img src="https://github.com/John-Paul-Larkin/wim/assets/107807466/a3aa6df8-5f2e-4f1a-9dc1-bd88104d3b55" alt="screenshot of customer table" width="400px" />
-
 <img src="https://github.com/John-Paul-Larkin/wim/assets/107807466/a22b4c53-ffc2-4f7a-bbec-eab2a70a374f" alt="screenshot of main page" width="400px" />      
+<br>
+<br>
+<img src="https://github.com/John-Paul-Larkin/wim/assets/107807466/a3aa6df8-5f2e-4f1a-9dc1-bd88104d3b55" alt="screenshot of customer table" width="400px" />
 
 
 ## Contact
